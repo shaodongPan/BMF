@@ -34,8 +34,8 @@ public class ShouKActivity extends BaseMvpActivity<presenter> implements Contrac
 
     @Override
     public void getInitData() {
-        tvTitle=  findViewById(R.id.tv_title);
-        ivBack=  findViewById(R.id.iv_back);
+        tvTitle = findViewById(R.id.tv_title);
+        ivBack = findViewById(R.id.iv_back);
         tvTitle.setText("收款方式");
         tvTitle.setTextSize(18);
         ivBack.setOnClickListener(new View.OnClickListener() {
@@ -68,25 +68,24 @@ public class ShouKActivity extends BaseMvpActivity<presenter> implements Contrac
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.tv_bank, R.id.tv_aLi, R.id.tv_weiChat, R.id.tv_paypal})
+    @OnClick({R.id.tv_bank
+            , R.id.tv_aLi
+            , R.id.tv_weiChat
+            , R.id.tv_paypal})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //银行卡绑定
             case R.id.tv_bank:
-                    startActivity(new Intent(mContext,BankActivity.class));
+                startActivity(new Intent(mContext, BankActivity.class));
                 break;
-                //支付宝绑定
+            //支付宝绑定
             case R.id.tv_aLi:
-                    startActivity(new Intent(mContext,AliActivity.class));
+                startActivity(new Intent(mContext, AliActivity.class));
                 break;
-                //微信绑定
+            //微信绑定
             case R.id.tv_weiChat:
-                    startActivity(new Intent(mContext,WeChatActivity.class));
+                startActivity(new Intent(mContext, WeChatActivity.class));
                 break;
-         /*       //paypal绑定
-            case R.id.tv_paypal:
-                    startActivity(new Intent(mContext,PaypleActivity.class));
-                break;*/
         }
     }
 }

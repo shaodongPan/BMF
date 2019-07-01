@@ -25,7 +25,8 @@
             android:name="android.vendor.full_screen"
             android:value="true" />
 
-        <activity android:name=".activity.YinActivity"
+        <activity
+            android:name=".activity.YinActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -93,6 +94,7 @@
         <activity android:name=".activity.BuyInActivity" />
         <activity android:name=".activity.SellNumActivity" />
         <activity android:name=".activity.CrowdActivity"></activity>
+        <activity android:name=".activity.TakePhotoActivity" />
     </application>
 
 </manifest>
