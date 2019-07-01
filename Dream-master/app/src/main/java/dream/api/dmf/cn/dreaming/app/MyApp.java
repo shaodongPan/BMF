@@ -3,6 +3,7 @@ package dream.api.dmf.cn.dreaming.app;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 
@@ -28,6 +29,12 @@ public class MyApp extends Application{
             instance = new MyApp();
         }
         return instance;
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     private List<Activity> activityList = new LinkedList<Activity>();

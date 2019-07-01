@@ -16,6 +16,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -63,7 +74,7 @@ public class TradingFragment extends BaseMvpFragment<presenter> implements Contr
     private List<Float> yValue = new ArrayList<>();
     //折线对应的数据
     private Map<String, Float> value = new HashMap<>();
-    private ChartView chartView;
+    private LineChart chartView;
     private TradingBean bean;
     private String ids;
     private RecyclerView mRecy;
@@ -92,7 +103,7 @@ public class TradingFragment extends BaseMvpFragment<presenter> implements Contr
 
     @Override
     protected void initView(View view) {
-        chartView = view.findViewById(R.id.chartview);
+        chartView = view.findViewById(R.id.lineChart);
         sharedPreferences = mContext.getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
         mUid = sharedPreferences.getString(UserApi.Uid, "");
         mShell = sharedPreferences.getString(UserApi.Shell, "");
@@ -289,10 +300,42 @@ public class TradingFragment extends BaseMvpFragment<presenter> implements Contr
             yValue.add(Float.valueOf(dataBean.price));
             value.put(dataBean.date, Float.valueOf(dataBean.amount));
         }
-        chartView.setValue(value, xValue, yValue);
 
+        float maxY = 0f;
+        for (TradingBean.DataBean dataBean : bean.data) {
+            float price = Float.valueOf(dataBean.price);
+            if (maxY <= price) {
+                maxY = price;
+            }
+        }
+        YAxis leftYAxis = chartView.getAxisLeft();
+        YAxis rightYAxis = chartView.getAxisRight();
+        leftYAxis.setAxisMinimum(0);
+        leftYAxis.setAxisMaximum(maxY + 2);
+        rightYAxis.setEnabled(false);
 
+        XAxis xAxis = chartView.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return xValue.get((int) value);
+            }
+        });
+
+        ArrayList<Entry> poitList = new ArrayList<>();
+
+        for (int i = 0; i < yValue.size(); i++) {
+            poitList.add(new Entry(i, Float.valueOf(yValue.get(i))));
+        }
+
+        Legend legend = chartView.getLegend();
+        legend.setEnabled(false);
+        LineDataSet dataSet = new LineDataSet(poitList, "");
+        dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        LineData lineData = new LineData(dataSet);
+        chartView.setData(lineData);
+        chartView.invalidate();
     }
-
-
 }
