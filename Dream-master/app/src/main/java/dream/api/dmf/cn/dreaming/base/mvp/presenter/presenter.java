@@ -28,7 +28,6 @@ public class presenter extends BasePresenter<Contract.Iview, model> implements C
 
     @Override
     public void delData(String url, Map<String, Object> headMap, Map<String, Object> map, Class clazz) {
-
         mModel.delData(url, headMap, map, clazz, this);
     }
 
@@ -50,7 +49,6 @@ public class presenter extends BasePresenter<Contract.Iview, model> implements C
     @Override
     public void getDataFalse(Throwable e) {
         mView.getData(e);
-
     }
 
     @Override

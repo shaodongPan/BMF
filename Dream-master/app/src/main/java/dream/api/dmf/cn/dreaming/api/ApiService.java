@@ -43,9 +43,7 @@ public interface ApiService {
     @POST("index.php?mod=mobile&act=updatecode")
     Observable<ResponseBody> addImageInfo(@Part List<MultipartBody.Part> requestBodyMap);
 
-    /*
-     添加购物车
-     */
+
     @FormUrlEncoded
     @POST("index.php?mod=mobile&act=verification")
     Observable<ResponseBody> verification(@Field("truename") String truename,

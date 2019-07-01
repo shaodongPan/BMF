@@ -48,6 +48,10 @@ import dream.api.dmf.cn.dreaming.utils.LogUtils;
 import dream.api.dmf.cn.dreaming.view.ChartView;
 
 public class TradingFragment extends BaseMvpFragment<presenter> implements Contract.Iview {
+    private String HYT = "HYT";
+    private String DMF = "DMF";
+    private String FROM = HYT;
+
     @BindView(R.id.r_butn)
     Button mButn;
     @BindView(R.id.r_butn2)
@@ -107,13 +111,44 @@ public class TradingFragment extends BaseMvpFragment<presenter> implements Contr
         sharedPreferences = mContext.getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
         mUid = sharedPreferences.getString(UserApi.Uid, "");
         mShell = sharedPreferences.getString(UserApi.Shell, "");
-        /*.setOnClickListener(new View.OnClickListener() {
+        pid = view.findViewById(R.id.ttt);
+        pid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), MoneyActivity.class));
+                refreshTitleView();
+                requestChartData();
+                switchType();
             }
-        });*/
-        pid = view.findViewById(R.id.ttt);
+        });
+    }
+
+    private void switchType() {
+        if (FROM.equals(HYT)) {
+            FROM = DMF;
+        } else {
+            FROM = HYT;
+        }
+    }
+
+    private void refreshTitleView() {
+        if (FROM.equals(HYT)) {
+            pid.setText("DMF折线图");
+        } else {
+            pid.setText("HYT折线图");
+        }
+    }
+
+    private void requestChartData() {
+        HashMap<String, Object> headmap = new HashMap<>();
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("uid", mUid);
+        map.put("shell", mShell);
+        if (FROM.equals(HYT)) {
+            map.put("type", "2");
+        } else {
+            map.put("type", "1");
+        }
+        mPresenter.postData(UserApi.getMoney, headmap, map, TradingBean.class);
     }
 
     @Override
@@ -126,53 +161,6 @@ public class TradingFragment extends BaseMvpFragment<presenter> implements Contr
         map.put("shell", mShell);
         map.put("type", ids);
         mPresenter.postData(UserApi.getMoney, headmap, map, TradingBean.class);
-        pid.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-             /*   ids="2";
-                pid.setText("DMF折线图");
-                HashMap<String, Object> headmap = new HashMap<>();
-                HashMap<String, Object> map = new HashMap<>();
-                 //*   sharedPreferences = mContext.getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
-                String mUid = sharedPreferences.getString(UserApi.Uid, "");
-                String mShell = sharedPreferences.getString(UserApi.Shell, "");
-                map.put("uid", mUid);
-                map.put("shell", mShell);
-                map.put("type", ids);
-                mPresenter.postData(UserApi.getMoney, headmap, map, TradingBean.class);*/
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ids = "2";
-                pid.setText("DMF折线图");
-                HashMap<String, Object> headmap = new HashMap<>();
-                HashMap<String, Object> map = new HashMap<>();
-                //*   sharedPreferences = mContext.getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
-                String mUid = sharedPreferences.getString(UserApi.Uid, "");
-                String mShell = sharedPreferences.getString(UserApi.Shell, "");
-                map.put("uid", mUid);
-                map.put("shell", mShell);
-                map.put("type", ids);
-                mPresenter.postData(UserApi.getMoney, headmap, map, TradingBean.class);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                ids = "2";
-                pid.setText("DMF折线图");
-                HashMap<String, Object> headmap = new HashMap<>();
-                HashMap<String, Object> map = new HashMap<>();
-                //*   sharedPreferences = mContext.getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
-                String mUid = sharedPreferences.getString(UserApi.Uid, "");
-                String mShell = sharedPreferences.getString(UserApi.Shell, "");
-                map.put("uid", mUid);
-                map.put("shell", mShell);
-                map.put("type", ids);
-                mPresenter.postData(UserApi.getMoney, headmap, map, TradingBean.class);
-            }
-        });
-
 
         HashMap<String, Object> headm = new HashMap<>();
         HashMap<String, Object> map2 = new HashMap<>();
@@ -290,6 +278,7 @@ public class TradingFragment extends BaseMvpFragment<presenter> implements Contr
     }
 
     public void initData() {
+        clearData();
         //x轴坐标对应的数据
         for (int i = 0; i < bean.data.size(); i++) {
             TradingBean.DataBean dataBean = bean.data.get(i);
@@ -324,18 +313,24 @@ public class TradingFragment extends BaseMvpFragment<presenter> implements Contr
             }
         });
 
-        ArrayList<Entry> poitList = new ArrayList<>();
+        ArrayList<Entry> pointList = new ArrayList<>();
 
         for (int i = 0; i < yValue.size(); i++) {
-            poitList.add(new Entry(i, Float.valueOf(yValue.get(i))));
+            pointList.add(new Entry(i, yValue.get(i)));
         }
 
         Legend legend = chartView.getLegend();
         legend.setEnabled(false);
-        LineDataSet dataSet = new LineDataSet(poitList, "");
+        LineDataSet dataSet = new LineDataSet(pointList, "");
         dataSet.setMode(LineDataSet.Mode.CUBIC_BEZIER);
         LineData lineData = new LineData(dataSet);
         chartView.setData(lineData);
         chartView.invalidate();
+    }
+
+    private void clearData() {
+        value.clear();
+        yValue.clear();
+        xValue.clear();
     }
 }

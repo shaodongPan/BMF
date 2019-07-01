@@ -14,6 +14,7 @@ import dream.api.dmf.cn.dreaming.utils.RetrofitUtils;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -199,6 +200,8 @@ public class model implements Contract.Imodel {
 
 
     }
+
+
 
     //上传头像
     @Override
