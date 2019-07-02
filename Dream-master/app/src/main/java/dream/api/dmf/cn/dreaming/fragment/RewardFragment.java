@@ -161,7 +161,6 @@ public class RewardFragment extends BaseMvpFragment<presenter> implements Contra
             mXian.setText(data.info.now_jifen);
             mTui.setText(data.info.commend_count);
             mTuan.setText(data.info.team_count);
-
         } else {
             Toast.makeText(mContext, readBean.message, Toast.LENGTH_SHORT).show();
         }
@@ -172,10 +171,6 @@ public class RewardFragment extends BaseMvpFragment<presenter> implements Contra
         // TODO: inflate a fragment view
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder1 = ButterKnife.bind(this, rootView);
-        /**
-         * let token = (Login.username + "a85GhBeA73J3" + "\(timeStamp)").MD5
-         *         let url = "https://shop.xg360.cc/app/index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=news.login&mobile=" + Login.username + "&token=" + token + "&time=" + "\(timeStamp)"
-         */
         return rootView;
     }
 
@@ -221,51 +216,6 @@ public class RewardFragment extends BaseMvpFragment<presenter> implements Contra
                 break;
         }
     }
-
-
-  /*  @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    @OnClick({R.id.mjf_list, R.id.mjf_xi, R.id.mjd_ti, R.id.mjf_zz, R.id.mjf_shen, R.id.r_pices,R.id.r_dan})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            //奖励列表
-            case R.id.mjf_list:
-                startActivity(new Intent(getActivity(), RewardListActivity.class), ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
-                //startActivity(new Intent(getActivity(), RewardListActivity.class));
-                break;
-            //积分明细
-            case R.id.mjf_xi:
-                startActivity(new Intent(getActivity(), RewardMxActivity.class), ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
-                //startActivity(new Intent(getActivity(), RewardMxActivity.class));
-                break;
-            //积分体现
-            case R.id.mjd_ti:
-                startActivity(new Intent(getActivity(), RewardTiActivity.class), ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
-                //startActivity(new Intent(getActivity(), RewardTiActivity.class));
-                break;
-            //积分转增
-            case R.id.mjf_zz:
-                startActivity(new Intent(getActivity(), RewardzzActivity.class), ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
-                //startActivity(new Intent(getActivity(), RewardzzActivity.class));
-                break;
-            //申请服务
-            case R.id.mjf_shen:
-                startActivity(new Intent(getActivity(), RewardShenActivity.class), ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
-                //startActivity(new Intent(getActivity(), RewardShenActivity.class));
-                break;
-            //跳转到网络图谱
-            case R.id.r_pices:
-                //淡若淡出
-                startActivity(new Intent(getActivity(), RewardPicesActivity.class), ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
-                //startActivity(new Intent(getActivity(), RewardPicesActivity.class));
-                break;
-            //推荐清单
-            case R.id.r_dan:
-                //转场动画
-                startActivity(new Intent(getActivity(), RewardDanActivity.class), ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
-                //startActivity(new Intent(getActivity(),RewardDanActivity.class));
-                break;
-        }
-    }*/
 
     @Override
     public void onResume() {

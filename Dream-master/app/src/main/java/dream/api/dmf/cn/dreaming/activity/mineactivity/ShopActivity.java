@@ -10,8 +10,14 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import dream.api.dmf.cn.dreaming.R;
 import dream.api.dmf.cn.dreaming.api.UserApi;
+import dream.api.dmf.cn.dreaming.event.BaseEvent;
+import dream.api.dmf.cn.dreaming.event.ShopEvent;
 import dream.api.dmf.cn.dreaming.utils.MD5Utils;
 
 public class ShopActivity extends AppCompatActivity {
@@ -19,20 +25,27 @@ public class ShopActivity extends AppCompatActivity {
     private WebView mWebview;
     private String username;
     private String token;
-    private int  one=6;
+    private int one = 6;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
+        EventBus.getDefault().register(this);
         mWebview = findViewById(R.id.m_shop_webview);
         onData();
     }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(BaseEvent event) {
 
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 
-
-    public  void onData(){
-
-
+    public void onData() {
         SharedPreferences sharedPreferences = getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
         username = sharedPreferences.getString(UserApi.UserName, "");
         WebSettings webSettings = mWebview.getSettings();
@@ -40,7 +53,7 @@ public class ShopActivity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
 // 若加载的 html 里有JS 在执行动画等操作，会造成资源浪费（CPU、电量）
 // 在 onStop 和 onResume 里分别把 setJavaScriptEnabled() 给设置成 false 和 true 即可
-        mWebview.addJavascriptInterface(new goBackPage(ShopActivity.this), "goBackPage");
+        mWebview.addJavascriptInterface(new goBackPage(), "Android");
 //设置自适应屏幕，两者合用
         mWebview.setWebViewClient(new WebViewClient());
         webSettings.setUseWideViewPort(true); //将图片调整到适合webview的大小
@@ -61,30 +74,28 @@ public class ShopActivity extends AppCompatActivity {
         // Date curDate = new Date(System.currentTimeMillis());
         // mTime = formatter.format(curDate);
         long timeStamp = System.currentTimeMillis();
-        Log.i("1111111",username+ "a85GhBeA73J3"+timeStamp);
-        String tex="a85GhBeA73J3";
-        token = MD5Utils.MD5(username+tex+timeStamp);
-        Log.i("1111111", token);
+        Log.i("1111111", username + "a85GhBeA73J3" + timeStamp);
+        String tex = "a85GhBeA73J3";
+        token = MD5Utils.MD5(username + tex + timeStamp);
         /*Uri uri=Uri.parse()*/
-        mWebview.loadUrl("javascript:alert()");
-        mWebview.loadUrl("https://shop.xg360.cc/app/index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=news.login&mobile="+username+"&token="+token+"&time="+timeStamp+"&type="+one);
+//        mWebview.loadUrl("javascript:alert()");
+        mWebview.loadUrl("https://shop.xg360.cc/app/index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=news.login&mobile=" + username + "&token=" + token + "&time=" + timeStamp + "&type=" + one);
     }
-    public class goBackPage {
-        private Context mContext;
 
-        public goBackPage(Context context) {
-            this.mContext = context;
-        }
+
+
+    public class goBackPage {
+
         @JavascriptInterface
-        public void onGoHome(){
+        public void goBackPage() {
             finish();
         }
-     /*   public void showToast() {
 
-           // Toast.makeText(mContext, "hello", Toast.LENGTH_LONG).show();
-        }*/
-
-
+        @JavascriptInterface
+        public void onGoHome() {
+            EventBus.getDefault().post(new ShopEvent());
+            finish();
+        }
 
     }
 }
