@@ -57,6 +57,7 @@ public class MoneyFragment extends Fragment {
         yUpdate = sharedPreferences.getString(UserApi.HUPDATE, "");
 
         view = View.inflate(getActivity(), R.layout.fragment_money, null);
+
         mGroup = view.findViewById(R.id.tGroup);
         mButton1 = view.findViewById(R.id.m_button1);
         mButton2 = view.findViewById(R.id.m_button2);

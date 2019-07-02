@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,10 +33,12 @@ public class SellNumActivity extends BaseMvpActivity<presenter> implements Contr
     private String mShell;
     private String mId;
     private Button quebutn;
+    private Button mCancelBt;
     private boolean username1;
     private TextView mBack;
     private List list;
     private String paytype;
+    private LinearLayout pay_pannel;
 
     @Override
     public void getThisData() {
@@ -127,7 +130,9 @@ public class SellNumActivity extends BaseMvpActivity<presenter> implements Contr
         mAmout = findViewById(R.id.num);
         mprice = findViewById(R.id.prices);
         quebutn = findViewById(R.id.buy_butn);
+        mCancelBt = findViewById(R.id.buy_false);
         mBack = findViewById(R.id.s_banck);
+//        pay_pannel = findViewById(R.id.pay_pannel);
         list = Arrays.asList(getResources().getStringArray(R.array.bank));
         Intent intent = getIntent();
         String realpay = intent.getStringExtra("realpay");
@@ -150,7 +155,22 @@ public class SellNumActivity extends BaseMvpActivity<presenter> implements Contr
                 } else if (list.get(2).equals("微信")) {
                     paytype = "6";
                     return;
+                } else {
+                    finish();
                 }
+            }
+        });
+
+        mCancelBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        pay_pannel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }

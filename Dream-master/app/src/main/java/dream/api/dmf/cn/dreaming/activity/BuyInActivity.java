@@ -60,7 +60,7 @@ public class BuyInActivity extends BaseMvpActivity<presenter> implements Contrac
         mReplay = findViewById(R.id.buy_replay);
         mNums = findViewById(R.id.buy_nums);
         mPricess = findViewById(R.id.buy_prices);
-        mFalse = findViewById(R.id.buy_false);
+        mFalse = findViewById(R.id.buy_false1);
         mButn = findViewById(R.id.buy_butn);
         mReplay.setText(replay);
         mNums.setText(amount);

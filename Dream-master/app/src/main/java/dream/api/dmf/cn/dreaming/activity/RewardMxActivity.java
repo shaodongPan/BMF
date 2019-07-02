@@ -4,9 +4,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.view.View;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import dream.api.dmf.cn.dreaming.R;
 import dream.api.dmf.cn.dreaming.api.UserApi;
@@ -17,15 +22,36 @@ public class RewardMxActivity extends AppCompatActivity {
     private String username;
     private String mTime;
     private String token;
+    private TextView mTitle;
+    private ImageView mBack;
+    private String mVipNumber;//会员编号
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reward_mx);
+        mVipNumber = getIntent().getStringExtra("data");
         mWebview = findViewById(R.id.mwebview);
+        mTitle = findViewById(R.id.tv_title);
+        mBack = findViewById(R.id.iv_back);
+        mTitle.setText("积分明细");
+        mTitle.setTextSize(16);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        mBack = findViewById(R.id.iv_back);
         getDate();
     }
-    private void getDate(){
 
+    private void getDate() {
+        if (TextUtils.isEmpty(mVipNumber)) {
+            mVipNumber = "";
+        } else {
+            mVipNumber = "&number=" + mVipNumber;
+        }
         SharedPreferences sharedPreferences = getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
         username = sharedPreferences.getString(UserApi.UserName, "");
         WebSettings webSettings = mWebview.getSettings();
@@ -35,7 +61,14 @@ public class RewardMxActivity extends AppCompatActivity {
 // 在 onStop 和 onResume 里分别把 setJavaScriptEnabled() 给设置成 false 和 true 即可
 
 //设置自适应屏幕，两者合用
-        mWebview.setWebViewClient(new WebViewClient());
+        mWebview.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                view.loadUrl(request.getUrl().toString());
+                return true;
+            }
+
+        });
         webSettings.setUseWideViewPort(true); //将图片调整到适合webview的大小
         webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
         webSettings.setSupportMultipleWindows(false);
@@ -53,12 +86,12 @@ public class RewardMxActivity extends AppCompatActivity {
         //SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日  HH:mm:ss");
         // Date curDate = new Date(System.currentTimeMillis());
         // mTime = formatter.format(curDate);
-       /* long timeStamp = System.currentTimeMillis();*/
+        /* long timeStamp = System.currentTimeMillis();*/
        /* Log.i("1111111",username+ "a85GhBeA73J3"+timeStamp);
         String tex="a85GhBeA73J3";
         token = MD5Utils.MD5(username+tex+timeStamp);
         Log.i("1111111", token);
         *//*Uri uri=Uri.parse()*/
-        mWebview.loadUrl("https://shop.xg360.cc/addons/ewei_shopv2/template/mobile/default/notice/jfinfo.html?phone="+username);
+        mWebview.loadUrl("https://shop.xg360.cc/addons/ewei_shopv2/template/mobile/default/notice/jfinfo.html?phone=" + username + mVipNumber);
     }
 }

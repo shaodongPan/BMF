@@ -46,6 +46,7 @@ import dream.api.dmf.cn.dreaming.app.MyApp;
 import dream.api.dmf.cn.dreaming.bean.ManBean;
 import dream.api.dmf.cn.dreaming.bean.RenBean;
 import dream.api.dmf.cn.dreaming.utils.CustomHelper;
+import dream.api.dmf.cn.dreaming.utils.LoginHelper;
 import dream.api.dmf.cn.dreaming.utils.RetrofitUtils;
 import dream.api.dmf.cn.dreaming.utils.WeakHandler;
 import io.reactivex.Observer;
@@ -171,6 +172,7 @@ public class SetActivity extends AppCompatActivity implements TakePhoto.TakeResu
                                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 
                                            public void onClick(DialogInterface dialog, int which) {
+                                               LoginHelper.logout();
                                                startActivity(new Intent(SetActivity.this, LoginActivity.class));
                                                finish();
                                            }

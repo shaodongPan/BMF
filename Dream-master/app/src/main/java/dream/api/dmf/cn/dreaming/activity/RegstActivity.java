@@ -2,8 +2,10 @@ package dream.api.dmf.cn.dreaming.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -55,6 +57,15 @@ public class RegstActivity extends BaseMvpActivity<presenter> implements Contrac
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
         webSettings.setLoadsImagesAutomatically(true); //支持自动加载图片
         webSettings.setDefaultTextEncodingName("utf-8");//设置编码格式
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                view.loadUrl(request.getUrl().toString());
+                return true;
+            }
+
+        });
+
         webView.loadUrl(UserApi.getRegst);
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override

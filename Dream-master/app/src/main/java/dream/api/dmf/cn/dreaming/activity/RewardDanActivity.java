@@ -1,6 +1,7 @@
 package dream.api.dmf.cn.dreaming.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,12 +33,22 @@ public class RewardDanActivity extends BaseMvpActivity<presenter> implements Con
     private String mShell;
     @Override
     public void getThisData() {
-        HashMap<String,Object> headmap=new HashMap<>();
-        HashMap<String,Object> map=new HashMap<>();
-        map.put("phone",mPhone);
-        map.put("uid",mUid);
-        map.put("shell",mShell);
-        mPresenter.postData(UserApi.getTUI,headmap,map,TuiBean.class);
+        Intent intent = getIntent();
+        if (intent == null || !intent.hasExtra("data")) {
+            finish();
+            return;
+        }
+        mPhone = sharedPreferences.getString(UserApi.UserName, "");
+        mUid = sharedPreferences.getString(UserApi.Uid, "");
+        mShell = sharedPreferences.getString(UserApi.Shell, "");
+        String number = intent.getStringExtra("data");
+        HashMap<String, Object> headmap = new HashMap<>();
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("phone", mPhone);
+        map.put("number", number);
+        map.put("uid", mUid);
+        map.put("shell", mShell);
+        mPresenter.postData(UserApi.getTUI, headmap, map, TuiBean.class);
 
 
     }
@@ -45,9 +56,6 @@ public class RewardDanActivity extends BaseMvpActivity<presenter> implements Con
     @Override
     public void getInitData() {
         sharedPreferences = mContext.getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
-        mPhone = sharedPreferences.getString(UserApi.UserName, "");
-        mUid = sharedPreferences.getString(UserApi.Uid, "");
-        mShell = sharedPreferences.getString(UserApi.Shell, "");
         mTitle = findViewById(R.id.tv_title);
         mBack = findViewById(R.id.iv_back);
         mTitle.setText("推荐清单");
@@ -77,16 +85,22 @@ public class RewardDanActivity extends BaseMvpActivity<presenter> implements Con
 
     @Override
     public void getData(Object object) {
-        if (object instanceof TuiBean){
-            TuiBean tuiBean= (TuiBean) object;
-            if (tuiBean.status==200){
-                //Toast.makeText(mContext,tuiBean.message,Toast.LENGTH_SHORT).show();
+        if (object instanceof TuiBean) {
+            TuiBean tuiBean = (TuiBean) object;
+            if (tuiBean.status == 200) {
                 List<TuiBean.DataBean> data = tuiBean.data;
-                TuiAdapter tuiAdapter=new TuiAdapter(data,mContext);
+                showTextIsEmpty(data);
+                TuiAdapter tuiAdapter = new TuiAdapter(data, mContext);
                 mRecy.setAdapter(tuiAdapter);
             }else{
                 Toast.makeText(mContext,tuiBean.message,Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    private void showTextIsEmpty(List<TuiBean.DataBean> list) {
+        if (list != null && list.size() == 0) {
+
         }
     }
 }

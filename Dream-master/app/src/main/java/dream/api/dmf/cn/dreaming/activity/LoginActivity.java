@@ -19,13 +19,13 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import dream.api.dmf.cn.dreaming.MainActivity;
 import dream.api.dmf.cn.dreaming.R;
 import dream.api.dmf.cn.dreaming.api.UserApi;
 import dream.api.dmf.cn.dreaming.base.BaseMvpActivity;
 import dream.api.dmf.cn.dreaming.base.mvp.Contract;
 import dream.api.dmf.cn.dreaming.base.mvp.presenter.presenter;
 import dream.api.dmf.cn.dreaming.bean.LoginBean;
+import dream.api.dmf.cn.dreaming.utils.LoginHelper;
 import dream.api.dmf.cn.dreaming.utils.StringUtils;
 import dream.api.dmf.cn.dreaming.utils.WeiboDialogUtils;
 
@@ -151,14 +151,10 @@ public class LoginActivity extends BaseMvpActivity<presenter> implements Contrac
             LoginBean bean= (LoginBean) object;
             switch (bean.error){
                 case "0":
-                    Toast.makeText(mContext,"登陆成功",Toast.LENGTH_SHORT).show();
-                    sharedPreferences.edit().putString(UserApi.Uid, bean.uid).commit();
-                    sharedPreferences.edit().putString(UserApi.Shell, bean.shell).commit();
-                    sharedPreferences.edit().putString(UserApi.TrueName, bean.truename).commit();
-                    sharedPreferences.edit().putString(UserApi.UserName, bean.username).commit();
-                    sharedPreferences.edit().putString(UserApi.Groupname_cn, bean.groupname_cn).commit();
-                    sharedPreferences.edit().putString(UserApi._UUID, bean.truename).commit();
-                    startActivity(new Intent(mContext,MainActivity.class));
+                    loadingDialog.dismiss();
+                    Toast.makeText(mContext, "登陆成功", Toast.LENGTH_SHORT).show();
+                    LoginHelper.login(mPhone,bean.uid, bean.shell, bean.truename, bean.username, bean.groupname_cn, bean.truename);
+                    startActivity(new Intent(mContext, MainActivity.class));
                     finish();
                     break;
                 case "1":

@@ -1,5 +1,7 @@
 package dream.api.dmf.cn.dreaming.bean;
 
+import java.util.List;
+
 /**
  * Created by SongNing on 2019/6/27.
  * email: 836883891@qq.com
@@ -22,6 +24,8 @@ public class ReadBean {
          */
 
         public InfoBean info;
+
+        public List<String> arr;
 
         public static class InfoBean {
             /**

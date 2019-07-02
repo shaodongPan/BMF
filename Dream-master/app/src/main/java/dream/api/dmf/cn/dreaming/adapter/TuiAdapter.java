@@ -37,16 +37,16 @@ public class TuiAdapter extends RecyclerView.Adapter<TuiAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-            viewHolder.mName.setText(data.get(i).realname);
-            viewHolder.mTime.setText(data.get(i).createtime);
-            viewHolder.money.setText(data.get(i).level);
-            viewHolder.mPhone.setText(data.get(i).number);
-            viewHolder.tMoney.setText(data.get(i).total_rewqrd);
+          viewHolder.mName.setText(data.get(i).realname);
+        viewHolder.mTime.setText("时间:" + data.get(i).createtime);
+        viewHolder.money.setText("会员等级:" + data.get(i).level);
+        viewHolder.mPhone.setText("会员编号:" + data.get(i).number);
+        viewHolder.tMoney.setText("总奖金:" + data.get(i).total_rewqrd);
     }
 
     @Override
     public int getItemCount() {
-        if (data==null){
+        if (data == null) {
             return 0;
         }
         return data.size();

@@ -20,6 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+
         <!-- 适配刘海屏、水滴屏 Android P -->
         <meta-data
             android:name="android.vendor.full_screen"
@@ -27,76 +28,80 @@
 
         <activity
             android:name=".activity.YinActivity"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
+        <activity  android:screenOrientation="portrait"
+            android:name=".activity.MainActivity"
             android:launchMode="singleTask" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".activity.RegstActivity"
             android:launchMode="singleTop" />
         <activity
+            android:screenOrientation="portrait"
             android:name=".activity.ForgetActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".activity.RewardListActivity" />
-        <activity android:name=".activity.RewardMxActivity" />
-        <activity android:name=".activity.RewardTiActivity" />
-        <activity android:name=".activity.RewardzzActivity" />
-        <activity android:name=".activity.RewardShenActivity" />
-        <activity android:name=".activity.RewardPicesActivity" />
-        <activity android:name=".activity.RewardDanActivity" />
-        <activity android:name=".activity.MoneyActivity" />
-        <activity android:name=".activity.moneyactivity.MoneyZActivity" />
-        <activity android:name=".activity.moneyactivity.MoneyluActivity" />
-        <activity android:name=".activity.moneyactivity.MoneyMLActivity" />
-        <activity android:name=".activity.moneyactivity.MoneyHRActivity" />
-        <activity android:name=".activity.moneyactivity.MoneyHCActivity" />
-        <activity android:name=".activity.moneyactivity.MoneyQActivity" />
-        <activity android:name=".activity.moneyactivity.MoneyHYTBActivity" />
-        <activity android:name=".activity.LoginActivity" />
-        <activity
+        <activity android:name=".activity.RewardListActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.RewardMxActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.RewardTiActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.RewardzzActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.RewardShenActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.RewardPicesActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.RewardDanActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.MoneyActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.moneyactivity.MoneyZActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.moneyactivity.MoneyluActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.moneyactivity.MoneyMLActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.moneyactivity.MoneyHRActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.moneyactivity.MoneyHCActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.moneyactivity.MoneyQActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.moneyactivity.MoneyHYTBActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.LoginActivity"  android:screenOrientation="portrait"/>
+        <activity  android:screenOrientation="portrait"
             android:name=".activity.mineactivity.ShopActivity"
             android:launchMode="singleTop" />
-        <activity
+        <activity  android:screenOrientation="portrait"
             android:name=".activity.mineactivity.AddressActivity"
             android:launchMode="singleTop" />
-        <activity
+        <activity  android:screenOrientation="portrait"
             android:name=".activity.mineactivity.ShareActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".activity.mineactivity.SetActivity" />
-        <activity android:name=".activity.mineactivity.CaptureActivity" />
-        <activity android:name=".activity.minactivity.AllActivity" />
-        <activity android:name=".activity.minactivity.WaitActivity" />
-        <activity android:name=".activity.minactivity.FahuoActivity" />
-        <activity android:name=".activity.minactivity.ShouActivity" />
-        <activity android:name=".activity.minactivity.FinishActivity" />
-        <activity android:name=".activity.moneylu.MoneyLuActivity" />
-        <activity android:name=".activity.moneylu.BuyActivity" />
-        <activity android:name=".activity.moneylu.BigBuyActivity" />
-        <activity android:name=".activity.moneylu.BigSellActivity" />
-        <activity android:name=".activity.mineactivity.ShouKActivity" />
-        <activity android:name=".activity.mineactivity.AnQuanActivity" />
-        <activity android:name=".activity.mineactivity.LoadDownActivity" />
-        <activity android:name=".activity.mineactivity.AboutActivity" />
-        <activity android:name=".activity.mineactivity.BankActivity" />
-        <activity android:name=".activity.mineactivity.AliActivity" />
-        <activity android:name=".activity.mineactivity.WeChatActivity" />
-        <activity android:name=".activity.mineactivity.PaypleActivity" />
-        <activity android:name=".activity.mineactivity.GestureActivity" />
-        <activity android:name=".activity.mineactivity.ChangePswdActivity" />
-        <activity android:name=".activity.mineactivity.ChangeSafePswdActivity" />
-        <activity android:name=".activity.mineactivity.MJListActivity" />
-        <activity android:name=".activity.BuyInActivity" />
-        <activity android:name=".activity.SellNumActivity" />
-        <activity android:name=".activity.CrowdActivity"></activity>
-        <activity android:name=".activity.TakePhotoActivity" />
-        <activity android:name=".activity.moneylu.RecordDetailActivity"/>
-        <activity android:name=".activity.PhotoActivity"/>
+        <activity android:name=".activity.mineactivity.SetActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.mineactivity.CaptureActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.minactivity.AllActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".activity.minactivity.WaitActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.minactivity.FahuoActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.minactivity.ShouActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.minactivity.FinishActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.moneylu.MoneyLuActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.moneylu.BuyActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.moneylu.BigBuyActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.moneylu.BigSellActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.mineactivity.ShouKActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.mineactivity.AnQuanActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.mineactivity.LoadDownActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.mineactivity.AboutActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.mineactivity.BankActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.mineactivity.AliActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.mineactivity.WeChatActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.mineactivity.PaypleActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.mineactivity.GestureActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.mineactivity.ChangePswdActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.mineactivity.ChangeSafePswdActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.mineactivity.MJListActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.BuyInActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.SellNumActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.CrowdActivity"  android:screenOrientation="portrait"></activity>
+        <activity android:name=".activity.TakePhotoActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.moneylu.RecordDetailActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.PhotoActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activity.WebUI"  android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

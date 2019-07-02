@@ -88,7 +88,7 @@
         android:orientation="horizontal"
         android:padding="@dimen/dimen10">
         <Button
-            android:id="@+id/buy_false"
+            android:id="@+id/buy_false1"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"

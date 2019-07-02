@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -30,14 +31,16 @@ public class RewardPicesActivity extends AppCompatActivity {
     WebView mweb;
     private Dialog loadingDialog;
     private String username;
+    private String mVipNumber;//会员编号
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reward_pices);
         ButterKnife.bind(this);
-        SharedPreferences sharedPreferences =getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
         username = sharedPreferences.getString(UserApi.UserName, "");
+        mVipNumber = getIntent().getStringExtra("data");
         mTitle.setText("网络图谱");
         mTitle.setTextSize(18);
         mBack.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +50,12 @@ public class RewardPicesActivity extends AppCompatActivity {
                                      }
                                  }
         );
+
+        if (TextUtils.isEmpty(mVipNumber)) {
+            mVipNumber = "";
+        } else {
+            mVipNumber = "&number=" + mVipNumber;
+        }
         WebSettings webSettings = mweb.getSettings();
 
         //如果访问的页面中要与Javascript交互，则webview必须设置支持Javascript
@@ -70,7 +79,7 @@ public class RewardPicesActivity extends AppCompatActivity {
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
         webSettings.setLoadsImagesAutomatically(true); //支持自动加载图片
         webSettings.setDefaultTextEncodingName("utf-8");//设置编码格式
-        mweb.loadUrl("https://shop.xg360.cc/addons/ewei_shopv2/template/mobile/default/notice/member-info.html?phone="+username);
+        mweb.loadUrl("https://shop.xg360.cc/addons/ewei_shopv2/template/mobile/default/notice/member-info.html?phone=" + username + mVipNumber);
         mweb.setWebViewClient(new WebViewClient() {
 
             @Override
@@ -107,7 +116,6 @@ public class RewardPicesActivity extends AppCompatActivity {
                 // mProgressDialog.dismiss();
 
             }
-
 
 
         });

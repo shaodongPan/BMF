@@ -9,21 +9,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import dream.api.dmf.cn.dreaming.api.UserApi;
-import dream.api.dmf.cn.dreaming.bean.IsLoginBean;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
-public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment
-{
+public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment {
+    Unbinder unbinder1;
     protected P mPresenter;
     public FragmentActivity mContext;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(getFragmentView(),container,false);
-        mContext=getActivity();
+        View view = inflater.inflate(getFragmentView(), container, false);
+        unbinder1 = ButterKnife.bind(this, view);
+        mContext = getActivity();
         initView(view);
 
         return view;
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder1.unbind();
     }
 
     @Override
@@ -45,6 +53,7 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment
     @Override
     public void onResume() {
         super.onResume();
+
     }
 
     protected abstract P createPresenter();

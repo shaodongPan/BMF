@@ -38,7 +38,6 @@ public class FinishAdapter extends RecyclerView.Adapter<FinishAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Log.e(FinishAdapter.class.getSimpleName(), i + "");
         holder.tvMoney.setText(data.get(i).realpay);
         holder.tvNum.setText(data.get(i).amount);
         holder.tvPrice.setText(data.get(i).price);

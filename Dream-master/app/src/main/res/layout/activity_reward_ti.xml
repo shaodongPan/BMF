@@ -58,7 +58,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="HYTB余额"/>
+                android:text="积分余额"/>
             <TextView
                 android:id="@+id/m_yue"
                 android:layout_width="0dp"
@@ -77,10 +77,11 @@
                 android:text="1HYTB:"
                 android:visibility="gone"/>
             <TextView
+                android:id="@+id/ratio"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="3.3079"/>
+                android:text=""/>
         </LinearLayout>
         <Button
             android:id="@+id/m_butn"

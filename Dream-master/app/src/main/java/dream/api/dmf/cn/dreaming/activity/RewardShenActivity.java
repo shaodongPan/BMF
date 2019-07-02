@@ -21,6 +21,7 @@ import dream.api.dmf.cn.dreaming.base.BaseMvpActivity;
 import dream.api.dmf.cn.dreaming.base.mvp.Contract;
 import dream.api.dmf.cn.dreaming.base.mvp.presenter.presenter;
 import dream.api.dmf.cn.dreaming.bean.ReShenBean;
+import dream.api.dmf.cn.dreaming.utils.JsonUtil;
 
 public class RewardShenActivity extends BaseMvpActivity<presenter> implements Contract.Iview {
 
@@ -40,9 +41,11 @@ public class RewardShenActivity extends BaseMvpActivity<presenter> implements Co
     Button ssButn;
     private String minePhone;
     private SharedPreferences sharedPreferences;
+    private String mVipNumber;//会员编号
 
     @Override
     public void getThisData() {
+        mVipNumber = getIntent().getStringExtra("data");
         sharedPreferences = mContext.getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
         minePhone = sharedPreferences.getString(UserApi.UserName, "");
         mTitle.setText("申请服务");
@@ -67,13 +70,18 @@ public class RewardShenActivity extends BaseMvpActivity<presenter> implements Co
 
     @Override
     public void getData(Object object) {
-        if (object instanceof ReShenBean){
-            ReShenBean reShenBean= (ReShenBean) object;
-            if (reShenBean.status==200){
-                Toast.makeText(mContext,reShenBean.message,Toast.LENGTH_SHORT).show();
+        if (object instanceof Throwable) {
+            String error = ((Throwable) object).getMessage();
+            Toast.makeText(mContext, JsonUtil.getError(error), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (object instanceof ReShenBean) {
+            ReShenBean reShenBean = (ReShenBean) object;
+            if (reShenBean.status == 200) {
+                Toast.makeText(mContext, reShenBean.message, Toast.LENGTH_SHORT).show();
                 finish();
-            }else{
-                Toast.makeText(mContext,reShenBean.message,Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(mContext, reShenBean.message, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -118,8 +126,9 @@ public class RewardShenActivity extends BaseMvpActivity<presenter> implements Co
                 map.put("p_number", number);
                 map.put("truename", name);
                 map.put("remark", mname);
-                map.put("phone",minePhone);
-                mPresenter.postData(UserApi.getRESHEN,headmap,map,ReShenBean.class);
+                map.put("phone", minePhone);
+                map.put("number", mVipNumber);
+                mPresenter.postData(UserApi.getRESHEN, headmap, map, ReShenBean.class);
                 break;
         }
     }

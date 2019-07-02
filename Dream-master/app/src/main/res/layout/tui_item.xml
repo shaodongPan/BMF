@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:padding="10dp">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/t_image"
-        android:layout_width="@dimen/dimen40"
-        android:layout_height="@dimen/dimen40"
-        app:placeholderImage="@mipmap/heard_image"
-        app:roundAsCircle="true"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"/>
+        android:layout_marginRight="10dp"
+        app:placeholderImage="@mipmap/heard_image"
+        app:roundAsCircle="true" />
 
     <TextView
         android:id="@+id/t_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="@dimen/dimen40"
+        android:layout_alignTop="@id/t_image"
+        android:layout_toRightOf="@id/t_image"
         android:text="安" />
 
     <TextView
@@ -26,9 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/t_name"
-        android:layout_marginLeft="-15dp"
-        android:layout_marginTop="0dp"
-        android:layout_toRightOf="@+id/t_name"
+        android:layout_toRightOf="@id/t_image"
         android:text="会员编号:" />
 
     <TextView
@@ -36,57 +36,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/t_phone"
-        android:layout_marginLeft="-12dp"
-
-        android:layout_marginTop="-1dp"
-        android:layout_toRightOf="@+id/t_name"
+        android:layout_toRightOf="@id/t_image"
         android:text="时间:" />
+
     <TextView
         android:id="@+id/t_money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="会员等级：普卡"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignTop="@id/t_name"
+        android:layout_alignParentRight="true"
+        android:text="会员等级：普卡" />
+
     <TextView
+        android:textColor="@color/bg_money"
         android:id="@+id/tt_money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="会员等级：普卡"
         android:layout_below="@+id/t_money"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="@dimen/dimen12"/>
-
-  <!--  <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/t_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="安"/>
-        <TextView
-            android:id="@+id/t_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="会员编号:"/>
-        <TextView
-            android:id="@+id/t_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="时间:"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-    </LinearLayout>-->
+        android:layout_marginTop="@dimen/dimen12"
+        android:text="总奖金：0" />
 </RelativeLayout>

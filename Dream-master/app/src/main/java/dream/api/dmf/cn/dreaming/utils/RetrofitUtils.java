@@ -67,8 +67,8 @@ public class RetrofitUtils
                 })*/
                 .sslSocketFactory(TrustAllCerts.createSSLSocketFactory())
                 .hostnameVerifier(new TrustAllCerts.TrustAllHostnameVerifier())
-                .readTimeout(3000,TimeUnit.MILLISECONDS)
-                .writeTimeout(3000,TimeUnit.MILLISECONDS)
+                .readTimeout(30*1000,TimeUnit.MILLISECONDS)
+                .writeTimeout(30*000,TimeUnit.MILLISECONDS)
                 .addInterceptor(httpLoggingInterceptor)
                 .build();
     }

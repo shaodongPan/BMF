@@ -13,5 +13,18 @@ public class ZhuanBean {
 
     public int status;
     public String message;
-    public String data;
+    public DataBean data;
+
+    public static class DataBean {
+        /**
+         * realname : 1
+         * level : 银卡
+         * number : 1
+         * total_rewqrd : 588.60
+         * createtime : 2019-06-25 11:40:24
+         */
+
+        public String ratio;
+        public String now_jifen;
+    }
 }

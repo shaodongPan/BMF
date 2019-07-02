@@ -129,19 +129,15 @@ public class MineFragment extends BaseMvpFragment<presenter> implements Contract
 
     @Override
     protected void initView(View view) {
-        sharedPreferences = mContext.getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
-        username = sharedPreferences.getString(UserApi.UserName, "");
-        mone = sharedPreferences.getString(UserApi.credit3, "");
-        mtwo = sharedPreferences.getString(UserApi.credit4, "");
+    
      /*   double one = Double.parseDouble(mone);
         double two = Double.parseDouble(mtwo);*/
         mMoney = view.findViewById(R.id.m_edu);
         mJin = view.findViewById(R.id.m_jin);
-        mUid = sharedPreferences.getString(UserApi.Uid, "");
-        mShell = sharedPreferences.getString(UserApi.Shell, "");
+
         rHeadNum = view.findViewById(R.id.r_head_num);
         // mMoney.setText(one+two+"");
-        rHeadNum.setText(username);
+
 
         mJin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,33 +153,6 @@ public class MineFragment extends BaseMvpFragment<presenter> implements Contract
             }
         });
 
-    }
-
-
-    @Override
-    protected void getData() {
-
-
-    }
-
-    @Override
-    public void getData(Object object) {
-        if (object instanceof SignBean){
-            SignBean signBean= (SignBean) object;
-            if (signBean.getError()==0){
-                Toast.makeText(mContext,signBean.getMsg(),Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(mContext,signBean.getMsg(),Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-
         mineHeadNum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -194,14 +163,41 @@ public class MineFragment extends BaseMvpFragment<presenter> implements Contract
                 mPresenter.postData(UserApi.getSign, headmap, map, SignBean.class);
             }
         });
-        return rootView;
+
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden && rHeadNum != null) {
+            sharedPreferences = mContext.getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
+            username = sharedPreferences.getString(UserApi.UserName, "");
+            mone = sharedPreferences.getString(UserApi.credit3, "");
+            mtwo = sharedPreferences.getString(UserApi.credit4, "");
+            mUid = sharedPreferences.getString(UserApi.Uid, "");
+            mShell = sharedPreferences.getString(UserApi.Shell, "");
+            rHeadNum.setText(username);
+        }
     }
+
+    @Override
+    protected void getData() {
+
+
+    }
+
+    @Override
+    public void getData(Object object) {
+        if (object instanceof SignBean) {
+            SignBean signBean = (SignBean) object;
+            if (signBean.getError() == 0) {
+                Toast.makeText(mContext, signBean.getMsg(), Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(mContext, signBean.getMsg(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 
     @OnClick({R.id.head_s_image, R.id.m_fen, R.id.m_edu, R.id.m_tone, R.id.m_ttwo, R.id.m_tshare, R.id.m_tfoure, R.id.m_pay, R.id.m_waito, R.id.m_Waitt, R.id.m_finish, R.id.mjf_list, R.id.mjf_xi, R.id.mjd_ti, R.id.mjf_shen, R.id.m_shop, R.id.m_address, R.id.m_fu, R.id.m_set})
     public void onViewClicked(View view) {

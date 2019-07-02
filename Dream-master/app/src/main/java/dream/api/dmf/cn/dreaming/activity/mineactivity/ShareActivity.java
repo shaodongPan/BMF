@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dream.api.dmf.cn.dreaming.R;
 import dream.api.dmf.cn.dreaming.api.UserApi;
+import dream.api.dmf.cn.dreaming.utils.MD5Utils;
 
 public class ShareActivity extends AppCompatActivity {
 
@@ -70,12 +71,9 @@ public class ShareActivity extends AppCompatActivity {
         //SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日  HH:mm:ss");
         // Date curDate = new Date(System.currentTimeMillis());
         // mTime = formatter.format(curDate);
-        /* long timeStamp = System.currentTimeMillis();*/
-       /* Log.i("1111111",username+ "a85GhBeA73J3"+timeStamp);
-        String tex="a85GhBeA73J3";
-        token = MD5Utils.MD5(username+tex+timeStamp);
-        Log.i("1111111", token);
-        *//*Uri uri=Uri.parse()*/
+         long timeStamp = System.currentTimeMillis();
+        String tex = "a85GhBeA73J3";
+        String token = MD5Utils.MD5(username + tex + timeStamp);
         mWeb.loadUrl("http://api.xg360.cc/index.php?mod=mobile&act=contact");
     }
     @OnClick(R.id.iv_back)

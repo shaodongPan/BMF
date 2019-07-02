@@ -1,7 +1,10 @@
 package dream.api.dmf.cn.dreaming.base.mvp.model;
 
 
+import android.text.TextUtils;
+
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +13,7 @@ import java.util.Map;
 
 import dream.api.dmf.cn.dreaming.api.ApiService;
 import dream.api.dmf.cn.dreaming.base.mvp.Contract;
+import dream.api.dmf.cn.dreaming.utils.JsonUtil;
 import dream.api.dmf.cn.dreaming.utils.RetrofitUtils;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -46,8 +50,9 @@ public class model implements Contract.Imodel {
                             string = responseBody.string();
                             Object o = gson.fromJson(string, clazz);
                             getDataCallBack.getDataTrue(o);
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
+                            getDataCallBack.getDataFalse(null);
                         }
 
                     }
@@ -66,7 +71,7 @@ public class model implements Contract.Imodel {
     }
 
     @Override
-    public void  postData(final String url, Map<String, Object> headMap, Map<String, Object> map, final Class clazz, final Contract.GetDataCallBack getDataCallBack) {
+    public void postData(final String url, Map<String, Object> headMap, Map<String, Object> map, final Class clazz, final Contract.GetDataCallBack getDataCallBack) {
         apiService.postData(url, headMap, map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -78,14 +83,18 @@ public class model implements Contract.Imodel {
 
                     @Override
                     public void onNext(ResponseBody responseBody) {
+                        String string = "";
                         try {
-                            Gson gson = new Gson();
-                            String string;
                             string = responseBody.string();
-                            Object o = gson.fromJson(string, clazz);
+                            Object o = new Gson().fromJson(string, clazz);
                             getDataCallBack.getDataTrue(o);
                         } catch (IOException e) {
                             e.printStackTrace();
+                            getDataCallBack.getDataFalse(null);
+                        } catch (JsonSyntaxException ee) {
+                            if (!TextUtils.isEmpty(string)) {
+                                getDataCallBack.getDataFalse(new Throwable(string));
+                            }
                         }
 
                     }
@@ -125,8 +134,9 @@ public class model implements Contract.Imodel {
                             string = responseBody.string();
                             Object o = gson.fromJson(string, clazz);
                             getDataCallBack.getDataTrue(o);
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
+                            getDataCallBack.getDataFalse(null);
                         }
 
                     }
@@ -166,8 +176,9 @@ public class model implements Contract.Imodel {
                             string = responseBody.string();
                             Object o = gson.fromJson(string, clazz);
                             getDataCallBack.getDataTrue(o);
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
+                            getDataCallBack.getDataFalse(null);
                         }
 
                     }
@@ -186,7 +197,6 @@ public class model implements Contract.Imodel {
 
 
     }
-
 
 
     //上传头像
@@ -212,8 +222,9 @@ public class model implements Contract.Imodel {
                             string = responseBody.string();
                             Object o = gson.fromJson(string, clazz);
                             getDataCallBack.getDataTrue(o);
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
+                            getDataCallBack.getDataFalse(null);
                         }
                     }
 
@@ -251,8 +262,9 @@ public class model implements Contract.Imodel {
                             String string = responseBody.string();
                             Object o = gson.fromJson(string, clazz);
                             getDataCallBack.getDataTrue(o);
-                        } catch (IOException e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
+                            getDataCallBack.getDataFalse(null);
                         }
 
                     }

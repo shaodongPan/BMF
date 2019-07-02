@@ -21,6 +21,9 @@ import dream.api.dmf.cn.dreaming.base.BaseMvpActivity;
 import dream.api.dmf.cn.dreaming.base.mvp.Contract;
 import dream.api.dmf.cn.dreaming.base.mvp.presenter.presenter;
 import dream.api.dmf.cn.dreaming.bean.JFZBean;
+import dream.api.dmf.cn.dreaming.bean.TuiBean;
+import dream.api.dmf.cn.dreaming.bean.ZhuanBean;
+import dream.api.dmf.cn.dreaming.utils.JsonUtil;
 
 public class RewardzzActivity extends BaseMvpActivity<presenter> implements Contract.Iview {
 
@@ -40,6 +43,7 @@ public class RewardzzActivity extends BaseMvpActivity<presenter> implements Cont
     Button zzButn;
     private SharedPreferences sharedPreferences;
     private String minePhone;
+    private String mVipNumber;//会员编号
 
     @Override
     public void getThisData() {
@@ -47,6 +51,7 @@ public class RewardzzActivity extends BaseMvpActivity<presenter> implements Cont
         tvTitle.setTextSize(18);
         sharedPreferences = mContext.getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
         minePhone = sharedPreferences.getString(UserApi.UserName, "");
+        mVipNumber = getIntent().getStringExtra("data");
     }
 
     @Override
@@ -66,14 +71,19 @@ public class RewardzzActivity extends BaseMvpActivity<presenter> implements Cont
 
     @Override
     public void getData(Object object) {
-      if (object instanceof JFZBean){
-          JFZBean jfzBean= (JFZBean) object;
-          if (jfzBean.status==200){
-              Toast.makeText(mContext,jfzBean.message,Toast.LENGTH_SHORT).show();
-          }else{
-              Toast.makeText(mContext,jfzBean.message,Toast.LENGTH_SHORT).show();
-          }
-      }
+        if (object instanceof Throwable) {
+            String error = ((Throwable) object).getMessage();
+            Toast.makeText(mContext, JsonUtil.getError(error), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (object instanceof ZhuanBean) {
+            JFZBean jfzBean = (JFZBean) object;
+            if (jfzBean.status == 200) {
+                Toast.makeText(mContext, jfzBean.message, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(mContext, jfzBean.message, Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -94,7 +104,7 @@ public class RewardzzActivity extends BaseMvpActivity<presenter> implements Cont
                 String nums = mNum.getText().toString().trim();
                 String pass = mPass.getText().toString().trim();
                 String name = mName.getText().toString().trim();
-                if (!phone.isEmpty()&&!nums.isEmpty()&&!pass.isEmpty()&&!name.isEmpty()) {
+                if (!phone.isEmpty() && !nums.isEmpty() && !pass.isEmpty() && !name.isEmpty()) {
                     //Toast.makeText(mContext,"该内容不能为空",Toast.LENGTH_SHORT).show();
                 }
                /* if (){
@@ -106,14 +116,15 @@ public class RewardzzActivity extends BaseMvpActivity<presenter> implements Cont
                 if (){
                     Toast.makeText(mContext,"备注不能为空",Toast.LENGTH_SHORT).show();
                 }*/
-                HashMap<String,Object> headmap=new HashMap<>();
-                HashMap<String,Object> map=new HashMap<>();
-                map.put("phone",minePhone);
-                map.put("be_phone",phone);
-                map.put("num",nums);
-                map.put("passward",pass);
-                map.put("remark",name);
-                mPresenter.postData(UserApi.getReZZ,headmap,map,JFZBean.class);
+                HashMap<String, Object> headmap = new HashMap<>();
+                HashMap<String, Object> map = new HashMap<>();
+                map.put("phone", minePhone);
+                map.put("be_phone", phone);
+                map.put("num", nums);
+                map.put("passward", pass);
+                map.put("remark", name);
+                map.put("number", mVipNumber);
+                mPresenter.postData(UserApi.getReZZ, headmap, map, JFZBean.class);
                 break;
                  /*   HashMap<String,Object> headmap=new HashMap<>();
                     HashMap<String,Object> map=new HashMap<>();
@@ -124,7 +135,6 @@ public class RewardzzActivity extends BaseMvpActivity<presenter> implements Cont
                     mPresenter.postData(UserApi.getReZZ,headmap,map,);*/
 
 
-
-        }
         }
     }
+}

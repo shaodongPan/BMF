@@ -50,7 +50,6 @@ public class BigTFragment extends BaseMvpFragment<presenter> implements Contract
     private ArrayList<Fragment> list;
     private SharedPreferences sharedPreferences;
     private boolean username1;
-
     public static Fragment newInstance() {
         BigTFragment fragment = new BigTFragment();
         return fragment;

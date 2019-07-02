@@ -22,6 +22,7 @@ import dream.api.dmf.cn.dreaming.base.BaseMvpActivity;
 import dream.api.dmf.cn.dreaming.base.mvp.Contract;
 import dream.api.dmf.cn.dreaming.base.mvp.presenter.presenter;
 import dream.api.dmf.cn.dreaming.bean.ZhuanBean;
+import dream.api.dmf.cn.dreaming.utils.JsonUtil;
 
 public class RewardTiActivity extends BaseMvpActivity<presenter> implements Contract.Iview {
     @BindView(R.id.m_nums)
@@ -34,6 +35,8 @@ public class RewardTiActivity extends BaseMvpActivity<presenter> implements Cont
     TextView hytyu;
     @BindView(R.id.m_yue)
     TextView mYue;
+    @BindView(R.id.ratio)
+    TextView ratio;
     @BindView(R.id.m_butn)
     Button mButn;
     private TextView mTitle;
@@ -42,16 +45,11 @@ public class RewardTiActivity extends BaseMvpActivity<presenter> implements Cont
     private String mUid;
     private String mShell;
     private String mUsername;
-    /*   @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView();
-        getInit();
-    }*/
+    private String mVipNumber;//会员编号
 
     @Override
     public void getThisData() {
-
+        getData();
     }
 
     @Override
@@ -60,6 +58,7 @@ public class RewardTiActivity extends BaseMvpActivity<presenter> implements Cont
         mUid = sharedPreferences.getString(UserApi.Uid, "");
         mShell = sharedPreferences.getString(UserApi.Shell, "");
         mUsername = sharedPreferences.getString(UserApi.UserName, "");
+        mVipNumber = getIntent().getStringExtra("data");
         getInit();
 
     }
@@ -88,22 +87,40 @@ public class RewardTiActivity extends BaseMvpActivity<presenter> implements Cont
         });
     }
 
+    public void getData() {
+        HashMap<String, Object> headmap = new HashMap<>();
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("phone", mUsername);
+        map.put("number", mVipNumber);
+        mPresenter.postData(UserApi.getIntegral, headmap, map, ZhuanBean.class);
+    }
+
     @Override
     public void getData(Object object) {
-            if (object instanceof  ZhuanBean){
-                ZhuanBean zhuanBean= (ZhuanBean) object;
-                    if (zhuanBean.status==200){
-                        Toast.makeText(mContext,zhuanBean.message,Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(mContext,zhuanBean.message,Toast.LENGTH_SHORT).show();
-                    }
+
+        if (object instanceof Throwable) {
+            String error = ((Throwable) object).getMessage();
+            Toast.makeText(mContext, JsonUtil.getError(error), Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (object instanceof ZhuanBean) {
+            ZhuanBean zhuanBean = (ZhuanBean) object;
+            if (zhuanBean.status == 200) {
+                if (zhuanBean.data != null) {
+                    mYue.setText("" + zhuanBean.data.now_jifen);
+                    ratio.setText("" + zhuanBean.data.ratio);
+                } else {
+                    mYue.setText("0");
+                    ratio.setText("0");
+                }
+
             }
+        }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
 
@@ -116,15 +133,16 @@ public class RewardTiActivity extends BaseMvpActivity<presenter> implements Cont
             case R.id.m_butn:
                 String nums = mNums.getText().toString().trim();
                 String mPass = this.mPass.getText().toString().trim();
-                if (!nums.isEmpty()&&!mPass.isEmpty()){
-                    HashMap<String,Object> headmap=new HashMap<>();
-                    HashMap<String,Object>map=new HashMap<>();
-                    map.put("uid",mUid);
-                    map.put("shell",mShell);
-                    map.put("phone",mUsername);
-                    map.put("num",nums);
-                    map.put("password",mPass);
-                    mPresenter.postData(UserApi.getZHUAN,headmap,map,ZhuanBean.class);
+                if (!nums.isEmpty() && !mPass.isEmpty()) {
+                    HashMap<String, Object> headmap = new HashMap<>();
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("uid", mUid);
+                    map.put("shell", mShell);
+                    map.put("phone", mUsername);
+                    map.put("num", nums);
+                    map.put("password", mPass);
+                    map.put("number", mVipNumber);
+                    mPresenter.postData(UserApi.getZHUAN, headmap, map, ZhuanBean.class);
                 }
                 break;
         }

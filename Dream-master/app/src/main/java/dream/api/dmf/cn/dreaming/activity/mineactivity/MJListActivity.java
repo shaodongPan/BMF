@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import dream.api.dmf.cn.dreaming.R;
 import dream.api.dmf.cn.dreaming.api.UserApi;
@@ -16,6 +19,8 @@ public class MJListActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private String username;
     private WebView mWeb;
+    private TextView mTitle;
+    private ImageView mBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +29,20 @@ public class MJListActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
         username = sharedPreferences.getString(UserApi.UserName, "");
         mWeb = findViewById(R.id.m_web);
+        mTitle = findViewById(R.id.tv_title);
+        mTitle.setText("金元记录");
+        mTitle.setTextSize(16);
+        mBack = findViewById(R.id.iv_back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         getData();
     }
-    public void getData(){
+
+    public void getData() {
         WebSettings webSettings = mWeb.getSettings();
         //如果访问的页面中要与Javascript交互，则webview必须设置支持Javascript
         webSettings.setJavaScriptEnabled(true);
@@ -59,6 +75,6 @@ public class MJListActivity extends AppCompatActivity {
         Log.i("1111111", token);
         *//*Uri uri=Uri.parse()*/
 
-        mWeb.loadUrl(" https://shop.xg360.cc/addons/ewei_shopv2/template/mobile/default/notice/record.html?phone="+ username);
+        mWeb.loadUrl(" https://shop.xg360.cc/addons/ewei_shopv2/template/mobile/default/notice/record.html?phone=" + username);
     }
 }

@@ -14,6 +14,7 @@ public class MyApp extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
+        instance=this;
         Fresco.initialize(this);
     }
 
@@ -25,16 +26,7 @@ public class MyApp extends Application{
     private static MyApp instance;
     //单例模式中获取唯一的MyApplication实例
     public static MyApp getInstance() {
-        if(null == instance) {
-            instance = new MyApp();
-        }
         return instance;
-    }
-
-    @Override
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        MultiDex.install(this);
     }
 
     private List<Activity> activityList = new LinkedList<Activity>();

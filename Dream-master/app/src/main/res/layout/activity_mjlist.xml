@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activity.mineactivity.MJListActivity">
+    <include layout="@layout/title"/>
     <WebView
         android:id="@+id/m_web"
         android:layout_width="match_parent"
