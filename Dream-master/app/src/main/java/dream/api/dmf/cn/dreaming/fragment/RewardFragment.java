@@ -139,38 +139,31 @@ public class RewardFragment extends BaseMvpFragment<presenter> implements Contra
 
     @Override
     protected void getData() {
-        HashMap<String,Object> headmap=new HashMap<>();
-        HashMap<String,Object> map=new HashMap<>();
-        map.put("phone",uPhone);
-        mPresenter.postData(UserApi.getRewardList,headmap,map,ReadBean.class);
+        HashMap<String, Object> headmap = new HashMap<>();
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("phone", uPhone);
+        mPresenter.postData(UserApi.getRewardList, headmap, map, ReadBean.class);
     }
 
     @Override
     public void getData(Object object) {
-        ReadBean readBean= (ReadBean) object;
-        if (readBean.status.equals("200")){
+        if (object == null) {
+            return;
+        }
 
+        ReadBean readBean = (ReadBean) object;
+        if (readBean.status.equals("200")) {
             data = readBean.data;
-            if (data.info==null){
-                lNum.setText("0");
-                rNum.setText("0");
-                rHeadNum.setText("13522301073");
-                mZong.setText("0");
-                mXian.setText("0");
-                mTui.setText("0");
-                mTuan.setText("0");
-                return;
-            }else{
-                lNum.setText(data.info.left_duipeng);
-                rNum.setText(data.info.right_duipeng);
-                rHeadNum.setText(data.info.phone);
-                mZong.setText(data.info.total_rewqrd);
-                mXian.setText(data.info.now_jifen);
-                mTui.setText(data.info.commend_count);
-                mTuan.setText(data.info.team_count);
-            }
-        }else{
-            Toast.makeText(mContext,readBean.message,Toast.LENGTH_SHORT).show();
+            lNum.setText(data.info.left_duipeng);
+            rNum.setText(data.info.right_duipeng);
+            rHeadNum.setText(data.info.phone);
+            mZong.setText(data.info.total_rewqrd);
+            mXian.setText(data.info.now_jifen);
+            mTui.setText(data.info.commend_count);
+            mTuan.setText(data.info.team_count);
+
+        } else {
+            Toast.makeText(mContext, readBean.message, Toast.LENGTH_SHORT).show();
         }
     }
 
