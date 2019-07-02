@@ -92,6 +92,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/tv_member_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen8"
@@ -119,6 +120,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/tv_member_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen8"
@@ -144,6 +146,7 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/tv_sale_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dimen8"

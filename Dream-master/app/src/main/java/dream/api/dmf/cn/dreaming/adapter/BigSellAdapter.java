@@ -22,18 +22,17 @@ public class BigSellAdapter extends RecyclerView.Adapter<BigSellAdapter.ViewHold
     private Context mContext;
     private List<BigBean.DataBean> data;
     private ViewHolder holder;
+
     public BigSellAdapter(Context mContext, List<BigBean.DataBean> data) {
         this.mContext = mContext;
         this.data = data;
     }
 
 
-
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view =View.inflate(mContext,R.layout.item_trading,null);      //LayoutInflater.from(mContext).inflate(, parent, false);
+        View view = View.inflate(mContext, R.layout.item_trading, null);      //LayoutInflater.from(mContext).inflate(, parent, false);
         holder = new ViewHolder(view);
         return holder;
     }
@@ -46,11 +45,11 @@ public class BigSellAdapter extends RecyclerView.Adapter<BigSellAdapter.ViewHold
         holder.tvSell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(mContext,BuyInActivity.class);
-                intent.putExtra("replay",data.get(i).realpay);
-                intent.putExtra("amount",data.get(i).amount);
-                intent.putExtra("price",data.get(i).price);
-                intent.putExtra("id",data.get(i).buy_uid);
+                Intent intent = new Intent(mContext, BuyInActivity.class);
+                intent.putExtra("replay", data.get(i).realpay);
+                intent.putExtra("amount", data.get(i).amount);
+                intent.putExtra("price", data.get(i).price);
+                intent.putExtra("id", data.get(i).id);
                 mContext.startActivity(intent);
             }
         });
@@ -59,7 +58,7 @@ public class BigSellAdapter extends RecyclerView.Adapter<BigSellAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        if (data==null){
+        if (data == null) {
             return 0;
         }
         return data.size();
@@ -70,12 +69,13 @@ public class BigSellAdapter extends RecyclerView.Adapter<BigSellAdapter.ViewHold
         TextView tvPrice;
         TextView tvMoney;
         TextView tvSell;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNum = itemView.findViewById(R.id.tv_num);
             tvPrice = itemView.findViewById(R.id.tv_price);
             tvMoney = itemView.findViewById(R.id.tv_money);
-           tvSell = itemView.findViewById(R.id.tv_sell);
+            tvSell = itemView.findViewById(R.id.tv_sell);
         }
     }
 }

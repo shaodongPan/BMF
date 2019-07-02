@@ -38,28 +38,28 @@ public class BigBuyActivity extends BaseMvpActivity<presenter> implements Contra
     @Override
     public void getThisData() {
         if (username1 == true) {
-            type="2";
-            c="2";
-            status="0";
-            HashMap<String,Object> headmap=new HashMap<>();
-            HashMap<String,Object> map=new HashMap<>();
-            map.put("c",c);
-            map.put("type",type);
-            map.put("uid",mUid);
-            map.put("shell",mShell);
-            map.put("status",status);
-            mPresenter.postData(UserApi.getSelllist,headmap,map,BigBean.class);
+            type = "2";
+            c = "2";
+            status = "0";
+            HashMap<String, Object> headmap = new HashMap<>();
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("c", c);
+            map.put("type", type);
+            map.put("uid", mUid);
+            map.put("shell", mShell);
+            map.put("status", status);
+            mPresenter.postData(UserApi.getSelllist, headmap, map, BigBean.class);
         } else if (username1 == false) {
-            type="1";
-            c="2";
-            HashMap<String,Object> headmap=new HashMap<>();
-            HashMap<String,Object> map=new HashMap<>();
-            map.put("c",c);
-            map.put("type",type);
-            map.put("uid",mUid);
-            map.put("shell",mShell);
-            map.put("status",status);
-            mPresenter.postData(UserApi.getSelllist,headmap,map,BigBean.class);
+            type = "1";
+            c = "2";
+            HashMap<String, Object> headmap = new HashMap<>();
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("c", c);
+            map.put("type", type);
+            map.put("uid", mUid);
+            map.put("shell", mShell);
+            map.put("status", status);
+            mPresenter.postData(UserApi.getSelllist, headmap, map, BigBean.class);
 
         }
     }
@@ -74,7 +74,7 @@ public class BigBuyActivity extends BaseMvpActivity<presenter> implements Contra
         mTitle = findViewById(R.id.tv_title);
         mTitle.setText("卖出记录");
         mTitle.setTextSize(16);
-        LinearLayoutManager manager=new LinearLayoutManager(mContext);
+        LinearLayoutManager manager = new LinearLayoutManager(mContext);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recy.setLayoutManager(manager);
         materialRefreshLayout = (MaterialRefreshLayout) findViewById(R.id.refresh);
@@ -111,15 +111,15 @@ public class BigBuyActivity extends BaseMvpActivity<presenter> implements Contra
     @Override
     public void getData(Object object) {
 
-        if (object instanceof BigBean){
-            BigBean bigBean= (BigBean) object;
-            if (bigBean.error==0){
+        if (object instanceof BigBean) {
+            BigBean bigBean = (BigBean) object;
+            if (bigBean.error == 0) {
                 List<BigBean.DataBean> data = bigBean.data;
-                adapter1 = new MoneyBigAdapter(mContext,data);
+                adapter1 = new MoneyBigAdapter(mContext, data, "卖出记录");
                 recy.setAdapter(adapter1);
 
-            }else{
-                Toast.makeText(mContext,bigBean.msg,Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(mContext, bigBean.msg, Toast.LENGTH_SHORT).show();
             }
         }
     }

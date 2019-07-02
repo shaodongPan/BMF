@@ -1,5 +1,8 @@
 package dream.api.dmf.cn.dreaming.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 /**
@@ -18,7 +21,7 @@ public class BigBean {
     public List<DataBean> data;
     public String msg;
 
-    public static class DataBean {
+    public static class DataBean implements Parcelable {
         /**
          * id : 3
          * sale_uid : null
@@ -53,8 +56,8 @@ public class BigBean {
 
         public String id;
         public Object sale_uid;
-        public Object sale_username;
-        public Object sale_mobile;
+        public String sale_username;
+        public String sale_mobile;
         public String buy_uid;
         public String buy_username;
         public String buy_mobile;
@@ -80,5 +83,72 @@ public class BigBean {
         public String checked;
         public Object payname;
         public String paymount;
+
+
+        protected DataBean(Parcel in) {
+            id = in.readString();
+            sale_username = in.readString();
+            sale_mobile = in.readString();
+            buy_uid = in.readString();
+            buy_username = in.readString();
+            buy_mobile = in.readString();
+            amount = in.readString();
+            realpay = in.readString();
+            price = in.readString();
+            paytype = in.readString();
+            addtime = in.readString();
+            buytime = in.readString();
+            paytime = in.readString();
+            status = in.readString();
+            pzimages = in.readString();
+            alipayfile = in.readString();
+            wechatfile = in.readString();
+            fe = in.readString();
+            tradetype = in.readString();
+            checked = in.readString();
+            paymount = in.readString();
+        }
+
+        public static final Creator<DataBean> CREATOR = new Creator<DataBean>() {
+            @Override
+            public DataBean createFromParcel(Parcel in) {
+                return new DataBean(in);
+            }
+
+            @Override
+            public DataBean[] newArray(int size) {
+                return new DataBean[size];
+            }
+        };
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(id);
+            dest.writeString(sale_username);
+            dest.writeString(sale_mobile);
+            dest.writeString(buy_uid);
+            dest.writeString(buy_username);
+            dest.writeString(buy_mobile);
+            dest.writeString(amount);
+            dest.writeString(realpay);
+            dest.writeString(price);
+            dest.writeString(paytype);
+            dest.writeString(addtime);
+            dest.writeString(buytime);
+            dest.writeString(paytime);
+            dest.writeString(status);
+            dest.writeString(pzimages);
+            dest.writeString(alipayfile);
+            dest.writeString(wechatfile);
+            dest.writeString(fe);
+            dest.writeString(tradetype);
+            dest.writeString(checked);
+            dest.writeString(paymount);
+        }
     }
 }

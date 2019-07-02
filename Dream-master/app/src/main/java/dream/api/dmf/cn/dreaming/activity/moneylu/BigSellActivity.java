@@ -31,30 +31,30 @@ public class BigSellActivity extends BaseMvpActivity<presenter> implements Contr
 
     @Override
     public void getThisData() {
-        if (username1 == true) {
-            type="2";
-            c="2";
-            status="0";
-            HashMap<String,Object> headmap=new HashMap<>();
-            HashMap<String,Object> map=new HashMap<>();
-            map.put("c",c);
-            map.put("type",type);
-            map.put("uid",mUid);
-            map.put("status",status);
-            map.put("shell",mShell);
-            mPresenter.postData(UserApi.getBUYLIST,headmap,map,BigBean.class);
-        } else if (username1 == false) {
-            type="1";
-            c="2";
-            status="0";
-            HashMap<String,Object> headmap=new HashMap<>();
-            HashMap<String,Object> map=new HashMap<>();
-            map.put("c",c);
-            map.put("type",type);
-            map.put("uid",mUid);
-            map.put("shell",mShell);
-            map.put("status",status);
-            mPresenter.postData(UserApi.getBUYLIST,headmap,map,BigBean.class);
+        if (username1 ) {
+            type = "2";
+            c = "2";
+            status = "0";
+            HashMap<String, Object> headMap = new HashMap<>();
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("c", c);
+            map.put("type", type);
+            map.put("uid", mUid);
+            map.put("status", status);
+            map.put("shell", mShell);
+            mPresenter.postData(UserApi.getBUYLIST, headMap, map, BigBean.class);
+        } else  {
+            type = "1";
+            c = "2";
+            status = "0";
+            HashMap<String, Object> headmap = new HashMap<>();
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("c", c);
+            map.put("type", type);
+            map.put("uid", mUid);
+            map.put("shell", mShell);
+            map.put("status", status);
+            mPresenter.postData(UserApi.getBUYLIST, headmap, map, BigBean.class);
 
         }
     }
@@ -69,7 +69,7 @@ public class BigSellActivity extends BaseMvpActivity<presenter> implements Contr
         mTitle = findViewById(R.id.tv_title);
         mTitle.setText("买入记录");
         mTitle.setTextSize(16);
-        LinearLayoutManager manager=new LinearLayoutManager(mContext);
+        LinearLayoutManager manager = new LinearLayoutManager(mContext);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recy.setLayoutManager(manager);
 
@@ -87,15 +87,14 @@ public class BigSellActivity extends BaseMvpActivity<presenter> implements Contr
 
     @Override
     public void getData(Object object) {
-        if (object instanceof BigBean){
-            BigBean bigBean= (BigBean) object;
-            if (bigBean.error==0){
+        if (object instanceof BigBean) {
+            BigBean bigBean = (BigBean) object;
+            if (bigBean.error == 0) {
                 List<BigBean.DataBean> data = bigBean.data;
-                MoneyBigAdapter adapter= new MoneyBigAdapter(mContext,data);
+                MoneyBigAdapter adapter = new MoneyBigAdapter(mContext, data,"买入记录");
                 recy.setAdapter(adapter);
-
-            }else{
-                Toast.makeText(mContext,bigBean.msg,Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(mContext, bigBean.msg, Toast.LENGTH_SHORT).show();
             }
         }
     }
