@@ -36,61 +36,62 @@ public class SellNumActivity extends BaseMvpActivity<presenter> implements Contr
     private TextView mBack;
     private List list;
     private String paytype;
+
     @Override
     public void getThisData() {
         quebutn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                    AlertDialog.Builder builder=new AlertDialog.Builder(SellNumActivity.this);
-                    // 创建对话框构建器
-                    View view=View.inflate(SellNumActivity.this,R.layout.updawho,null);
-                    //*  View view = View.inflate(QueueActivity.this, R.layout.updawho, null);*//*
-                    // 获取布局中的控件
-                    TextView edmail = (TextView) view.findViewById(R.id.bbuy);
-                    final TextView unfalse = (TextView) view.findViewById(R.id.fal_qu);
+                AlertDialog.Builder builder = new AlertDialog.Builder(SellNumActivity.this);
+                // 创建对话框构建器
+                View view = View.inflate(SellNumActivity.this, R.layout.updawho, null);
+                //*  View view = View.inflate(QueueActivity.this, R.layout.updawho, null);*//*
+                // 获取布局中的控件
+                TextView edmail = (TextView) view.findViewById(R.id.bbuy);
+                final TextView unfalse = (TextView) view.findViewById(R.id.fal_qu);
 
 //                    // 设置参数
-                   builder.setTitle("卖出")
-                            .setView(view);
-                    // 创建对话框
+                builder.setTitle("卖出")
+                        .setView(view);
+                // 创建对话框
                 unfalse.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         finish();
                     }
                 });
-                    final AlertDialog alertDialog = builder.create();
-                    edmail.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            //Toast.makeText(mContext,"买入",Toast.LENGTH_LONG).show();
-                            if (username1 ==true){
-                                HashMap<String,Object>headmap=new HashMap<>();
-                                HashMap<String,Object>map=new HashMap<>();
-                                map.put("uid",mUid);
-                                map.put("shell",mShell);
-                                map.put("id",mId);
-                                map.put("paytype",paytype);
-                                mPresenter.postData(UserApi.getSELLid,headmap,map,BuBean.class);
+                final AlertDialog alertDialog = builder.create();
+                edmail.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Toast.makeText(mContext,"买入",Toast.LENGTH_LONG).show();
+                        if (username1 == true) {
+                            HashMap<String, Object> headmap = new HashMap<>();
+                            HashMap<String, Object> map = new HashMap<>();
+                            map.put("uid", mUid);
+                            map.put("shell", mShell);
+                            map.put("id", mId);
+                            map.put("paytype", paytype);
+                            mPresenter.postData(UserApi.getSELLid, headmap, map, BuBean.class);
                         /*    edone.setText(isLoginBean.stock_mdf);
                             edtwo.setText(isLoginBean.regmoney_dmf);*/
 
-                            }else if (username1 ==false){
-                                HashMap<String,Object>headmap=new HashMap<>();
-                                HashMap<String,Object>map=new HashMap<>();
-                                map.put("uid",mUid);
-                                map.put("shell",mShell);
-                                map.put("id",mId);
-                                map.put("paytype",paytype);
-                                mPresenter.postData(UserApi.getHYTBYIDSELL,headmap,map,BuBean.class);
+                        } else if (username1 == false) {
+                            HashMap<String, Object> headmap = new HashMap<>();
+                            HashMap<String, Object> map = new HashMap<>();
+                            map.put("uid", mUid);
+                            map.put("shell", mShell);
+                            map.put("id", mId);
+                            map.put("paytype", paytype);
+                            mPresenter.postData(UserApi.getHYTBYIDSELL, headmap, map, BuBean.class);
                                /* edone.setText(isLoginBean.stock);
                                 edtwo.setText(isLoginBean.regmoney);
                     */
                                 /*String Hed = sharedPreferences.getString(UserApi.HYTED, "");
                                 tvBug.setText("DMF买入");
                                 eTeprice.setText(hytday);*/
-                            }
+                        }
                          /*   // TODO Auto-generated method stub
                             String uname = username.getText().toString().trim();
                             String edma = edmail.getText().toString().trim();
@@ -102,10 +103,10 @@ public class SellNumActivity extends BaseMvpActivity<presenter> implements Contr
                             }else{
                                 Toast.makeText(QueueActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
                             }*/
-                            //alertDialog.dismiss();// 对话框消失
-                        }
-                    });
-                  alertDialog.show();
+                        //alertDialog.dismiss();// 对话框消失
+                    }
+                });
+                alertDialog.show();
             }
         });
      /*   HashMap<String,Object> headmap=new HashMap<>();
@@ -113,7 +114,7 @@ public class SellNumActivity extends BaseMvpActivity<presenter> implements Contr
         map.put("uid",mUid);
         map.put("shell",mShell);
         map.put("id",mId);*/
-       // mPresenter.postData(UserApi.getBUYid,headmap,map,);
+        // mPresenter.postData(UserApi.getBUYid,headmap,map,);
     }
 
     @Override
@@ -140,29 +141,28 @@ public class SellNumActivity extends BaseMvpActivity<presenter> implements Contr
             @Override
             public void onClick(View v) {
                 new BankDialog(mContext, list, mBack);
-                if (list.get(0).equals("银行卡")){
-                    paytype="1";
+                if (list.get(0).equals("银行卡")) {
+                    paytype = "1";
                     return;
-                }else if (list.get(1).equals("支付宝")){
-                    paytype="2";
+                } else if (list.get(1).equals("支付宝")) {
+                    paytype = "2";
                     return;
-                }else if(list.get(2).equals("微信")){
-                    paytype="6";
+                } else if (list.get(2).equals("微信")) {
+                    paytype = "6";
                     return;
+                }
             }
-        }
-    });
+        });
     }
 
     @Override
     public int getView() {
         return R.layout.activity_sell_num;
-        }
+    }
 
 
-
-       /* http://api.xg360.cc/index.php?mod=mobile&act=buy_dmf_trade2
-        http://api.xg360.cc/index.php?mod=mobile&act=buy_stock_trade2*/
+    /* http://api.xg360.cc/index.php?mod=mobile&act=buy_dmf_trade2
+     http://api.xg360.cc/index.php?mod=mobile&act=buy_stock_trade2*/
     @Override
     protected presenter createP() {
         return new presenter();
@@ -171,15 +171,15 @@ public class SellNumActivity extends BaseMvpActivity<presenter> implements Contr
     @Override
     public void getData(Object object) {
 
-           if(object instanceof BuBean){
-               BuBean buyIdBean= (BuBean) object;
-               if(buyIdBean.error.equals("0")){
-                   Toast.makeText(mContext,"购买成功",Toast.LENGTH_LONG).show();
-                   finish();
-               }else{
-                   Toast.makeText(mContext,buyIdBean.msg,Toast.LENGTH_LONG).show();
-               }
-           }
+        if (object instanceof BuBean) {
+            BuBean buyIdBean = (BuBean) object;
+            if (buyIdBean.error.equals("0")) {
+                Toast.makeText(mContext, "购买成功", Toast.LENGTH_LONG).show();
+                finish();
+            } else {
+                Toast.makeText(mContext, buyIdBean.msg, Toast.LENGTH_LONG).show();
+            }
+        }
         /*
                     AlertDialog.Builder builder=new AlertDialog.Builder(QueueActivity.this);
                     // 创建对话框构建器

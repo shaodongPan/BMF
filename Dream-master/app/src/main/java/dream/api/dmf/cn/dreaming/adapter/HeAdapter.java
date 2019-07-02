@@ -11,6 +11,7 @@ import java.util.List;
 
 import dream.api.dmf.cn.dreaming.R;
 import dream.api.dmf.cn.dreaming.bean.BuyListBean;
+import dream.api.dmf.cn.dreaming.bean.ConstomData;
 
 /**
  * Created by SongNing on 2019/6/29.
@@ -19,8 +20,8 @@ import dream.api.dmf.cn.dreaming.bean.BuyListBean;
 public class HeAdapter extends RecyclerView.Adapter<HeAdapter.ViewHolder> {
 
     Context mContext;
-    List<BuyListBean.DataBean> data;
-    public HeAdapter(Context mContext, List<BuyListBean.DataBean> data) {
+    List<ConstomData> data;
+    public HeAdapter(Context mContext, List<ConstomData> data) {
         this.mContext = mContext;
         this.data = data;
     }
@@ -31,7 +32,8 @@ public class HeAdapter extends RecyclerView.Adapter<HeAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view =View.inflate(mContext,R.layout.item_trading,null);      //LayoutInflater.from(mContext).inflate(, parent, false);
+        View view =View.inflate(mContext,R.layout.item_trading,null);
+        //LayoutInflater.from(mContext).inflate(, parent, false);
         holder = new ViewHolder(view);
         return holder;
     }

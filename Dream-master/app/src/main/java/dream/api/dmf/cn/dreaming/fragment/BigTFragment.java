@@ -50,6 +50,7 @@ public class BigTFragment extends BaseMvpFragment<presenter> implements Contract
     private ArrayList<Fragment> list;
     private SharedPreferences sharedPreferences;
     private boolean username1;
+
     public static Fragment newInstance() {
         BigTFragment fragment = new BigTFragment();
         return fragment;
@@ -69,12 +70,12 @@ public class BigTFragment extends BaseMvpFragment<presenter> implements Contract
     protected void initView(View view) {
         sharedPreferences = getActivity().getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
         username1 = sharedPreferences.getBoolean("Username", true);
-        if (username1 ==true){
+        if (username1 == true) {
             mButton3 = view.findViewById(R.id.m_button3);
-            mButton4= view.findViewById(R.id.m_button4);
+            mButton4 = view.findViewById(R.id.m_button4);
             mButton3.setText("卖出DMF");
             mButton4.setText("买入DMF");
-        }else if (username1 ==false){
+        } else if (username1 == false) {
 
 
         }
@@ -83,10 +84,10 @@ public class BigTFragment extends BaseMvpFragment<presenter> implements Contract
     @Override
     protected void getData() {
         list = new ArrayList<>();
-        BigSellFragment frag01 =new BigSellFragment();
-        BigBugFragment frag02 =new BigBugFragment();
-        BigSellHFragment frag03=new BigSellHFragment();
-        BigBugHFragment frag04=new BigBugHFragment();
+        BigSellFragment frag01 = new BigSellFragment();
+        BigBugFragment frag02 = new BigBugFragment();
+        BigSellHFragment frag03 = new BigSellHFragment();
+        BigBugHFragment frag04 = new BigBugHFragment();
         list.add(frag01);
         list.add(frag02);
         list.add(frag03);
@@ -157,28 +158,4 @@ public class BigTFragment extends BaseMvpFragment<presenter> implements Contract
                 break;
         }
     }
-
- /*   final class MyViewPagerAdapter extends FragmentPagerAdapter {
-        public MyViewPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return list[position];
-        }
-
-
-        @Override
-        public int getCount() {
-            return list.length;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return TabText[position];
-
-        }
-    }*/
-
 }

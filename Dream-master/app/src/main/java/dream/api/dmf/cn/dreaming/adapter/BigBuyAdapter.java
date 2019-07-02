@@ -47,7 +47,7 @@ public class BigBuyAdapter extends RecyclerView.Adapter<BigBuyAdapter.ViewHolder
                 intent.putExtra("realpay",data.get(i).realpay);
                 intent.putExtra("amount",data.get(i).amount);
                 intent.putExtra("price",data.get(i).price);
-                intent.putExtra("position",data.get(i).buy_uid);
+                intent.putExtra("position",data.get(i).id);
                mContext.startActivity(intent);
             }
         });

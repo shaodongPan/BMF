@@ -25,6 +25,7 @@ import dream.api.dmf.cn.dreaming.base.mvp.Contract;
 import dream.api.dmf.cn.dreaming.base.mvp.presenter.presenter;
 import dream.api.dmf.cn.dreaming.bean.BigBean;
 import dream.api.dmf.cn.dreaming.bean.BuyListBean;
+import dream.api.dmf.cn.dreaming.bean.ConstomData;
 
 public class BigBugFragment extends BaseMvpFragment<presenter> implements Contract.Iview {
 
@@ -202,7 +203,7 @@ public class BigBugFragment extends BaseMvpFragment<presenter> implements Contra
         if (object instanceof BuyListBean){
             BuyListBean buyListBean= (BuyListBean) object;
             if (buyListBean.error==0){
-                List<BuyListBean.DataBean> data = buyListBean.data;
+                List<ConstomData> data = buyListBean.data;
                 BuyListAdapter buyListAdapter=new BuyListAdapter(mContext,data);
                 mRecyt.setAdapter(buyListAdapter);
                 //Toast.makeText(mContext,"成功",Toast.LENGTH_SHORT).show();

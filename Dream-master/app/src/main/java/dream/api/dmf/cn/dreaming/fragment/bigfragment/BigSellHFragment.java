@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -167,7 +168,8 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
             map1.put("c", c);
             map1.put("status", status);
             map1.put("type", type);
-            mPresenter.postData(UserApi.getBUYLIST, headsmap, map1, SellBean.class);
+            mPresenter.postData(UserApi.getSelllist, headsmap, map1, SellBean.class);
+
             type = "2";
             status = "5";
             c = "2";
@@ -178,7 +180,7 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
             map.put("c", c);
             map.put("status", status);
             map.put("type", type);
-            mPresenter.postData(UserApi.getBUYLIST, headmap, map1, OKBean.class);
+            mPresenter.postData(UserApi.getSelllist, headmap, map, OKBean.class);
 
         } else if (username1 == false) {
             status = "0";
@@ -191,7 +193,8 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
             map1.put("c", c);
             map1.put("status", status);
             map1.put("type", type);
-            mPresenter.postData(UserApi.getBUYLIST, headsmap, map1, SellBean.class);
+            mPresenter.postData(UserApi.getSelllist, headsmap, map1, SellBean.class);
+
             status = "5";
             type = "1";
             c = "2";
@@ -202,8 +205,7 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
             map.put("c", c);
             map.put("status", status);
             map.put("type", type);
-            mPresenter.postData(UserApi.getBUYLIST, headmap, map, OKBean.class);
-
+            mPresenter.postData(UserApi.getSelllist, headmap, map, OKBean.class);
         }
         mPrice.setText(dmfday);
     }
@@ -211,19 +213,23 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
 
     @Override
     public void getData(Object object) {
+
         if (object instanceof OKBean) {
             OKBean okBean = (OKBean) object;
             if (okBean.error == 0) {
                 List<OKBean.DataBean> data = okBean.data;
                 OkAdapter okAdapter = new OkAdapter(data, mContext);
+                recyt.setNestedScrollingEnabled(false);//禁止滑动
                 recyt.setAdapter(okAdapter);
             }
         }
+
         if (object instanceof SellBean) {
             SellBean sellBean = (SellBean) object;
             if (sellBean.error == 0) {
                 List<SellBean.DataBean> datase = sellBean.data;
                 adapter = new FinishAdapter(mContext, datase);
+                recy.setNestedScrollingEnabled(false);//禁止滑动
                 recy.setAdapter(adapter);
             } else {
                 Toast.makeText(mContext, sellBean.msg, Toast.LENGTH_SHORT).show();
@@ -381,7 +387,7 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
     @Override
     public void onResume() {
         super.onResume();
-        getInstance();
+//        getInstance();
     }
 
     public static String cutDoubleNumber(Double number) {

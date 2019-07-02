@@ -74,121 +74,48 @@ public class BuyInActivity extends BaseMvpActivity<presenter> implements Contrac
         mButn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (username1 == true) {
-                    AlertDialog.Builder builder=new AlertDialog.Builder(BuyInActivity.this);
-                    // 创建对话框构建器
-                    View view=View.inflate(BuyInActivity.this,R.layout.updawho,null);
-                    //*  View view = View.inflate(QueueActivity.this, R.layout.updawho, null);*//*
-                    // 获取布局中的控件
-                    TextView edmail = (TextView) view.findViewById(R.id.bbuy);
-                    final TextView unfalse = (TextView) view.findViewById(R.id.fal_qu);
-                    unfalse.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            finish();
+
+                AlertDialog.Builder builder=new AlertDialog.Builder(BuyInActivity.this);
+                // 创建对话框构建器
+                View view=View.inflate(BuyInActivity.this,R.layout.updawho,null);
+                // 获取布局中的控件
+                TextView edmail = (TextView) view.findViewById(R.id.bbuy);
+                final TextView unfalse = (TextView) view.findViewById(R.id.fal_qu);
+                unfalse.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                });
+                builder.setTitle("买入")
+                        .setView(view);
+                // 创建对话框
+                final AlertDialog alertDialog = builder.create();
+                edmail.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (username1){
+                            HashMap<String,Object>headmap=new HashMap<>();
+                            HashMap<String,Object>map=new HashMap<>();
+                            map.put("uid",mUid);
+                            map.put("shell",mShell);
+                            map.put("id",mid);
+                            mPresenter.postData(UserApi.getBUYid,headmap,map,BuyIdBean.class);
+
+                        }else{
+                            HashMap<String,Object>headmap=new HashMap<>();
+                            HashMap<String,Object>map=new HashMap<>();
+                            map.put("uid",mUid);
+                            map.put("shell",mShell);
+                            map.put("id",mid);
+                            mPresenter.postData(UserApi.getHYTBYID,headmap,map,BuyIdBean.class);
                         }
-                    });
-//                    // 设置参数
-                    builder.setTitle("买入")
-                            .setView(view);
-                    // 创建对话框
-                    final AlertDialog alertDialog = builder.create();
-                    edmail.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            //Toast.makeText(mContext,"买入",Toast.LENGTH_LONG).show();
-                            if (username1 ==true){
-                                HashMap<String,Object>headmap=new HashMap<>();
-                                HashMap<String,Object>map=new HashMap<>();
-                                map.put("uid",mUid);
-                                map.put("shell",mShell);
-                                map.put("id",mid);
-                                mPresenter.postData(UserApi.getBUYid,headmap,map,BuyIdBean.class);
-                        /*    edone.setText(isLoginBean.stock_mdf);
-                            edtwo.setText(isLoginBean.regmoney_dmf);*/
+                    }
+                });
+                alertDialog.show();
 
-                            }else if (username1 ==false){
-                                HashMap<String,Object>headmap=new HashMap<>();
-                                HashMap<String,Object>map=new HashMap<>();
-                                map.put("uid",mUid);
-                                map.put("shell",mShell);
-                                map.put("id",mid);
-                                //map.put("paytype",paytype);
-                                mPresenter.postData(UserApi.getHYTBYID,headmap,map,BuyIdBean.class);
-                               /* edone.setText(isLoginBean.stock);
-                                edtwo.setText(isLoginBean.regmoney);
-                    */
-                                /*String Hed = sharedPreferences.getString(UserApi.HYTED, "");
-                                tvBug.setText("DMF买入");
-                                eTeprice.setText(hytday);*/
-                            }
-                         /*   // TODO Auto-generated method stub
-                            String uname = username.getText().toString().trim();
-                            String edma = edmail.getText().toString().trim();
-                            String sexo = wsex.getText().toString().trim();
-                            String sext = nsex.getText().toString().trim();
 
-                            if (uname.equals("") && edma.equals("")) {
-                                Toast.makeText(QueueActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
-                            }else{
-                                Toast.makeText(QueueActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
-                            }*/
-                            //alertDialog.dismiss();// 对话框消失
-                        }
-                    });
-                    alertDialog.show();
-/*                      //
-                    AlertDialog.Builder builder=new AlertDialog.Builder(QueueActivity.this);
-                    // 创建对话框构建器
-                    View view=View.inflate(BuyInActivity.this,R.layout.updawho,null);
-                    *//*  View view = View.inflate(QueueActivity.this, R.layout.updawho, null);*//*
-                    // 获取布局中的控件
-                    final EditText edmail = (EditText) view.findViewById(R.id.edmail);
-                    final EditText username = (EditText) view.findViewById(R.id.edname);
-                    final CheckBox wsex = (CheckBox) view.findViewById(R.id.csex);
-                    final CheckBox nsex = (CheckBox) view.findViewById(R.id.cnsex);
-                    final Button button = (Button) view.findViewById(R.id.butnupdate);
-                    // 设置参数
-                    builder.setTitle("修改用户信息").setIcon(R.mipmap.fanhdpi)
-                            .setView(view);
-                    // 创建对话框
-                    final AlertDialog alertDialog = builder.create();
-                    button.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            // TODO Auto-generated method stub
-                            String uname = username.getText().toString().trim();
-                            String edma = edmail.getText().toString().trim();
-                            String sexo = wsex.getText().toString().trim();
-                            String sext = nsex.getText().toString().trim();
 
-                            if (uname.equals("") && edma.equals("")) {
-                                Toast.makeText(QueueActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
-                            }else{
-                                Toast.makeText(QueueActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
-                            }
-                            alertDialog.dismiss();// 对话框消失
-                        }
-                    });*/
-                /*    alertDialog.show();*/
-                    //DMF
-/*
-                    HashMap<String, Object> headmap = new HashMap<>();
-                    HashMap<String, Object> map = new HashMap<>();
-                    map.put("uid", mUid);
-                    map.put("shell", mShell);
-                    map.put("id", mid);
-                    mPresenter.postData(UserApi.getSELLid, headmap, map, BuyIdBean.class);*/
-               /* } else if (username1 == false) {
-                    //HYT
-                    HashMap<String, Object> headmap = new HashMap<>();
-                    HashMap<String, Object> map = new HashMap<>();
-                    map.put("uid", mUid);
-                    map.put("shell", mShell);
-                    map.put("id", mid);
-                    mPresenter.postData(UserApi.getHYTBYIDSELL, headmap, map, BuyIdBean.class);*/
-
-                }
 
             }
         });

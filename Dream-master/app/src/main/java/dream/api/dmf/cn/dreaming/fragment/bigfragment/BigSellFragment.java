@@ -27,11 +27,9 @@ import dream.api.dmf.cn.dreaming.bean.SellBean;
 
 public class BigSellFragment extends BaseMvpFragment<presenter> implements Contract.Iview {
 
-    private RecyclerView mRecy;
     private RecyclerView mRecyt;
     private String mUid;
     private String mShell;
-    private BigBean bigBean;
     private String  t;
     private String type;
     private String cc="2";
@@ -120,9 +118,11 @@ public class BigSellFragment extends BaseMvpFragment<presenter> implements Contr
             map.put("type",type);
             map.put("t",t);
             mPresenter.postData(UserApi.getBigShow,headmap,map,BigBean.class);
+
+
             type="2";
             c="2";
-            status="4";
+            status="5";
             HashMap<String,Object> headsmap=new HashMap<>();
             HashMap<String,Object> maps=new HashMap<>();
             maps.put("c",c);
@@ -142,9 +142,10 @@ public class BigSellFragment extends BaseMvpFragment<presenter> implements Contr
             map.put("t",t);
             map.put("type",type);
             mPresenter.postData(UserApi.getBigShow,headmap,map,BigBean.class);
+
             type="1";
             c="2";
-            status="4";
+            status="5";
             HashMap<String,Object> headhmap=new HashMap<>();
             HashMap<String,Object> maph=new HashMap<>();
             maph.put("c",c);
@@ -167,8 +168,8 @@ public class BigSellFragment extends BaseMvpFragment<presenter> implements Contr
                 //Toast.makeText(mContext,"成功",Toast.LENGTH_SHORT).show();
                 data = bigBean.data;
                 BigSellAdapter bigSellAdapter = new BigSellAdapter(mContext, this.data);
+                mRecy1.setNestedScrollingEnabled(false);//禁止滑动
                 mRecy1.setAdapter(bigSellAdapter);
-                //mRecyt.setAdapter(bigSellAdapter);
             } else {
                 Toast.makeText(mContext, bigBean.msg, Toast.LENGTH_SHORT).show();
             }
@@ -178,6 +179,7 @@ public class BigSellFragment extends BaseMvpFragment<presenter> implements Contr
             if (sellBean.error==0){
                 List<SellBean.DataBean> datase = sellBean.data;
                 FinishAdapter adapter = new FinishAdapter(mContext, datase);
+                mRecyt.setNestedScrollingEnabled(false);//禁止滑动
                 mRecyt.setAdapter(adapter);
             }else{
                 Toast.makeText(mContext,sellBean.msg,Toast.LENGTH_SHORT).show();
@@ -197,7 +199,7 @@ public class BigSellFragment extends BaseMvpFragment<presenter> implements Contr
             mPresenter.postData(UserApi.getBigShow,headmap,map,BigBean.class);
             type="2";
             c="2";
-            status="4";
+            status="5";
             HashMap<String,Object> headsmap=new HashMap<>();
             HashMap<String,Object> maps=new HashMap<>();
             maps.put("c",c);
@@ -219,7 +221,7 @@ public class BigSellFragment extends BaseMvpFragment<presenter> implements Contr
             mPresenter.postData(UserApi.getBigShow,headmap,map,BigBean.class);
             type="1";
             c="2";
-            status="4";
+            status="5";
             HashMap<String,Object> headhmap=new HashMap<>();
             HashMap<String,Object> maph=new HashMap<>();
             maph.put("c",c);

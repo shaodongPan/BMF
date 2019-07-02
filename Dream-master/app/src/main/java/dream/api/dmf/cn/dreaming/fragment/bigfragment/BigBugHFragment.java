@@ -35,7 +35,10 @@ import dream.api.dmf.cn.dreaming.api.UserApi;
 import dream.api.dmf.cn.dreaming.base.BaseMvpFragment;
 import dream.api.dmf.cn.dreaming.base.mvp.Contract;
 import dream.api.dmf.cn.dreaming.base.mvp.presenter.presenter;
+import dream.api.dmf.cn.dreaming.bean.BigBean;
+import dream.api.dmf.cn.dreaming.bean.BuyBean;
 import dream.api.dmf.cn.dreaming.bean.BuyListBean;
+import dream.api.dmf.cn.dreaming.bean.ConstomData;
 import dream.api.dmf.cn.dreaming.bean.EBuyBean;
 import dream.api.dmf.cn.dreaming.utils.BuyNumDialog;
 import dream.api.dmf.cn.dreaming.utils.LogUtils;
@@ -68,7 +71,7 @@ public class BigBugHFragment extends BaseMvpFragment<presenter> implements Contr
     private List<String> numList;
     private RecyclerView mRecy;
     private RecyclerView recy;
-    private String c="2";
+    private String c = "2";
     private String start;
     private String type;
     private EditText mPass;
@@ -102,19 +105,19 @@ public class BigBugHFragment extends BaseMvpFragment<presenter> implements Contr
         eTeprice = view.findViewById(R.id.e_teprice);
         mRecy = view.findViewById(R.id.recyo);
         recy = view.findViewById(R.id.recyt);
-        LinearLayoutManager manager=new LinearLayoutManager(mContext);
+        LinearLayoutManager manager = new LinearLayoutManager(mContext);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecy.setLayoutManager(manager);
-        LinearLayoutManager manager1=new LinearLayoutManager(mContext);
+        LinearLayoutManager manager1 = new LinearLayoutManager(mContext);
         manager1.setOrientation(LinearLayoutManager.VERTICAL);
         recy.setLayoutManager(manager1);
         String[] splitNums = nums.substring(1, nums.length() - 1).replace("\"", "").split(",");
         numList = Arrays.asList(splitNums);
         list = Arrays.asList(getResources().getStringArray(R.array.bank));
-        if (username1 ==true){
+        if (username1 == true) {
 
 
-        }else if (username1 ==false){
+        } else if (username1 == false) {
             String Hed = sharedPreferences.getString(UserApi.HYTED, "");
             tvBug.setText("DMF买入");
             eTeprice.setText(hytday);
@@ -125,19 +128,19 @@ public class BigBugHFragment extends BaseMvpFragment<presenter> implements Contr
             //密码可见,点击之后设置成不可见的
             mPass.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
 
-        }else {
+        } else {
             //不可见设置成可见
             mPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         }
         mExe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (!isChecked){
+                if (!isChecked) {
                     if (mPass.getInputType() == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
                         //不可见设置成可见
                         mPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     }
-                }else {
+                } else {
 
                     mPass.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
                     //密码可见,点击之后设置成不可见的
@@ -171,124 +174,89 @@ public class BigBugHFragment extends BaseMvpFragment<presenter> implements Contr
 
             }
         });
-        if (username1==true) {
+        if (username1 == true) {
             type = "2";
-            HashMap<String,Object> headtmap=new HashMap<>();
-            HashMap<String,Object> map1=new HashMap<>();
-            start="0";
-            c="2";
-            map1.put("uid",mUid);
-            map1.put("shell",mShell);
-            map1.put("c",c);
-            map1.put("status",start);
-            map1.put("type",type);
-            mPresenter.postData(UserApi.getBUYLIST,headtmap,map1,BuyListBean.class);
+            HashMap<String, Object> headtmap = new HashMap<>();
+            HashMap<String, Object> map1 = new HashMap<>();
+            start = "0";
+            c = "2";
+            map1.put("uid", mUid);
+            map1.put("shell", mShell);
+            map1.put("c", c);
+            map1.put("status", start);
+            map1.put("type", type);
+            mPresenter.postData(UserApi.getBUYLIST, headtmap, map1, BuyListBean.class);
+
             type = "2";
-            HashMap<String,Object> headmap=new HashMap<>();
-            HashMap<String,Object> map=new HashMap<>();
-            start="4";
-            c="2";
-            map.put("uid",mUid);
-            map.put("shell",mShell);
-            map.put("c",c);
-            map.put("status",start);
-            map.put("type",type);
-            mPresenter.postData(UserApi.getBUYLIST,headmap,map,BuyListBean.class);
-        }else if (username1==false){
-            type="1";
-            HashMap<String,Object> headsmap=new HashMap<>();
-            HashMap<String,Object> map1=new HashMap<>();
-            start="4";
-            c="2";
-            map1.put("uid",mUid);
-            map1.put("shell",mShell);
-            map1.put("c",c);
-            map1.put("status",start);
-            map1.put("type",type);
-            mPresenter.postData(UserApi.getBUYLIST,headsmap,map1,BuyListBean.class);
+            start = "5";
+            c = "2";
+            HashMap<String, Object> headmap = new HashMap<>();
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("uid", mUid);
+            map.put("shell", mShell);
+            map.put("c", c);
+            map.put("status", start);
+            map.put("type", type);
+            mPresenter.postData(UserApi.getBUYLIST, headmap, map, BuyBean.class);
+        } else if (username1 == false) {
             type = "1";
-            HashMap<String,Object> headmap=new HashMap<>();
-            HashMap<String,Object> map=new HashMap<>();
-            start="4";
-            c="2";
-            map.put("uid",mUid);
-            map.put("shell",mShell);
-            map.put("c",c);
-            map.put("status",start);
-            map.put("type",type);
-            mPresenter.postData(UserApi.getBUYLIST,headmap,map,BuyListBean.class);
+            start = "0";
+            c = "2";
+            HashMap<String, Object> headsmap = new HashMap<>();
+            HashMap<String, Object> map1 = new HashMap<>();
+            map1.put("uid", mUid);
+            map1.put("shell", mShell);
+            map1.put("c", c);
+            map1.put("status", start);
+            map1.put("type", type);
+            mPresenter.postData(UserApi.getBUYLIST, headsmap, map1, BuyListBean.class);
+
+            type = "1";
+            HashMap<String, Object> headmap = new HashMap<>();
+            HashMap<String, Object> map = new HashMap<>();
+            start = "5";
+            c = "2";
+            map.put("uid", mUid);
+            map.put("shell", mShell);
+            map.put("c", c);
+            map.put("status", start);
+            map.put("type", type);
+            mPresenter.postData(UserApi.getBUYLIST, headmap, map, BuyBean.class);
         }
 
     }
 
     @Override
     public void getData(Object object) {
-        LogUtils.v(object+"");
-        if (object instanceof EBuyBean){
-            EBuyBean eBuyBean= (EBuyBean) object;
-            if (eBuyBean.error.equals("0")){
-                Toast.makeText(mContext,"购买成功",Toast.LENGTH_SHORT).show();
-               /* if (username1==true) {
-                    type = "2";
-                    HashMap<String,Object> headtmap=new HashMap<>();
-                    HashMap<String,Object> map1=new HashMap<>();
-                    start="4";
-                    map1.put("uid",mUid);
-                    map1.put("shell",mShell);
-                    map1.put("c",c);
-                    map1.put("status",start);
-                    map1.put("type",type);
-                    mPresenter.postData(UserApi.getBUYLIST,headtmap,map1,BuyListBean.class);
-                }else if (username1==false){
-                    HashMap<String,Object> headsmap=new HashMap<>();
-                    HashMap<String,Object> map1=new HashMap<>();
-                    start="4";
-                    map1.put("uid",mUid);
-                    map1.put("shell",mShell);
-                    map1.put("c",c);
-                    map1.put("status",start);
-                    map1.put("type",type);
-                    mPresenter.postData(UserApi.getBUYLIST,headsmap,map1,BuyListBean.class);
-                }*/
-            }else{
-                Toast.makeText(mContext,eBuyBean.msg,Toast.LENGTH_SHORT).show();
-               /* if (username1==true) {
-                    type = "2";
-                    HashMap<String,Object> headtmap=new HashMap<>();
-                    HashMap<String,Object> map1=new HashMap<>();
-                    start="4";
-                    map1.put("uid",mUid);
-                    map1.put("shell",mShell);
-                    map1.put("c",c);
-                    map1.put("status",start);
-                    map1.put("type",type);
-                    mPresenter.postData(UserApi.getBUYLIST,headtmap,map1,BuyListBean.class);
-                }else if (username1==false){
-                    HashMap<String,Object> headsmap=new HashMap<>();
-                    HashMap<String,Object> map1=new HashMap<>();
-                    start="4";
-                    map1.put("uid",mUid);
-                    map1.put("shell",mShell);
-                    map1.put("c",c);
-                    map1.put("status",start);
-                    map1.put("type",type);
-                    mPresenter.postData(UserApi.getBUYLIST,headsmap,map1,BuyListBean.class);
-                }*/
+        LogUtils.v(object + "");
+        if (object instanceof EBuyBean) {
+            EBuyBean eBuyBean = (EBuyBean) object;
+            if (eBuyBean.error.equals("0")) {
+                Toast.makeText(mContext, "购买成功", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(mContext, eBuyBean.msg, Toast.LENGTH_SHORT).show();
             }
 
         }
-        if (object instanceof BuyListBean){
-            BuyListBean buyListBean= (BuyListBean) object;
-            if (buyListBean.error==0){
-                List<BuyListBean.DataBean> data = buyListBean.data;
-                HeAdapter heAdapter=new HeAdapter(mContext,data);
+        if (object instanceof BuyListBean) {
+            BuyListBean buyListBean = (BuyListBean) object;
+            if (buyListBean.error == 0) {
+                List<ConstomData> data = buyListBean.data;
+                HeAdapter heAdapter = new HeAdapter(mContext, data);
                 mRecy.setAdapter(heAdapter);
+            } else {
+                Toast.makeText(mContext, buyListBean.msg, Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        if (object instanceof BuyBean){
+            BuyBean bigBean = (BuyBean) object;
+            if (bigBean.error == 0) {
+                List<ConstomData> data = bigBean.data;
+                HeAdapter heAdapter = new HeAdapter(mContext, data);
                 recy.setAdapter(heAdapter);
-                //BuyListAdapter buyListAdapter=new BuyListAdapter(mContext,data);
-               // mRecy.setAdapter(buyListAdapter);
-               // Toast.makeText(mContext,"成功",Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(mContext,buyListBean.msg,Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(mContext, bigBean.msg, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -322,19 +290,19 @@ public class BigBugHFragment extends BaseMvpFragment<presenter> implements Contr
             case R.id.login_exe:
                 break;
             case R.id.tv_bug:
-                if (username1==true){
-                    type="2";
-                    HashMap<String,Object> headmap=new HashMap<>();
-                    HashMap<String,Object> map=new HashMap<>();
+                if (username1 == true) {
+                    type = "2";
+                    HashMap<String, Object> headmap = new HashMap<>();
+                    HashMap<String, Object> map = new HashMap<>();
                     mNum = eNum.getText().toString();
                     String mPhone = tvEdphone.getText().toString().trim();
                     //String mprice = eTeprice.getText().toString();
-                    map.put("uid",mUid);
-                    map.put("shell",mShell);
-                    map.put("repass",mPhone);
+                    map.put("uid", mUid);
+                    map.put("shell", mShell);
+                    map.put("repass", mPhone);
                     map.put("howmoney", mNum);
-                    map.put("sellprice",bankNin);
-                    mPresenter.postData(UserApi.getBIGHYTBBUY,headmap,map,EBuyBean.class);
+                    map.put("sellprice", bankNin);
+                    mPresenter.postData(UserApi.getBIGHYTBBUY, headmap, map, EBuyBean.class);
                   /*  HashMap<String,Object> headtmap=new HashMap<>();
                     HashMap<String,Object> map1=new HashMap<>();
                     start="4";
@@ -345,20 +313,20 @@ public class BigBugHFragment extends BaseMvpFragment<presenter> implements Contr
                     map1.put("type",type);
                     mPresenter.postData(UserApi.getBUYLIST,headtmap,map1,BuyListBean.class);*/
 
-                }else if (username1==false){
-                    type="1";
+                } else if (username1 == false) {
+                    type = "1";
                     /*   String Hed = sharedPreferences.getString(UserApi.HYTED, "");*/
-                    HashMap<String,Object> headmap=new HashMap<>();
-                    HashMap<String,Object> map=new HashMap<>();
+                    HashMap<String, Object> headmap = new HashMap<>();
+                    HashMap<String, Object> map = new HashMap<>();
                     mNum = eNum.getText().toString();
                     String mPhone = tvEdphone.getText().toString().trim();
                     //String mprice = eTeprice.getText().toString();
-                    map.put("uid",mUid);
-                    map.put("shell",mShell);
-                    map.put("repass",mPhone);
+                    map.put("uid", mUid);
+                    map.put("shell", mShell);
+                    map.put("repass", mPhone);
                     map.put("howmoney", mNum);
                     //map.put("sellprice",bankNin);
-                    mPresenter.postData(UserApi.getBIGHYTBBUY,headmap,map,EBuyBean.class);
+                    mPresenter.postData(UserApi.getBIGHYTBBUY, headmap, map, EBuyBean.class);
                  /*   HashMap<String,Object> headsmap=new HashMap<>();
                     HashMap<String,Object> map1=new HashMap<>();
                     start="4";
@@ -373,11 +341,12 @@ public class BigBugHFragment extends BaseMvpFragment<presenter> implements Contr
                 break;
         }
     }
+
     public static String cutDoubleNumber(Double number) {
 //
         java.text.DecimalFormat df = new java.text.DecimalFormat("0.0");
         df.setRoundingMode(RoundingMode.FLOOR);
-        String d=df.format(number);
+        String d = df.format(number);
 
         //四舍五入保留两位小数,number.toString()是一个Double值
 //        double v = new BigDecimal(number.toString()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();

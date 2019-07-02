@@ -11,6 +11,7 @@ import java.util.List;
 
 import dream.api.dmf.cn.dreaming.R;
 import dream.api.dmf.cn.dreaming.bean.BuyListBean;
+import dream.api.dmf.cn.dreaming.bean.ConstomData;
 
 /**
  * Created by SongNing on 2019/6/27.
@@ -18,9 +19,9 @@ import dream.api.dmf.cn.dreaming.bean.BuyListBean;
  */
 public class BuyListAdapter extends RecyclerView.Adapter<BuyListAdapter.ViewHolder> {
     Context mContext;
-    List<BuyListBean.DataBean> data;
+    List<ConstomData> data;
     ViewHolder holder;
-    public BuyListAdapter(Context mContext, List<BuyListBean.DataBean> data) {
+    public BuyListAdapter(Context mContext, List<ConstomData> data) {
         this.mContext = mContext;
         this.data = data;
     }
