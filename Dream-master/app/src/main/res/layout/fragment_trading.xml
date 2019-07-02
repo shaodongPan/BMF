@@ -35,21 +35,6 @@
                 android:id="@+id/lineChart"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen200" />
-
-            <!--<dream.api.dmf.cn.dreaming.view.ChartView-->
-            <!--android:id="@+id/chartview"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/dimen200"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:layout_marginTop="@dimen/dimen10"-->
-            <!--app:bgcolor="#ffffff"-->
-            <!--app:interval="55dp"-->
-            <!--app:isScroll="true"-->
-            <!--app:linecolor="#02bbb7"-->
-            <!--app:xylinecolor="#e2e2e2"-->
-            <!--app:xylinewidth="1dp"-->
-            <!--app:xytextcolor="#7e7e7e"-->
-            <!--app:xytextsize="12sp" />-->
         </LinearLayout>
 
         <View

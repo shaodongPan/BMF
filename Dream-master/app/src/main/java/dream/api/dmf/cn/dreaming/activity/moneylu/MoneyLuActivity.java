@@ -33,29 +33,29 @@ public class MoneyLuActivity extends BaseMvpActivity<presenter> implements Contr
     public void getThisData() {
 
         if (username1 == true) {
-            type="2";
-            c="1";
-            status="0";
-            HashMap<String,Object> headsmap=new HashMap<>();
-            HashMap<String,Object> map2=new HashMap<>();
-            map2.put("uid",mUid);
-            map2.put("shell",mShell);
-            map2.put("c",c);
-            map2.put("status",status);
-            map2.put("type",type);
-            mPresenter.postData(UserApi.getSelllist,headsmap,map2,SellBean.class);
+            type = "2";
+            c = "1";
+            status = "0";
+            HashMap<String, Object> headsmap = new HashMap<>();
+            HashMap<String, Object> map2 = new HashMap<>();
+            map2.put("uid", mUid);
+            map2.put("shell", mShell);
+            map2.put("c", c);
+            map2.put("status", status);
+            map2.put("type", type);
+            mPresenter.postData(UserApi.getSelllist, headsmap, map2, SellBean.class);
         } else if (username1 == false) {
-            type="1";
-            c="1";
-            status="0";
-            HashMap<String,Object> headsmap=new HashMap<>();
-            HashMap<String,Object> map2=new HashMap<>();
-            map2.put("uid",mUid);
-            map2.put("shell",mShell);
-            map2.put("c",c);
-            map2.put("status",status);
-            map2.put("type",type);
-            mPresenter.postData(UserApi.getSelllist,headsmap,map2,SellBean.class);
+            type = "1";
+            c = "1";
+            status = "0";
+            HashMap<String, Object> headsmap = new HashMap<>();
+            HashMap<String, Object> map2 = new HashMap<>();
+            map2.put("uid", mUid);
+            map2.put("shell", mShell);
+            map2.put("c", c);
+            map2.put("status", status);
+            map2.put("type", type);
+            mPresenter.postData(UserApi.getSelllist, headsmap, map2, SellBean.class);
         }
     }
 
@@ -69,7 +69,7 @@ public class MoneyLuActivity extends BaseMvpActivity<presenter> implements Contr
         mTitle = findViewById(R.id.tv_title);
         mTitle.setText("卖出记录");
         mTitle.setTextSize(16);
-        LinearLayoutManager manager=new LinearLayoutManager(mContext);
+        LinearLayoutManager manager = new LinearLayoutManager(mContext);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecy.setLayoutManager(manager);
     }
@@ -86,17 +86,17 @@ public class MoneyLuActivity extends BaseMvpActivity<presenter> implements Contr
 
     @Override
     public void getData(Object object) {
-        SellBean sellBean= (SellBean) object;
-       if (object instanceof SellBean){
-           if (sellBean.error==0){
-               List<SellBean.DataBean> datase = sellBean.data;
+        SellBean sellBean = (SellBean) object;
+        if (object instanceof SellBean) {
+            if (sellBean.error == 0) {
+                List<SellBean.DataBean> datase = sellBean.data;
 
                 SellAdapter adapter = new SellAdapter(mContext, datase);
-               mRecy.setAdapter(adapter);
-               //Toast.makeText(mContext,"成功",Toast.LENGTH_SHORT).show();
-           }else{
-               Toast.makeText(mContext,sellBean.msg,Toast.LENGTH_SHORT).show();
-           }
-       }
+                mRecy.setAdapter(adapter);
+                //Toast.makeText(mContext,"成功",Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(mContext, sellBean.msg, Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

@@ -78,13 +78,11 @@ public class MoneyluActivity extends BaseMvpActivity<presenter> implements Contr
     @Override
     public void getData(Object object) {
 
-
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
 

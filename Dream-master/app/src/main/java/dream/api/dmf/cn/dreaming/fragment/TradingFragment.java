@@ -237,30 +237,28 @@ public class TradingFragment extends BaseMvpFragment<presenter> implements Contr
         unbinder.unbind();
     }
 
-    @OnClick({R.id.r_butn, R.id.r_butn2})
+    @OnClick({R.id.r_butn
+            , R.id.r_butn2})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.r_butn:
                 mOname.setText("DMF");
                 mOname.setTextSize(16);
-                if (unmae.equals("1")) {
+                if (unmae.equals("2")) {
                     Intent intent = new Intent(getActivity(), MoneyActivity.class);
                     intent.putExtra("name", tex);
                     intent.putExtra("today", te);
                     intent.putExtra("update", teup);
                     intent.putExtra("uname", "1");
                     sharedPreferences.edit().putBoolean("Username", true).commit();
-                    //sharedPreferences.edit().putString(UserApi.Hnum,"one").commit();
                     startActivity(intent);
                     break;
                 } else {
                     Toast.makeText(mContext, "未激活", Toast.LENGTH_LONG).show();
                 }
                 break;
-
-
             case R.id.r_butn2:
-                if (unmae.equals("1")) {
+                if (unmae.equals("2")) {
                     Intent intent2 = new Intent(getActivity(), MoneyActivity.class);
                     intent2.putExtra("name", hye);
                     intent2.putExtra("today", htoday);

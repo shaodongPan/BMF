@@ -1,40 +1,17 @@
 package dream.api.dmf.cn.dreaming;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.hjm.bottomtabbar.BottomTabBar;
 
-import org.devio.takephoto.app.TakePhoto;
-import org.devio.takephoto.app.TakePhotoImpl;
-import org.devio.takephoto.model.InvokeParam;
-import org.devio.takephoto.model.TContextWrap;
-import org.devio.takephoto.model.TImage;
-import org.devio.takephoto.model.TResult;
-import org.devio.takephoto.permission.InvokeListener;
-import org.devio.takephoto.permission.PermissionManager;
-import org.devio.takephoto.permission.TakePhotoInvocationHandler;
-
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import butterknife.ButterKnife;
 import dream.api.dmf.cn.dreaming.activity.CrowdActivity;
@@ -50,8 +27,6 @@ import dream.api.dmf.cn.dreaming.fragment.HomeFragment;
 import dream.api.dmf.cn.dreaming.fragment.MineFragment;
 import dream.api.dmf.cn.dreaming.fragment.RewardFragment;
 import dream.api.dmf.cn.dreaming.fragment.TradingFragment;
-import dream.api.dmf.cn.dreaming.utils.CustomHelper;
-import dream.api.dmf.cn.dreaming.utils.WeakHandler;
 
 public class MainActivity extends BaseMvpActivity<presenter> implements Contract.Iview {
 
@@ -173,77 +148,9 @@ public class MainActivity extends BaseMvpActivity<presenter> implements Contract
         }
     }
 
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        switch (requestCode) {
-//            case RC_CAMERA:
-//                Bitmap bitmap = data.getParcelableExtra("data");
-//                Uri uri1 = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null, null));
-//                if (uri1 != null) {
-//                    mZImage.setImageURI(uri1);
-//                    //调用工具类将uri图片转为path
-//                    String path = ImageUtil.getPath(this, uri1);
-//                    if (path != null) {
-//                        //将图片转为file
-//                        File file = new File(path);
-//                        //调用P层
-//                        HashMap<String, Object> headmap = new HashMap<>();
-//                        HashMap<String, Object> map = new HashMap<>();
-//                        map.put("shell", mShell);
-//                        map.put("uid", mUid);
-//                        map.put("type", rcard);
-//                        /*   mPresenter.postHeadData*/
-//                        // mPresenter.postMorePicture(UserApi.getPhoneImage,headmap,map,file,RenBean.class);
-//                        /*  mPresenter.postHeadData(UserApi.getPhoneImage,headmap,file,RenBean.class);*/
-//                        // mPresenter.postData(UserApi.getPhoneImage,headmap,map,RenBean.class);
-//                        HashMap<String, Object> headsmap = new HashMap<>();
-//                        HashMap<String, Object> maps = new HashMap<>();
-//                        map.put("shell", mShell);
-//                        map.put("uid", mUid);
-//                        map.put("type", fcard);
-//                        map.put("imgFile", file);
-//                        //mPresenter.postData(UserApi.getPhoneImage,headsmap,maps,RenBean.class);
-//                    }
-//                }
-//              /*  Uri url = data.getParcelableExtra("data");
-//                mZImage.setImageURI(Uri.parse(url.toString()));
-//                HashMap<String,Object> headmap=new HashMap<>();
-//                HashMap<String,Object>map=new HashMap<>();
-//                map.put("")
-//*/
-//                Toast.makeText(MainActivity.this, "相机回调", Toast.LENGTH_SHORT).show();
-//                break;
-//            case RC_ALBUM:
-//                Uri uri = data.getData();
-//                if (uri != null) {
-//                    mZImage.setImageURI(uri);
-//                    //调用工具类将uri图片转为path
-//                    String path = ImageUtil.getPath(this, uri);
-//
-//                    if (path != null) {
-//                        //将图片转为file
-//                        File file = new File(path);
-//                        HashMap<String, Object> headmap = new HashMap<>();
-//                        HashMap<String, Object> map = new HashMap<>();
-//                        map.put("shell", mShell);
-//                        map.put("uid", mUid);
-//                        map.put("type", rcard);
-//                        map.put("imgFile", file);
-//                        mPresenter.postData(UserApi.getPhoneImage, headmap, map, RenBean.class);
-//                        HashMap<String, Object> headsmap = new HashMap<>();
-//                        HashMap<String, Object> maps = new HashMap<>();
-//                        map.put("shell", mShell);
-//                        map.put("uid", mUid);
-//                        map.put("type", fcard);
-//                        map.put("imgFile", file);
-//                        mPresenter.postData(UserApi.getPhoneImage, headsmap, maps, RenBean.class);
-//                    }
-//                }
-//                break;
-//        }
     }
 
     @Override
