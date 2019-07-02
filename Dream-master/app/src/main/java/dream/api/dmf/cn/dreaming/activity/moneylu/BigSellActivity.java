@@ -22,7 +22,7 @@ public class BigSellActivity extends BaseMvpActivity<presenter> implements Contr
 
     private String mUid;
     private String mShell;
-    private boolean username1;
+    private boolean username1; //true 是DMF false 为HYT
     private RecyclerView recy;
     private String type;
     private String c;
@@ -31,7 +31,7 @@ public class BigSellActivity extends BaseMvpActivity<presenter> implements Contr
 
     @Override
     public void getThisData() {
-        if (username1 ) {
+        if (username1) {
             type = "2";
             c = "2";
             status = "0";
@@ -43,7 +43,7 @@ public class BigSellActivity extends BaseMvpActivity<presenter> implements Contr
             map.put("status", status);
             map.put("shell", mShell);
             mPresenter.postData(UserApi.getBUYLIST, headMap, map, BigBean.class);
-        } else  {
+        } else {
             type = "1";
             c = "2";
             status = "0";
@@ -55,7 +55,6 @@ public class BigSellActivity extends BaseMvpActivity<presenter> implements Contr
             map.put("shell", mShell);
             map.put("status", status);
             mPresenter.postData(UserApi.getBUYLIST, headmap, map, BigBean.class);
-
         }
     }
 
@@ -91,7 +90,7 @@ public class BigSellActivity extends BaseMvpActivity<presenter> implements Contr
             BigBean bigBean = (BigBean) object;
             if (bigBean.error == 0) {
                 List<BigBean.DataBean> data = bigBean.data;
-                MoneyBigAdapter adapter = new MoneyBigAdapter(mContext, data,"买入记录");
+                MoneyBigAdapter adapter = new MoneyBigAdapter(mContext, data, "买入记录", username1, "2");
                 recy.setAdapter(adapter);
             } else {
                 Toast.makeText(mContext, bigBean.msg, Toast.LENGTH_SHORT).show();

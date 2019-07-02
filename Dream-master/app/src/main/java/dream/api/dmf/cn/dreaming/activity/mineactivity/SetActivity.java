@@ -423,7 +423,7 @@ public class SetActivity extends AppCompatActivity implements TakePhoto.TakeResu
         parts.add(toRequestBodyOfText("type", getPhotoType()));
         parts.add(toRequestBodyOfImage("imgFile", part));
 
-        apiService.addImageInfo(parts)
+        apiService.addImageInfo(UserApi.getPhoneImage,parts)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {

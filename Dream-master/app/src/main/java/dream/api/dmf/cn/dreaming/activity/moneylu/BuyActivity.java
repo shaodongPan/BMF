@@ -15,10 +15,12 @@ import java.util.List;
 
 import dream.api.dmf.cn.dreaming.R;
 import dream.api.dmf.cn.dreaming.adapter.BuyListAdapter;
+import dream.api.dmf.cn.dreaming.adapter.MoneyBigAdapter;
 import dream.api.dmf.cn.dreaming.api.UserApi;
 import dream.api.dmf.cn.dreaming.base.BaseMvpActivity;
 import dream.api.dmf.cn.dreaming.base.mvp.Contract;
 import dream.api.dmf.cn.dreaming.base.mvp.presenter.presenter;
+import dream.api.dmf.cn.dreaming.bean.BigBean;
 import dream.api.dmf.cn.dreaming.bean.BuyListBean;
 
 public class BuyActivity extends BaseMvpActivity<presenter> implements Contract.Iview {
@@ -34,6 +36,7 @@ public class BuyActivity extends BaseMvpActivity<presenter> implements Contract.
     private BuyListAdapter buyListAdapter;
     private TextView mTitle;
 
+
     @Override
     public void getThisData() {
         if (username1 == true) {
@@ -47,7 +50,7 @@ public class BuyActivity extends BaseMvpActivity<presenter> implements Contract.
             map.put("c", c);
             map.put("status", status);
             map.put("type", type);
-            mPresenter.postData(UserApi.getBUYLIST, headsmap, map, BuyListBean.class);
+            mPresenter.postData(UserApi.getBUYLIST, headsmap, map, BigBean.class);
 
         } else if (username1 == false) {
             type = "1";
@@ -60,7 +63,7 @@ public class BuyActivity extends BaseMvpActivity<presenter> implements Contract.
             map1.put("c", c);
             map1.put("status", status);
             map1.put("type", type);
-            mPresenter.postData(UserApi.getBUYLIST, headsmap, map1, BuyListBean.class);
+            mPresenter.postData(UserApi.getBUYLIST, headsmap, map1, BigBean.class);
         }
     }
 
@@ -96,7 +99,7 @@ public class BuyActivity extends BaseMvpActivity<presenter> implements Contract.
                     map.put("c", c);
                     map.put("status", status);
                     map.put("type", type);
-                    mPresenter.postData(UserApi.getBUYLIST, headsmap, map, BuyListBean.class);
+                    mPresenter.postData(UserApi.getBUYLIST, headsmap, map, BigBean.class);
                     // buyListAdapter.notifyDataSetChanged();
                 } else if (username1 == false) {
                     type = "1";
@@ -109,7 +112,7 @@ public class BuyActivity extends BaseMvpActivity<presenter> implements Contract.
                     map1.put("c", c);
                     map1.put("status", status);
                     map1.put("type", type);
-                    mPresenter.postData(UserApi.getBUYLIST, headsmap, map1, BuyListBean.class);
+                    mPresenter.postData(UserApi.getBUYLIST, headsmap, map1, BigBean.class);
                     //buyListAdapter.notifyDataSetChanged();
                 }
             }
@@ -127,7 +130,7 @@ public class BuyActivity extends BaseMvpActivity<presenter> implements Contract.
                     map.put("c", c);
                     map.put("status", status);
                     map.put("type", type);
-                    mPresenter.postData(UserApi.getBUYLIST, headsmap, map, BuyListBean.class);
+                    mPresenter.postData(UserApi.getBUYLIST, headsmap, map, BigBean.class);
 
                 } else if (username1 == false) {
                     type = "1";
@@ -140,7 +143,7 @@ public class BuyActivity extends BaseMvpActivity<presenter> implements Contract.
                     map1.put("c", c);
                     map1.put("status", status);
                     map1.put("type", type);
-                    mPresenter.postData(UserApi.getBUYLIST, headsmap, map1, BuyListBean.class);
+                    mPresenter.postData(UserApi.getBUYLIST, headsmap, map1, BigBean.class);
                 }
             }
         });
@@ -164,10 +167,10 @@ public class BuyActivity extends BaseMvpActivity<presenter> implements Contract.
 
     @Override
     public void getData(Object object) {
-        BuyListBean buyListBean = (BuyListBean) object;
+        BigBean buyListBean = (BigBean) object;
         if (buyListBean.error == 0) {
-            List<BuyListBean.DataBean> data = buyListBean.data;
-            BuyListAdapter buyListAdapter = new BuyListAdapter(mContext, data);
+            List<BigBean.DataBean> data = buyListBean.data;
+            MoneyBigAdapter buyListAdapter = new MoneyBigAdapter(mContext, data,"买入记录", username1, "1");
             mRecy.setAdapter(buyListAdapter);
         } else {
             Toast.makeText(mContext, buyListBean.msg, Toast.LENGTH_SHORT).show();

@@ -119,6 +119,9 @@ public class TakePhotoActivity extends BaseMvpActivity<presenter> implements Tak
 
     }
 
+    public void getPhotoData(Object o){
+
+    }
     public static boolean isListEmpty(List list) {
         if (list != null && list.size() > 0) {
             return false;
@@ -186,14 +189,8 @@ public class TakePhotoActivity extends BaseMvpActivity<presenter> implements Tak
     /**
      * 上传图片
      */
-    public void postHeadData(File part, final Class clazz, String type) {
-        List<MultipartBody.Part> parts = new ArrayList<>();
-        parts.add(toRequestBodyOfText("shell", mShell));
-        parts.add(toRequestBodyOfText("uid", mUid));
-        parts.add(toRequestBodyOfText("type", type));
-        parts.add(toRequestBodyOfImage("imgFile", part));
-
-        apiService.addImageInfo(parts)
+    public void postHeadData(String url, List<MultipartBody.Part> requestBodyMap, final Class clazz) {
+        apiService.addImageInfo(url, requestBodyMap)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
@@ -209,7 +206,7 @@ public class TakePhotoActivity extends BaseMvpActivity<presenter> implements Tak
                             String string;
                             string = responseBody.string();
                             Object o = gson.fromJson(string, clazz);
-
+                            getPhotoData(o);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -227,11 +224,11 @@ public class TakePhotoActivity extends BaseMvpActivity<presenter> implements Tak
                 });
     }
 
-    private MultipartBody.Part toRequestBodyOfText(String keyStr, String value) {
+    public MultipartBody.Part toRequestBodyOfText(String keyStr, String value) {
         return MultipartBody.Part.createFormData(keyStr, value);
     }
 
-    private MultipartBody.Part toRequestBodyOfImage(String keyStr, File pFile) {
+    public MultipartBody.Part toRequestBodyOfImage(String keyStr, File pFile) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), pFile);
         return MultipartBody.Part.createFormData(keyStr, pFile.getName(), requestBody);
     }

@@ -40,16 +40,16 @@ public interface ApiService {
     Observable<ResponseBody> postHeadData(@Url String url, @HeaderMap Map<String, Object> headMap, @Part MultipartBody.Part part);
 
     @Multipart
-    @POST("index.php?mod=mobile&act=updatecode")
-    Observable<ResponseBody> addImageInfo(@Part List<MultipartBody.Part> requestBodyMap);
+    @POST
+    Observable<ResponseBody> addImageInfo(@Url String url, @Part List<MultipartBody.Part> requestBodyMap);
 
 
     @FormUrlEncoded
     @POST("index.php?mod=mobile&act=verification")
     Observable<ResponseBody> verification(@Field("truename") String truename,
-                               @Field("idcard") String idcard,
-                               @Field("uid") String uid,
-                               @Field("shell") String shell);
+                                          @Field("idcard") String idcard,
+                                          @Field("uid") String uid,
+                                          @Field("shell") String shell);
 
     @POST
     @Multipart

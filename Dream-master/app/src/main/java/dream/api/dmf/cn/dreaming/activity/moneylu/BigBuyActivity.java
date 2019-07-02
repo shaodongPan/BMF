@@ -77,7 +77,7 @@ public class BigBuyActivity extends BaseMvpActivity<presenter> implements Contra
         LinearLayoutManager manager = new LinearLayoutManager(mContext);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recy.setLayoutManager(manager);
-        materialRefreshLayout = (MaterialRefreshLayout) findViewById(R.id.refresh);
+        materialRefreshLayout = findViewById(R.id.refresh);
         materialRefreshLayout.setIsOverLay(false);
         materialRefreshLayout.setWaveShow(false);
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
@@ -115,7 +115,7 @@ public class BigBuyActivity extends BaseMvpActivity<presenter> implements Contra
             BigBean bigBean = (BigBean) object;
             if (bigBean.error == 0) {
                 List<BigBean.DataBean> data = bigBean.data;
-                adapter1 = new MoneyBigAdapter(mContext, data, "卖出记录");
+                adapter1 = new MoneyBigAdapter(mContext, data, "卖出记录", username1,"2");
                 recy.setAdapter(adapter1);
 
             } else {

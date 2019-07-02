@@ -48,7 +48,7 @@ public class presenter extends BasePresenter<Contract.Iview, model> implements C
 
     @Override
     public void getDataFalse(Throwable e) {
-        mView.getData(e);
+
     }
 
     @Override

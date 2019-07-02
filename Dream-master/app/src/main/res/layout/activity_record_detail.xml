@@ -171,6 +171,7 @@
                 app:layout_constraintTop_toBottomOf="@id/view_line">
 
                 <RelativeLayout
+                    android:id="@+id/rl_upload"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -193,6 +194,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/rl_view"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -206,6 +208,7 @@
                         android:src="@mipmap/wallet_detail_2" />
 
                     <TextView
+                        android:id="@+id/tv_photo_uploaded"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/iv_pay_not_upload"

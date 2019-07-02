@@ -26,11 +26,16 @@ public class MoneyBigAdapter extends RecyclerView.Adapter<MoneyBigAdapter.ViewHo
     private List<BigBean.DataBean> data;
     private ViewHolder holder;
     private String mTitle;
+    private boolean mType;
+    private String mChannel;
 
-    public MoneyBigAdapter(Context mContext, List<BigBean.DataBean> data, String title) {
+    public MoneyBigAdapter(Context mContext, List<BigBean.DataBean> data, String title
+            , Boolean type, String channel) {
         this.mContext = mContext;
         this.data = data;
         this.mTitle = title;
+        this.mType = type;
+        this.mChannel = channel;
     }
 
     @NonNull
@@ -53,7 +58,9 @@ public class MoneyBigAdapter extends RecyclerView.Adapter<MoneyBigAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
-                bundle.putString(Constants.FROM_TITLE, mTitle);
+                bundle.putString(Constants.FROM_TITLE, mTitle); //标题
+                bundle.putBoolean(Constants.TYPE, mType);//DMF 或HYT
+                bundle.putString(Constants.CHANNEL, mChannel);
                 bundle.putParcelable(Constants.JUMP_TO_RECORD, data.get(i));
                 Intent intent = new Intent(mContext, RecordDetailActivity.class);
                 intent.putExtras(bundle);

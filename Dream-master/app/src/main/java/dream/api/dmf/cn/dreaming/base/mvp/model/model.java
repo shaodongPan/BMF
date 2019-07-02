@@ -66,7 +66,7 @@ public class model implements Contract.Imodel {
     }
 
     @Override
-    public void postData(final String url, Map<String, Object> headMap, Map<String, Object> map, final Class clazz, final Contract.GetDataCallBack getDataCallBack) {
+    public void  postData(final String url, Map<String, Object> headMap, Map<String, Object> map, final Class clazz, final Contract.GetDataCallBack getDataCallBack) {
         apiService.postData(url, headMap, map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -84,20 +84,6 @@ public class model implements Contract.Imodel {
                             string = responseBody.string();
                             Object o = gson.fromJson(string, clazz);
                             getDataCallBack.getDataTrue(o);
-                          /*  Gson gson = new Gson();
-                            String string = responseBody.string();
-                            JsonArray array = new JsonArray();
-                            if (url.equals("index.php?mod=mobile&act=gettradebox")){
-                                List<BigBean> o = gson.fromJson(string, new TypeToken<List<BigBean>>() {
-                                }.getType());
-                                getDataCallBack.getDataTrue(o);
-                            }else{
-                                Object o = gson.fromJson(string, clazz);
-                                getDataCallBack.getDataTrue(o);
-                            }*/
-                        /*    string = responseBody.string();
-                            Object o = gson.fromJson(string, clazz);
-                            getDataCallBack.getDataTrue(o);*/
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

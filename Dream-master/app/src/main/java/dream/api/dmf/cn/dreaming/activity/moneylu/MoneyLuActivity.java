@@ -16,6 +16,7 @@ import dream.api.dmf.cn.dreaming.api.UserApi;
 import dream.api.dmf.cn.dreaming.base.BaseMvpActivity;
 import dream.api.dmf.cn.dreaming.base.mvp.Contract;
 import dream.api.dmf.cn.dreaming.base.mvp.presenter.presenter;
+import dream.api.dmf.cn.dreaming.bean.BigBean;
 import dream.api.dmf.cn.dreaming.bean.SellBean;
 
 public class MoneyLuActivity extends BaseMvpActivity<presenter> implements Contract.Iview {
@@ -42,7 +43,7 @@ public class MoneyLuActivity extends BaseMvpActivity<presenter> implements Contr
             map2.put("c", c);
             map2.put("status", status);
             map2.put("type", type);
-            mPresenter.postData(UserApi.getSelllist, headsmap, map2, SellBean.class);
+            mPresenter.postData(UserApi.getSelllist, headsmap, map2, BigBean.class);
         } else if (username1 == false) {
             type = "1";
             c = "1";
@@ -54,7 +55,7 @@ public class MoneyLuActivity extends BaseMvpActivity<presenter> implements Contr
             map2.put("c", c);
             map2.put("status", status);
             map2.put("type", type);
-            mPresenter.postData(UserApi.getSelllist, headsmap, map2, SellBean.class);
+            mPresenter.postData(UserApi.getSelllist, headsmap, map2, BigBean.class);
         }
     }
 
@@ -85,12 +86,12 @@ public class MoneyLuActivity extends BaseMvpActivity<presenter> implements Contr
 
     @Override
     public void getData(Object object) {
-        SellBean sellBean = (SellBean) object;
-        if (object instanceof SellBean) {
+        if (object instanceof BigBean) {
+            BigBean sellBean = (BigBean) object;
             if (sellBean.error == 0) {
-                List<SellBean.DataBean> datase = sellBean.data;
+                List<BigBean.DataBean> datase = sellBean.data;
 
-                SellAdapter adapter = new SellAdapter(mContext, datase);
+                SellAdapter adapter = new SellAdapter(mContext, datase,"卖出记录", username1, "1");
                 mRecy.setAdapter(adapter);
             } else {
                 Toast.makeText(mContext, sellBean.msg, Toast.LENGTH_SHORT).show();

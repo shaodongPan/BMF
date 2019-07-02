@@ -17,8 +17,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,6 +46,7 @@ import dream.api.dmf.cn.dreaming.api.UserApi;
 import dream.api.dmf.cn.dreaming.base.BaseMvpFragment;
 import dream.api.dmf.cn.dreaming.base.mvp.Contract;
 import dream.api.dmf.cn.dreaming.base.mvp.presenter.presenter;
+import dream.api.dmf.cn.dreaming.bean.SignBean;
 
 
 public class MineFragment extends BaseMvpFragment<presenter> implements Contract.Iview {
@@ -110,6 +114,9 @@ public class MineFragment extends BaseMvpFragment<presenter> implements Contract
     private String mone;
     private String mtwo;
 
+    private String mUid;
+    private String mShell;
+
     @Override
     protected presenter createPresenter() {
         return new presenter();
@@ -130,17 +137,19 @@ public class MineFragment extends BaseMvpFragment<presenter> implements Contract
         double two = Double.parseDouble(mtwo);*/
         mMoney = view.findViewById(R.id.m_edu);
         mJin = view.findViewById(R.id.m_jin);
-        rHeadNum= view.findViewById(R.id.r_head_num);
-       // mMoney.setText(one+two+"");
+        mUid = sharedPreferences.getString(UserApi.Uid, "");
+        mShell = sharedPreferences.getString(UserApi.Shell, "");
+        rHeadNum = view.findViewById(R.id.r_head_num);
+        // mMoney.setText(one+two+"");
         rHeadNum.setText(username);
 
         mJin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),MJListActivity.class));
+                startActivity(new Intent(getActivity(), MJListActivity.class));
             }
         });
-    rReward = view.findViewById(R.id.r_reward);
+        rReward = view.findViewById(R.id.r_reward);
         rReward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,16 +159,23 @@ public class MineFragment extends BaseMvpFragment<presenter> implements Contract
 
     }
 
+
     @Override
     protected void getData() {
-
 
 
     }
 
     @Override
     public void getData(Object object) {
-
+        if (object instanceof SignBean){
+            SignBean signBean= (SignBean) object;
+            if (signBean.getError()==0){
+                Toast.makeText(mContext,signBean.getMsg(),Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(mContext,signBean.getMsg(),Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -168,6 +184,16 @@ public class MineFragment extends BaseMvpFragment<presenter> implements Contract
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder = ButterKnife.bind(this, rootView);
 
+        mineHeadNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HashMap<String, Object> headmap = new HashMap<>();
+                HashMap<String, Object> map = new HashMap<>();
+                map.put("shell", mShell);
+                map.put("uid", mUid);
+                mPresenter.postData(UserApi.getSign, headmap, map, SignBean.class);
+            }
+        });
         return rootView;
     }
 
@@ -192,19 +218,19 @@ public class MineFragment extends BaseMvpFragment<presenter> implements Contract
                 break;
             //收款方式
             case R.id.m_tone:
-                startActivity(new Intent(getActivity(),ShouKActivity.class));
+                startActivity(new Intent(getActivity(), ShouKActivity.class));
                 break;
             //安全中心
             case R.id.m_ttwo:
-                startActivity(new Intent(getActivity(),AnQuanActivity.class));
+                startActivity(new Intent(getActivity(), AnQuanActivity.class));
                 break;
             //分享下载
             case R.id.m_tshare:
-                startActivity(new Intent(getActivity(),LoadDownActivity.class));
+                startActivity(new Intent(getActivity(), LoadDownActivity.class));
                 break;
             //关于平台
             case R.id.m_tfoure:
-                startActivity(new Intent(getActivity(),AboutActivity.class));
+                startActivity(new Intent(getActivity(), AboutActivity.class));
                 break;
             //代付款
             case R.id.m_pay:

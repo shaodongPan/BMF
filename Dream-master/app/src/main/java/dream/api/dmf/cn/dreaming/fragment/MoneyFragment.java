@@ -26,14 +26,14 @@ import dream.api.dmf.cn.dreaming.api.UserApi;
 public class MoneyFragment extends Fragment {
 
     private RadioGroup mGroup;
-    private RadioButton mButton1,mButton2;
+    private RadioButton mButton1, mButton2;
     private ViewPager mPage;
     private ArrayList<Fragment> list;
     private List mHytlist;
     private Button mUpMoney;
-    private View view,view2;
-    private TextView mYesDay,mYesDay2;
-    private TextView mToDay,mToDay2,mUpMoney2;
+    private View view, view2;
+    private TextView mYesDay, mYesDay2;
+    private TextView mToDay, mToDay2, mUpMoney2;
     private String peice;
     private String hToday;
     private String hye;
@@ -45,20 +45,19 @@ public class MoneyFragment extends Fragment {
         return fragment;
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
         boolean username1 = sharedPreferences.getBoolean("Username", true);
         String dmfday = sharedPreferences.getString(UserApi.dmf_day_Today, "");
-        Log.i("aaaaaaaa",dmfday);
         peice = sharedPreferences.getString(UserApi.dmf_day_price, "");
         updatep = sharedPreferences.getString(UserApi.updatemoney, "");
         hToday = sharedPreferences.getString(UserApi.HTODAY, "");
         hye = sharedPreferences.getString(UserApi.HYE, "");
         yUpdate = sharedPreferences.getString(UserApi.HUPDATE, "");
-        view = View.inflate(getActivity(),R.layout.fragment_money,null);
+
+        view = View.inflate(getActivity(), R.layout.fragment_money, null);
+
         mGroup = view.findViewById(R.id.tGroup);
         mButton1 = view.findViewById(R.id.m_button1);
         mButton2 = view.findViewById(R.id.m_button2);
@@ -67,38 +66,38 @@ public class MoneyFragment extends Fragment {
         mToDay = view.findViewById(R.id.today);
         mUpMoney = view.findViewById(R.id.updatemoney);
 
-        Log.i("aaaaaaaa", updatep);
-        //sharedPreferences.getString("")
-        if (username1==true){
-           ;
-            mToDay.setText(dmfday);
-            if (Double.parseDouble(updatep)<0){
 
-                mUpMoney.setText("-"+  cutDoubleNumber(Double.parseDouble(updatep)));
-            }else{
-                mUpMoney.setText("+"+  cutDoubleNumber(Double.parseDouble(updatep)));
+        if (username1) {
+
+            mToDay.setText(dmfday);
+            if (Double.parseDouble(updatep) < 0) {
+
+                mUpMoney.setText("-" + cutDoubleNumber(Double.parseDouble(updatep)));
+            } else {
+                mUpMoney.setText("+" + cutDoubleNumber(Double.parseDouble(updatep)));
             }
 
             mYesDay.setText(peice);
 
-        }else if (username1==false){
+        } else  {
             mToDay.setText(hToday);
-            if (Double.parseDouble(yUpdate)<1){
-                mUpMoney.setText("-"+ cutDoubleNumber(Double.parseDouble(yUpdate)));
-            }else{
-                mUpMoney.setText("+"+ cutDoubleNumber(Double.parseDouble(yUpdate)));
+            if (Double.parseDouble(yUpdate) < 1) {
+                mUpMoney.setText("-" + cutDoubleNumber(Double.parseDouble(yUpdate)));
+            } else {
+                mUpMoney.setText("+" + cutDoubleNumber(Double.parseDouble(yUpdate)));
             }
-           //mUpMoney.setText(yUpdate);
+            //mUpMoney.setText(yUpdate);
             mYesDay.setText(hye);
 
         }
-        initdata();
+        initData();
         return view;
     }
-    protected void initdata() {
+
+    protected void initData() {
         list = new ArrayList<>();
-        SellFragment frag_01=new SellFragment();
-        BuyFragment frag_02=new BuyFragment();
+        SellFragment frag_01 = new SellFragment();
+        BuyFragment frag_02 = new BuyFragment();
         list.add(frag_01);
         list.add(frag_02);
         mPage.setAdapter(new FragmentPagerAdapter(this.getChildFragmentManager()) {
@@ -132,7 +131,7 @@ public class MoneyFragment extends Fragment {
         mGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId){
+                switch (checkedId) {
                     case R.id.m_button1:
                         mPage.setCurrentItem(0);
                         break;
@@ -145,14 +144,10 @@ public class MoneyFragment extends Fragment {
         });
 
     }
+
     public static String cutDoubleNumber(Double number) {
-//
         java.text.DecimalFormat df = new java.text.DecimalFormat("0.0");
         df.setRoundingMode(RoundingMode.FLOOR);
-        String d=df.format(number);
-
-        //四舍五入保留两位小数,number.toString()是一个Double值
-//        double v = new BigDecimal(number.toString()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        return d;
+        return df.format(number);
     }
 }

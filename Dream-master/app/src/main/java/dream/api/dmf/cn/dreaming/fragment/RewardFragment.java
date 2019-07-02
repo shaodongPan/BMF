@@ -39,7 +39,6 @@ import dream.api.dmf.cn.dreaming.base.mvp.Contract;
 import dream.api.dmf.cn.dreaming.base.mvp.presenter.presenter;
 import dream.api.dmf.cn.dreaming.bean.ReadBean;
 
-
 public class RewardFragment extends BaseMvpFragment<presenter> implements Contract.Iview {
 
     Unbinder unbinder1;
@@ -153,7 +152,11 @@ public class RewardFragment extends BaseMvpFragment<presenter> implements Contra
 
         ReadBean readBean = (ReadBean) object;
         if (readBean.status.equals("200")) {
+
             data = readBean.data;
+            if (data.info == null) {
+                data.info = new ReadBean.DataBean.InfoBean();
+            }
             lNum.setText(data.info.left_duipeng);
             rNum.setText(data.info.right_duipeng);
             rHeadNum.setText(data.info.phone);

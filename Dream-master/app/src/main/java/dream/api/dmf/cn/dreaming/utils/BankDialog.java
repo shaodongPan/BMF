@@ -22,13 +22,15 @@ import dream.api.dmf.cn.dreaming.adapter.BuyNumAdapter;
  */
 
 public class BankDialog {
+
+
     private Context ctx;
 
+    private BandDialogCallBack mCallBack;
 
     public BankDialog(Context ctx, List<String> title, TextView textView) {
         this.ctx = ctx;
-
-        showDialog(title,textView);
+        showDialog(title, textView);
     }
 
 
@@ -49,6 +51,9 @@ public class BankDialog {
         adapter.setItemClickListener(new BuyNumAdapter.MyItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                if (mCallBack != null) {
+                    mCallBack.select(title.get(position));
+                }
                 textView.setText(title.get(position));
                 dialog.dismiss();
             }
@@ -63,4 +68,11 @@ public class BankDialog {
         dialog.show();
     }
 
+    public interface BandDialogCallBack {
+        void select(String select);
+    }
+
+    public void setCallBack(BandDialogCallBack callBack) {
+        this.mCallBack = callBack;
+    }
 }

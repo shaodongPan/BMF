@@ -37,16 +37,16 @@ public class ReadBean {
              * team_count : 1
              */
 
-            public String id;
-            public String phone;
-            public String level;
-            public String left_duipeng;
-            public String right_duipeng;
-            public String number;
-            public String total_rewqrd;
-            public String now_jifen;
-            public String commend_count;
-            public String team_count;
+            public String id = "";
+            public String phone = "0";
+            public String level = "";
+            public String left_duipeng = "0";
+            public String right_duipeng = "0";
+            public String number = "0";
+            public String total_rewqrd = "0";
+            public String now_jifen = "0";
+            public String commend_count = "0";
+            public String team_count = "0";
         }
     }
 }

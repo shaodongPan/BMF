@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,6 +26,9 @@ public class MoneyActivity extends AppCompatActivity {
     ImageView mBack;
     @BindView(R.id.m_lu)
     ImageView mLu;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+
     private ViewPager mViewpa;
     private TabLayout mTab;
     private Fragment[] list = new Fragment[3];
@@ -47,16 +51,16 @@ public class MoneyActivity extends AppCompatActivity {
         mLu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MoneyActivity.this,MoneyluActivity.class));
+                startActivity(new Intent(MoneyActivity.this, MoneyluActivity.class));
             }
         });
         Intent intent = getIntent();
         String uname = intent.getStringExtra("uname");
-       // Toast.makeText(this, uname, Toast.LENGTH_SHORT).show();
         if (uname.equals("1")) {
             TabText[0] = "额度交易";
             TabText[1] = "大厅交易";
             TabText[2] = "DMF";
+            tvTitle.setText("DMF交易");
             mTab.setTabMode(TabLayout.MODE_FIXED);
             list[0] = MoneyFragment.newInstance();
             list[1] = BigTFragment.newInstance();
@@ -65,13 +69,12 @@ public class MoneyActivity extends AppCompatActivity {
             mViewpa.setAdapter(pagerAdapter);
             //将ViewPager和TabLayout绑定
             mTab.setupWithViewPager(mViewpa);
-            //mViewpa.setCurrentItem(2);
-            DMFFragment.newInstance().setTargetFragment(DMFFragment.newInstance(),1);
-            //startActivity(new Intent(this,DMFFragment.class));
+            DMFFragment.newInstance().setTargetFragment(DMFFragment.newInstance(), 1);
         } else if (uname.equals("2")) {
             TabText[0] = "额度交易";
             TabText[1] = "大厅交易";
             TabText[2] = "HTY";
+            tvTitle.setText("HYT交易");
             mTab.setTabMode(TabLayout.MODE_FIXED);
             list[0] = MoneyFragment.newInstance();
             list[1] = BigTFragment.newInstance();
@@ -79,10 +82,7 @@ public class MoneyActivity extends AppCompatActivity {
             PagerAdapter pagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager());
             mViewpa.setAdapter(pagerAdapter);
             mTab.setupWithViewPager(mViewpa);
-
         }
-
-
     }
 
     final class MyViewPagerAdapter extends FragmentPagerAdapter {

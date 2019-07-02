@@ -80,7 +80,7 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
     private List list;
     private boolean username1;
     private String howmey;
-    private String c="2";
+    private String c = "2";
     private String status;
     public String type;
     private RecyclerView recy;
@@ -120,10 +120,10 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
         list = Arrays.asList(getResources().getStringArray(R.array.bank));
         recy = view.findViewById(R.id.recyo);
         recyt = view.findViewById(R.id.recyt);
-        LinearLayoutManager manager=new LinearLayoutManager(mContext);
+        LinearLayoutManager manager = new LinearLayoutManager(mContext);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recy.setLayoutManager(manager);
-        LinearLayoutManager manager1=new LinearLayoutManager(mContext);
+        LinearLayoutManager manager1 = new LinearLayoutManager(mContext);
         manager1.setOrientation(LinearLayoutManager.VERTICAL);
         recyt.setLayoutManager(manager1);
         mPass = view.findViewById(R.id.s_rpass);
@@ -132,20 +132,20 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
             //密码可见,点击之后设置成不可见的
             mPass.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
 
-        }else {
+        } else {
             //不可见设置成可见
             mPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         }
         mExe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (!isChecked){
+                if (!isChecked) {
                     if (mPass.getInputType() == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
                         //不可见设置成可见
                         mPass.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
                     }
-                }else {
+                } else {
 
                     //密码可见,点击之后设置成不可见的
                     mPass.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
@@ -161,53 +161,53 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
 
     @Override
     protected void getData() {
-        if (username1 ==true){
-            type="2";
-            status="0";
-            c="2";
-            HashMap<String,Object> headsmap=new HashMap<>();
-            HashMap<String,Object> map1=new HashMap<>();
-            map1.put("uid",mUid);
-            map1.put("shell",mShell);
-            map1.put("c",c);
-            map1.put("status",status);
-            map1.put("type",type);
-            mPresenter.postData(UserApi.getBUYLIST,headsmap,map1,SellBean.class);
-            type="2";
-            status="5";
-            c="2";
-            HashMap<String,Object> headmap=new HashMap<>();
-            HashMap<String,Object> map=new HashMap<>();
-            map.put("uid",mUid);
-            map.put("shell",mShell);
-            map.put("c",c);
-            map.put("status",status);
-            map.put("type",type);
-            mPresenter.postData(UserApi.getBUYLIST,headmap,map1,OKBean.class);
+        if (username1 == true) {
+            type = "2";
+            status = "0";
+            c = "2";
+            HashMap<String, Object> headsmap = new HashMap<>();
+            HashMap<String, Object> map1 = new HashMap<>();
+            map1.put("uid", mUid);
+            map1.put("shell", mShell);
+            map1.put("c", c);
+            map1.put("status", status);
+            map1.put("type", type);
+            mPresenter.postData(UserApi.getBUYLIST, headsmap, map1, SellBean.class);
+            type = "2";
+            status = "5";
+            c = "2";
+            HashMap<String, Object> headmap = new HashMap<>();
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("uid", mUid);
+            map.put("shell", mShell);
+            map.put("c", c);
+            map.put("status", status);
+            map.put("type", type);
+            mPresenter.postData(UserApi.getBUYLIST, headmap, map1, OKBean.class);
 
-        }else if (username1 ==false){
-            status="0";
-            type="1";
-            c="2";
-            HashMap<String,Object> headsmap=new HashMap<>();
-            HashMap<String,Object> map1=new HashMap<>();
-            map1.put("uid",mUid);
-            map1.put("shell",mShell);
-            map1.put("c",c);
-            map1.put("status",status);
-            map1.put("type",type);
-            mPresenter.postData(UserApi.getBUYLIST,headsmap,map1,SellBean.class);
-            status="5";
-            type="1";
-            c="2";
-            HashMap<String,Object> headmap=new HashMap<>();
-            HashMap<String,Object> map=new HashMap<>();
-            map.put("uid",mUid);
-            map.put("shell",mShell);
-            map.put("c",c);
-            map.put("status",status);
-            map.put("type",type);
-            mPresenter.postData(UserApi.getBUYLIST,headmap,map,OKBean.class);
+        } else if (username1 == false) {
+            status = "0";
+            type = "1";
+            c = "2";
+            HashMap<String, Object> headsmap = new HashMap<>();
+            HashMap<String, Object> map1 = new HashMap<>();
+            map1.put("uid", mUid);
+            map1.put("shell", mShell);
+            map1.put("c", c);
+            map1.put("status", status);
+            map1.put("type", type);
+            mPresenter.postData(UserApi.getBUYLIST, headsmap, map1, SellBean.class);
+            status = "5";
+            type = "1";
+            c = "2";
+            HashMap<String, Object> headmap = new HashMap<>();
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("uid", mUid);
+            map.put("shell", mShell);
+            map.put("c", c);
+            map.put("status", status);
+            map.put("type", type);
+            mPresenter.postData(UserApi.getBUYLIST, headmap, map, OKBean.class);
 
         }
 
@@ -222,9 +222,9 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String mNum = ssNum.getText().toString();
-                Double num=((Double.parseDouble(mNum) * Double.parseDouble(mEd)));
-                Double nu=(Double.parseDouble(mNum));
-                sNump.setText(num+nu+"");
+                Double num = ((Double.parseDouble(mNum) * Double.parseDouble(mEd)));
+                Double nu = (Double.parseDouble(mNum));
+                sNump.setText(num + nu + "");
                 String s1 = cutDoubleNumber(Double.valueOf((Double.parseDouble(mNum) * Double.parseDouble(dmfday) + "")));
                 sNum.setText(s1);
                 //Toast.makeText(mContext, "111111111", Toast.LENGTH_SHORT).show();
@@ -238,43 +238,42 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
 
             }
         });
-     }
-
+    }
 
 
     @Override
     public void getData(Object object) {
-        if (object instanceof  OKBean){
-            OKBean okBean= (OKBean) object;
-            if (okBean.error==0){
+        if (object instanceof OKBean) {
+            OKBean okBean = (OKBean) object;
+            if (okBean.error == 0) {
                 List<OKBean.DataBean> data = okBean.data;
-                OkAdapter okAdapter=new OkAdapter(data,mContext);
+                OkAdapter okAdapter = new OkAdapter(data, mContext);
                 recyt.setAdapter(okAdapter);
             }
         }
-        if (object instanceof SellBean){
-            SellBean sellBean= (SellBean) object;
-            if (sellBean.error==0){
+        if (object instanceof SellBean) {
+            SellBean sellBean = (SellBean) object;
+            if (sellBean.error == 0) {
                 List<SellBean.DataBean> datase = sellBean.data;
                 adapter = new FinishAdapter(mContext, datase);
                 recy.setAdapter(adapter);
 
                 //Toast.makeText(mContext,"成功",Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(mContext,sellBean.msg,Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(mContext, sellBean.msg, Toast.LENGTH_SHORT).show();
             }
 
         }
-        if (object instanceof DuSellBean){
-            DuSellBean duSellBean= (DuSellBean) object;
-            if (duSellBean.error.equals("0")){
-               Toast.makeText(mContext,"卖出成功",Toast.LENGTH_SHORT).show();
+        if (object instanceof DuSellBean) {
+            DuSellBean duSellBean = (DuSellBean) object;
+            if (duSellBean.error.equals("0")) {
+                Toast.makeText(mContext, "卖出成功", Toast.LENGTH_SHORT).show();
                 //sBanck.setText("");
                 ssNum.setText("");
                 sNum.setText("");
                 mPass.setText("");
-            }else{
-                Toast.makeText(mContext,duSellBean.msg,Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(mContext, duSellBean.msg, Toast.LENGTH_SHORT).show();
 
             }
         }
@@ -306,14 +305,14 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
                 break;
             case R.id.s_banck:
                 new BankDialog(mContext, list, sBanck);
-                if (list.get(0).equals("银行卡")){
-                    paytype="1";
+                if (list.get(0).equals("银行卡")) {
+                    paytype = "1";
                     return;
-                }else if (list.get(1).equals("支付宝")){
-                    paytype="2";
+                } else if (list.get(1).equals("支付宝")) {
+                    paytype = "2";
                     return;
-                }else if(list.get(2).equals("微信")){
-                    paytype="3";
+                } else if (list.get(2).equals("微信")) {
+                    paytype = "3";
                     return;
                 }
                 break;
@@ -327,15 +326,15 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
                 break;
             case R.id.s_butn:
                 howmey = ssNum.getText().toString().trim();
-                if (username1 ==true){
-                    type="2";
-                    HashMap<String,Object> headmap=new HashMap<>();
-                    HashMap<String,Object> map=new HashMap<>();
-                    map.put("uid",mUid);
-                    map.put("shell",mShell);
+                if (username1 == true) {
+                    type = "2";
+                    HashMap<String, Object> headmap = new HashMap<>();
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("uid", mUid);
+                    map.put("shell", mShell);
                     map.put("howmoney", howmey);
-                    map.put("paytype",paytype);
-                    mPresenter.postData(UserApi.getBIGHYTBSell,headmap,map,DuSellBean.class);
+                    map.put("paytype", paytype);
+                    mPresenter.postData(UserApi.getBIGHYTBSell, headmap, map, DuSellBean.class);
 
                 /*    HashMap<String,Object> headsmap=new HashMap<>();
                     HashMap<String,Object> map1=new HashMap<>();
@@ -346,15 +345,15 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
                     map1.put("type",type);
                     mPresenter.postData(UserApi.getBUYLIST,headsmap,map1,BuyListBean.class);*/
 
-                }else if (username1 ==false){
-                    type="1";
-                    HashMap<String,Object> headmap=new HashMap<>();
-                    HashMap<String,Object> map=new HashMap<>();
-                    map.put("uid",mUid);
-                    map.put("shell",mShell);
+                } else if (username1 == false) {
+                    type = "1";
+                    HashMap<String, Object> headmap = new HashMap<>();
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("uid", mUid);
+                    map.put("shell", mShell);
                     map.put("howmoney", howmey);
-                    map.put("paytype",paytype);
-                    mPresenter.postData(UserApi.getBIGHYTBSell,headmap,map,SellBean.class);
+                    map.put("paytype", paytype);
+                    mPresenter.postData(UserApi.getBIGHYTBSell, headmap, map, SellBean.class);
 
                 /*    HashMap<String,Object> headsmap=new HashMap<>();
                     HashMap<String,Object> map1=new HashMap<>();
@@ -366,46 +365,46 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
                     mPresenter.postData(UserApi.getBUYLIST,headsmap,map1,SellBean.class);*/
 
 
-
                 }
                 break;
         }
     }
-    public void getInstance(){
+
+    public void getInstance() {
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(final MaterialRefreshLayout materialRefreshLayout) {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (username1 ==true){
-                            type="2";
-                            HashMap<String,Object> headmap=new HashMap<>();
-                            HashMap<String,Object> map=new HashMap<>();
-                            map.put("uid",mUid);
-                            map.put("shell",mShell);
+                        if (username1 == true) {
+                            type = "2";
+                            HashMap<String, Object> headmap = new HashMap<>();
+                            HashMap<String, Object> map = new HashMap<>();
+                            map.put("uid", mUid);
+                            map.put("shell", mShell);
                             map.put("howmoney", howmey);
-                            map.put("paytype",paytype);
-                            mPresenter.postData(UserApi.getBIGHYTBSell,headmap,map,DuSellBean.class);
+                            map.put("paytype", paytype);
+                            mPresenter.postData(UserApi.getBIGHYTBSell, headmap, map, DuSellBean.class);
 
-                            HashMap<String,Object> headsmap=new HashMap<>();
-                            HashMap<String,Object> map1=new HashMap<>();
-                            map1.put("uid",mUid);
-                            map1.put("shell",mShell);
-                            map1.put("c",c);
-                            map1.put("status",status);
-                            map1.put("type",type);
-                            mPresenter.postData(UserApi.getBUYLIST,headsmap,map1,BuyListBean.class);
+                            HashMap<String, Object> headsmap = new HashMap<>();
+                            HashMap<String, Object> map1 = new HashMap<>();
+                            map1.put("uid", mUid);
+                            map1.put("shell", mShell);
+                            map1.put("c", c);
+                            map1.put("status", status);
+                            map1.put("type", type);
+                            mPresenter.postData(UserApi.getBUYLIST, headsmap, map1, BuyListBean.class);
 
-                        }else if (username1 ==false){
-                            type="1";
-                            HashMap<String,Object> headmap=new HashMap<>();
-                            HashMap<String,Object> map=new HashMap<>();
-                            map.put("uid",mUid);
-                            map.put("shell",mShell);
+                        } else if (username1 == false) {
+                            type = "1";
+                            HashMap<String, Object> headmap = new HashMap<>();
+                            HashMap<String, Object> map = new HashMap<>();
+                            map.put("uid", mUid);
+                            map.put("shell", mShell);
                             map.put("howmoney", howmey);
-                            map.put("paytype",paytype);
-                            mPresenter.postData(UserApi.getBIGHYTBSell,headmap,map,SellBean.class);
+                            map.put("paytype", paytype);
+                            mPresenter.postData(UserApi.getBIGHYTBSell, headmap, map, SellBean.class);
 
                          /*   HashMap<String,Object> headsmap=new HashMap<>();
                             HashMap<String,Object> map1=new HashMap<>();
@@ -419,14 +418,13 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
                         materialRefreshLayout.finishRefresh();
                     }
 
-                },3000);
+                }, 3000);
 
 
             }
 
             @Override
             public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
-
 
 
             }
@@ -478,11 +476,12 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
 
         }*/
     }
+
     public static String cutDoubleNumber(Double number) {
 //
         java.text.DecimalFormat df = new java.text.DecimalFormat("0.0");
         df.setRoundingMode(RoundingMode.FLOOR);
-        String d=df.format(number);
+        String d = df.format(number);
 
         //四舍五入保留两位小数,number.toString()是一个Double值
 //        double v = new BigDecimal(number.toString()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();

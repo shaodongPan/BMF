@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -112,6 +113,7 @@ public class TradingFragment extends BaseMvpFragment<presenter> implements Contr
         mUid = sharedPreferences.getString(UserApi.Uid, "");
         mShell = sharedPreferences.getString(UserApi.Shell, "");
         pid = view.findViewById(R.id.ttt);
+
         pid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -280,9 +282,6 @@ public class TradingFragment extends BaseMvpFragment<presenter> implements Contr
         //x轴坐标对应的数据
         for (int i = 0; i < bean.data.size(); i++) {
             TradingBean.DataBean dataBean = bean.data.get(i);
-            Log.i("zzzaaa", "initData: date = " + dataBean.date);
-            Log.i("zzzaaa", "initData: price = " + dataBean.price + "      sPrice = " + Float.valueOf(dataBean.price));
-            Log.i("zzzaaa", "initData: amount = " + dataBean.amount + "     sAmount = " + Float.valueOf(dataBean.amount));
             xValue.add(dataBean.date);
             yValue.add(Float.valueOf(dataBean.price));
             value.put(dataBean.date, Float.valueOf(dataBean.amount));

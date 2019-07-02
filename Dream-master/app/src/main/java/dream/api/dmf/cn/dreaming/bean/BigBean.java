@@ -79,6 +79,7 @@ public class BigBean {
         public String wechatfile;
         public String fe;
         public String tradetype;
+        public String pzimagesUrl;
         public Object uptime;
         public String checked;
         public Object payname;
@@ -101,6 +102,7 @@ public class BigBean {
             paytime = in.readString();
             status = in.readString();
             pzimages = in.readString();
+            pzimagesUrl = in.readString();
             alipayfile = in.readString();
             wechatfile = in.readString();
             fe = in.readString();
@@ -143,6 +145,7 @@ public class BigBean {
             dest.writeString(paytime);
             dest.writeString(status);
             dest.writeString(pzimages);
+            dest.writeString(pzimagesUrl);
             dest.writeString(alipayfile);
             dest.writeString(wechatfile);
             dest.writeString(fe);
