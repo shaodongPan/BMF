@@ -32,10 +32,10 @@ public class BigSellFragment extends BaseMvpFragment<presenter> implements Contr
     private String mUid;
     private String mShell;
     private BigBean bigBean;
-    private String t;
+    private String  t;
     private String type;
-    private String cc = "2";
-    private String status = "4";
+    private String cc="2";
+    private String status="4";
     private String types;
     private List<BigBean.DataBean> data;
     private RecyclerView mRecy1;
@@ -65,18 +65,25 @@ public class BigSellFragment extends BaseMvpFragment<presenter> implements Contr
         mUid = sharedPreferences.getString(UserApi.Uid, "");
         mShell = sharedPreferences.getString(UserApi.Shell, "");
         mRecy1 = view.findViewById(R.id.recyo);
-        LinearLayoutManager manager = new LinearLayoutManager(mContext);
+        LinearLayoutManager manager=new LinearLayoutManager(mContext);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecy1.setLayoutManager(manager);
         mRecyt = view.findViewById(R.id.recyt);
-        LinearLayoutManager manager1 = new LinearLayoutManager(mContext);
+        LinearLayoutManager manager1=new LinearLayoutManager(mContext);
         manager1.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyt.setLayoutManager(manager1);
-        materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
+        materialRefreshLayout = view.findViewById(R.id.refresh);
         materialRefreshLayout.setIsOverLay(false);
         materialRefreshLayout.setWaveShow(false);
 
 
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (materialRefreshLayout != null && isVisible()) {
+            doRequest();
+        }
     }
 
     @Override
@@ -87,112 +94,65 @@ public class BigSellFragment extends BaseMvpFragment<presenter> implements Contr
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (username1 == true) {
-                            type = "2";
-                            t = "2";
-                            HashMap<String, Object> headmap = new HashMap<>();
-                            HashMap<String, Object> map = new HashMap<>();
-                            map.put("uid", mUid);
-                            map.put("shell", mShell);
-                            map.put("type", type);
-                            map.put("t", t);
-                            mPresenter.postData(UserApi.getBigShow, headmap, map, BigBean.class);
-                            type = "2";
-                            c = "2";
-                            status = "4";
-                            HashMap<String, Object> headsmap = new HashMap<>();
-                            HashMap<String, Object> maps = new HashMap<>();
-                            maps.put("c", c);
-                            maps.put("type", type);
-                            maps.put("uid", mUid);
-                            maps.put("shell", mShell);
-                            maps.put("status", status);
-                            mPresenter.postData(UserApi.getSelllist, headsmap, maps, SellBean.class);
-
-                        } else if (username1 == false) {
-                            type = "1";
-                            t = "2";
-                            HashMap<String, Object> headmap = new HashMap<>();
-                            HashMap<String, Object> map = new HashMap<>();
-                            map.put("uid", mUid);
-                            map.put("shell", mShell);
-                            map.put("t", t);
-                            map.put("type", type);
-                            mPresenter.postData(UserApi.getBigShow, headmap, map, BigBean.class);
-                            type = "1";
-                            c = "2";
-                            status = "4";
-                            HashMap<String, Object> headhmap = new HashMap<>();
-                            HashMap<String, Object> maph = new HashMap<>();
-                            maph.put("c", c);
-                            maph.put("type", type);
-                            maph.put("uid", mUid);
-                            maph.put("shell", mShell);
-                            maph.put("status", status);
-                            mPresenter.postData(UserApi.getSelllist, headhmap, maph, SellBean.class);
-                        }
-                        materialRefreshLayout.finishRefresh();
+                        doRequest();
                     }
 
-                }, 3000);
-
+                },3000);
 
             }
 
             @Override
             public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
 
-            }
-
-        });
+                }
+            });
 
         materialRefreshLayout.finishRefresh();
         materialRefreshLayout.finishRefreshLoadMore();
-        // load more refresh complete
         materialRefreshLayout.finishRefreshLoadMore();
-        if (username1 == true) {
-            type = "2";
-            t = "2";
-            HashMap<String, Object> headmap = new HashMap<>();
-            HashMap<String, Object> map = new HashMap<>();
-            map.put("uid", mUid);
-            map.put("shell", mShell);
-            map.put("type", type);
-            map.put("t", t);
-            mPresenter.postData(UserApi.getBigShow, headmap, map, BigBean.class);
-            type = "2";
-            c = "2";
-            status = "4";
-            HashMap<String, Object> headsmap = new HashMap<>();
-            HashMap<String, Object> maps = new HashMap<>();
-            maps.put("c", c);
-            maps.put("type", type);
-            maps.put("uid", mUid);
-            maps.put("shell", mShell);
-            maps.put("status", status);
-            mPresenter.postData(UserApi.getSelllist, headsmap, maps, SellBean.class);
+        if (username1){
+            type="2";
+            t="2";
+            HashMap<String,Object> headmap=new HashMap<>();
+            HashMap<String,Object> map=new HashMap<>();
+            map.put("uid",mUid);
+            map.put("shell",mShell);
+            map.put("type",type);
+            map.put("t",t);
+            mPresenter.postData(UserApi.getBigShow,headmap,map,BigBean.class);
+            type="2";
+            c="2";
+            status="4";
+            HashMap<String,Object> headsmap=new HashMap<>();
+            HashMap<String,Object> maps=new HashMap<>();
+            maps.put("c",c);
+            maps.put("type",type);
+            maps.put("uid",mUid);
+            maps.put("shell",mShell);
+            maps.put("status",status);
+            mPresenter.postData(UserApi.getSelllist,headsmap,maps,SellBean.class);
 
-        } else if (username1 == false) {
-            type = "1";
-            t = "2";
-            HashMap<String, Object> headmap = new HashMap<>();
-            HashMap<String, Object> map = new HashMap<>();
-            map.put("uid", mUid);
-            map.put("shell", mShell);
-            map.put("t", t);
-            map.put("type", type);
-            mPresenter.postData(UserApi.getBigShow, headmap, map, BigBean.class);
-            type = "1";
-            c = "2";
-            status = "4";
-            HashMap<String, Object> headhmap = new HashMap<>();
-            HashMap<String, Object> maph = new HashMap<>();
-            maph.put("c", c);
-            maph.put("type", type);
-            maph.put("uid", mUid);
-            maph.put("shell", mShell);
-            maph.put("status", status);
-            mPresenter.postData(UserApi.getSelllist, headhmap, maph, SellBean.class);
+        }else{
+            type="1";
+            t="2";
+            HashMap<String,Object> headmap=new HashMap<>();
+            HashMap<String,Object> map=new HashMap<>();
+            map.put("uid",mUid);
+            map.put("shell",mShell);
+            map.put("t",t);
+            map.put("type",type);
+            mPresenter.postData(UserApi.getBigShow,headmap,map,BigBean.class);
+            type="1";
+            c="2";
+            status="4";
+            HashMap<String,Object> headhmap=new HashMap<>();
+            HashMap<String,Object> maph=new HashMap<>();
+            maph.put("c",c);
+            maph.put("type",type);
+            maph.put("uid",mUid);
+            maph.put("shell",mShell);
+            maph.put("status",status);
+            mPresenter.postData(UserApi.getSelllist,headhmap,maph,SellBean.class);
         }
 
 
@@ -200,6 +160,7 @@ public class BigSellFragment extends BaseMvpFragment<presenter> implements Contr
 
     @Override
     public void getData(Object object) {
+        materialRefreshLayout.finishRefresh();
         if (object instanceof BigBean) {
             BigBean bigBean = (BigBean) object;
             if (bigBean.error == 0) {
@@ -212,16 +173,64 @@ public class BigSellFragment extends BaseMvpFragment<presenter> implements Contr
                 Toast.makeText(mContext, bigBean.msg, Toast.LENGTH_SHORT).show();
             }
         }
-        if (object instanceof SellBean) {
-            SellBean sellBean = (SellBean) object;
-            if (sellBean.error == 0) {
+        if (object instanceof SellBean){
+            SellBean sellBean= (SellBean) object;
+            if (sellBean.error==0){
                 List<SellBean.DataBean> datase = sellBean.data;
                 FinishAdapter adapter = new FinishAdapter(mContext, datase);
                 mRecyt.setAdapter(adapter);
-                //Toast.makeText(mContext,"成功",Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(mContext, sellBean.msg, Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(mContext,sellBean.msg,Toast.LENGTH_SHORT).show();
             }
         }
     }
+    private void doRequest(){
+        if (username1 ==true){
+            type="2";
+            t="2";
+            HashMap<String,Object> headmap=new HashMap<>();
+            HashMap<String,Object> map=new HashMap<>();
+            map.put("uid",mUid);
+            map.put("shell",mShell);
+            map.put("type",type);
+            map.put("t",t);
+            mPresenter.postData(UserApi.getBigShow,headmap,map,BigBean.class);
+            type="2";
+            c="2";
+            status="4";
+            HashMap<String,Object> headsmap=new HashMap<>();
+            HashMap<String,Object> maps=new HashMap<>();
+            maps.put("c",c);
+            maps.put("type",type);
+            maps.put("uid",mUid);
+            maps.put("shell",mShell);
+            maps.put("status",status);
+            mPresenter.postData(UserApi.getSelllist,headsmap,maps,SellBean.class);
+
+        }else if (username1 ==false){
+            type="1";
+            t="2";
+            HashMap<String,Object> headmap=new HashMap<>();
+            HashMap<String,Object> map=new HashMap<>();
+            map.put("uid",mUid);
+            map.put("shell",mShell);
+            map.put("t",t);
+            map.put("type",type);
+            mPresenter.postData(UserApi.getBigShow,headmap,map,BigBean.class);
+            type="1";
+            c="2";
+            status="4";
+            HashMap<String,Object> headhmap=new HashMap<>();
+            HashMap<String,Object> maph=new HashMap<>();
+            maph.put("c",c);
+            maph.put("type",type);
+            maph.put("uid",mUid);
+            maph.put("shell",mShell);
+            maph.put("status",status);
+            mPresenter.postData(UserApi.getSelllist,headhmap,maph,SellBean.class);
+        }
+
+
+    }
+
 }

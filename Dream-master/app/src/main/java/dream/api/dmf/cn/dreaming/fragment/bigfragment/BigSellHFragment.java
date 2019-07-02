@@ -90,11 +90,6 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
     private FinishAdapter adapter;
     private MaterialRefreshLayout materialRefreshLayout;
 
-    public static Fragment newInstance() {
-        BigSellHFragment fragment = new BigSellHFragment();
-        return fragment;
-    }
-
     @Override
     protected presenter createPresenter() {
         return new presenter();
@@ -153,7 +148,7 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
                 }
             }
         });
-        materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
+        materialRefreshLayout = view.findViewById(R.id.refresh);
         materialRefreshLayout.setIsOverLay(false);
         materialRefreshLayout.setWaveShow(false);
 
@@ -210,34 +205,7 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
             mPresenter.postData(UserApi.getBUYLIST, headmap, map, OKBean.class);
 
         }
-
         mPrice.setText(dmfday);
-        ssNum.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                // new BuyNumDialog(mContext, numList, sNums);
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String mNum = ssNum.getText().toString();
-                Double num = ((Double.parseDouble(mNum) * Double.parseDouble(mEd)));
-                Double nu = (Double.parseDouble(mNum));
-                sNump.setText(num + nu + "");
-                String s1 = cutDoubleNumber(Double.valueOf((Double.parseDouble(mNum) * Double.parseDouble(dmfday) + "")));
-                sNum.setText(s1);
-                //Toast.makeText(mContext, "111111111", Toast.LENGTH_SHORT).show();
-                //String mNum = ssNum.getText().toString();
-                //sNump.setText(Double.parseDouble(mEd) * Double.parseDouble(ssNum) + "");
-                // sNum.setText((Double.parseDouble(mNum) * Double.parseDouble(dmfday) + (Double.parseDouble(mEd) * Double.parseDouble(String.valueOf(mNum))) + ""));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
     }
 
 
@@ -257,8 +225,6 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
                 List<SellBean.DataBean> datase = sellBean.data;
                 adapter = new FinishAdapter(mContext, datase);
                 recy.setAdapter(adapter);
-
-                //Toast.makeText(mContext,"成功",Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(mContext, sellBean.msg, Toast.LENGTH_SHORT).show();
             }
@@ -268,7 +234,6 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
             DuSellBean duSellBean = (DuSellBean) object;
             if (duSellBean.error.equals("0")) {
                 Toast.makeText(mContext, "卖出成功", Toast.LENGTH_SHORT).show();
-                //sBanck.setText("");
                 ssNum.setText("");
                 sNum.setText("");
                 mPass.setText("");
@@ -282,7 +247,6 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder = ButterKnife.bind(this, rootView);
         return rootView;
@@ -294,11 +258,23 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
         unbinder.unbind();
     }
 
-    @OnClick({R.id.ss_num, R.id.s_nump, R.id.s_banck, R.id.s_num, R.id.s_rpass, R.id.login_exe, R.id.s_edsell, R.id.s_butn})
+    @OnClick({R.id.ss_num
+            , R.id.s_nump, R.id.s_banck, R.id.s_num, R.id.s_rpass, R.id.login_exe, R.id.s_edsell, R.id.s_butn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ss_num:
-                new BuyNumDialog(mContext, numList, ssNum);
+                BankDialog dialog = new BankDialog(mContext, numList, ssNum);
+                dialog.setCallBack(new BankDialog.BandDialogCallBack() {
+                    @Override
+                    public void select(String select) {
+                        String mNum = select;
+                        Double num = ((Double.parseDouble(mNum) * Double.parseDouble(mEd)));
+                        Double nu = (Double.parseDouble(mNum));
+                        sNump.setText(num + nu + "");
+                        String s1 = cutDoubleNumber(Double.valueOf((Double.parseDouble(mNum) * Double.parseDouble(dmfday) + "")));
+                        sNum.setText(s1);
+                    }
+                });
                 break;
             case R.id.s_nump:
 
@@ -326,7 +302,7 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
                 break;
             case R.id.s_butn:
                 howmey = ssNum.getText().toString().trim();
-                if (username1 == true) {
+                if (username1) {
                     type = "2";
                     HashMap<String, Object> headmap = new HashMap<>();
                     HashMap<String, Object> map = new HashMap<>();
@@ -335,17 +311,7 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
                     map.put("howmoney", howmey);
                     map.put("paytype", paytype);
                     mPresenter.postData(UserApi.getBIGHYTBSell, headmap, map, DuSellBean.class);
-
-                /*    HashMap<String,Object> headsmap=new HashMap<>();
-                    HashMap<String,Object> map1=new HashMap<>();
-                    map1.put("uid",mUid);
-                    map1.put("shell",mShell);
-                    map1.put("c",c);
-                    map1.put("status",status);
-                    map1.put("type",type);
-                    mPresenter.postData(UserApi.getBUYLIST,headsmap,map1,BuyListBean.class);*/
-
-                } else if (username1 == false) {
+                } else {
                     type = "1";
                     HashMap<String, Object> headmap = new HashMap<>();
                     HashMap<String, Object> map = new HashMap<>();
@@ -353,18 +319,7 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
                     map.put("shell", mShell);
                     map.put("howmoney", howmey);
                     map.put("paytype", paytype);
-                    mPresenter.postData(UserApi.getBIGHYTBSell, headmap, map, SellBean.class);
-
-                /*    HashMap<String,Object> headsmap=new HashMap<>();
-                    HashMap<String,Object> map1=new HashMap<>();
-                    map1.put("uid",mUid);
-                    map1.put("shell",mShell);
-                    map1.put("c",c);
-                    map1.put("status",status);
-                    map1.put("type",type);
-                    mPresenter.postData(UserApi.getBUYLIST,headsmap,map1,SellBean.class);*/
-
-
+                    mPresenter.postData(UserApi.getBigHSell, headmap, map, SellBean.class);
                 }
                 break;
         }
@@ -405,15 +360,6 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
                             map.put("howmoney", howmey);
                             map.put("paytype", paytype);
                             mPresenter.postData(UserApi.getBIGHYTBSell, headmap, map, SellBean.class);
-
-                         /*   HashMap<String,Object> headsmap=new HashMap<>();
-                            HashMap<String,Object> map1=new HashMap<>();
-                            map1.put("uid",mUid);
-                            map1.put("shell",mShell);
-                            map1.put("c",c);
-                            map1.put("status",status);
-                            map1.put("type",type);
-                            mPresenter.postData(UserApi.getBUYLIST,headsmap,map1,SellBean.class);*/
                         }
                         materialRefreshLayout.finishRefresh();
                     }
@@ -436,55 +382,12 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
     public void onResume() {
         super.onResume();
         getInstance();
-       /* howmey = ssNum.getText().toString().trim();
-        if (username1 ==true){
-            type="2";
-            HashMap<String,Object> headmap=new HashMap<>();
-            HashMap<String,Object> map=new HashMap<>();
-            map.put("uid",mUid);
-            map.put("shell",mShell);
-            map.put("howmoney", howmey);
-            map.put("paytype",paytype);
-            mPresenter.postData(UserApi.getBIGHYTBSell,headmap,map,DuSellBean.class);
-            HashMap<String,Object> headsmap=new HashMap<>();
-            HashMap<String,Object> map1=new HashMap<>();
-            map1.put("uid",mUid);
-            map1.put("shell",mShell);
-            map1.put("c",c);
-            map1.put("status",status);
-            map1.put("type",type);
-            mPresenter.postData(UserApi.getBUYLIST,headsmap,map1,BuyListBean.class);
-
-        }else if (username1 ==false){
-            type="1";
-            HashMap<String,Object> headmap=new HashMap<>();
-            HashMap<String,Object> map=new HashMap<>();
-            map.put("uid",mUid);
-            map.put("shell",mShell);
-            map.put("howmoney", howmey);
-            map.put("paytype",paytype);
-            mPresenter.postData(UserApi.getBIGHYTBSell,headmap,map,SellBean.class);
-
-            HashMap<String,Object> headsmap=new HashMap<>();
-            HashMap<String,Object> map1=new HashMap<>();
-            map1.put("uid",mUid);
-            map1.put("shell",mShell);
-            map1.put("c",c);
-            map1.put("status",status);
-            map1.put("type",type);
-            mPresenter.postData(UserApi.getBUYLIST,headsmap,map1,SellBean.class);
-
-        }*/
     }
 
     public static String cutDoubleNumber(Double number) {
-//
         java.text.DecimalFormat df = new java.text.DecimalFormat("0.0");
         df.setRoundingMode(RoundingMode.FLOOR);
         String d = df.format(number);
-
-        //四舍五入保留两位小数,number.toString()是一个Double值
-//        double v = new BigDecimal(number.toString()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         return d;
     }
 }

@@ -63,5 +63,4 @@ public class BuyNumDialog {
         window.setWindowAnimations(R.style.dialog_select_pic);
         dialog.show();
     }
-
 }

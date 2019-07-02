@@ -52,6 +52,7 @@ public class BigBuyActivity extends BaseMvpActivity<presenter> implements Contra
         } else if (username1 == false) {
             type = "1";
             c = "2";
+            status = "0";
             HashMap<String, Object> headmap = new HashMap<>();
             HashMap<String, Object> map = new HashMap<>();
             map.put("c", c);
@@ -60,7 +61,6 @@ public class BigBuyActivity extends BaseMvpActivity<presenter> implements Contra
             map.put("shell", mShell);
             map.put("status", status);
             mPresenter.postData(UserApi.getSelllist, headmap, map, BigBean.class);
-
         }
     }
 
@@ -91,9 +91,7 @@ public class BigBuyActivity extends BaseMvpActivity<presenter> implements Contra
                 adapter1.notifyDataSetChanged();
             }
         });
-        // refresh complete
         materialRefreshLayout.finishRefresh();
-        // load more refresh complete
         materialRefreshLayout.finishRefreshLoadMore();
 
     }
