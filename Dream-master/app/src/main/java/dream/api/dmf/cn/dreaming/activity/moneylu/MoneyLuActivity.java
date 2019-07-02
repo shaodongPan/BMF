@@ -31,7 +31,6 @@ public class MoneyLuActivity extends BaseMvpActivity<presenter> implements Contr
 
     @Override
     public void getThisData() {
-
         if (username1 == true) {
             type = "2";
             c = "1";
@@ -93,7 +92,6 @@ public class MoneyLuActivity extends BaseMvpActivity<presenter> implements Contr
 
                 SellAdapter adapter = new SellAdapter(mContext, datase);
                 mRecy.setAdapter(adapter);
-                //Toast.makeText(mContext,"成功",Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(mContext, sellBean.msg, Toast.LENGTH_SHORT).show();
             }

@@ -30,37 +30,37 @@ public class BuyActivity extends BaseMvpActivity<presenter> implements Contract.
     private String type;
     private String status;
 
-     private MaterialRefreshLayout materialRefreshLayout;
+    private MaterialRefreshLayout materialRefreshLayout;
     private BuyListAdapter buyListAdapter;
     private TextView mTitle;
 
     @Override
     public void getThisData() {
         if (username1 == true) {
-            type="2";
-            c="1";
-            status="0";
-            HashMap<String,Object> headsmap=new HashMap<>();
-            HashMap<String,Object> map=new HashMap<>();
-            map.put("uid",mUid);
-            map.put("shell",mShell);
-            map.put("c",c);
-            map.put("status",status);
-            map.put("type",type);
-            mPresenter.postData(UserApi.getBUYLIST,headsmap,map,BuyListBean.class);
+            type = "2";
+            c = "1";
+            status = "0";
+            HashMap<String, Object> headsmap = new HashMap<>();
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("uid", mUid);
+            map.put("shell", mShell);
+            map.put("c", c);
+            map.put("status", status);
+            map.put("type", type);
+            mPresenter.postData(UserApi.getBUYLIST, headsmap, map, BuyListBean.class);
 
         } else if (username1 == false) {
-            type="1";
-            c="1";
-            status="0";
-            HashMap<String,Object> headsmap=new HashMap<>();
-            HashMap<String,Object> map1=new HashMap<>();
-            map1.put("uid",mUid);
-            map1.put("shell",mShell);
-            map1.put("c",c);
-            map1.put("status",status);
-            map1.put("type",type);
-            mPresenter.postData(UserApi.getBUYLIST,headsmap,map1,BuyListBean.class);
+            type = "1";
+            c = "1";
+            status = "0";
+            HashMap<String, Object> headsmap = new HashMap<>();
+            HashMap<String, Object> map1 = new HashMap<>();
+            map1.put("uid", mUid);
+            map1.put("shell", mShell);
+            map1.put("c", c);
+            map1.put("status", status);
+            map1.put("type", type);
+            mPresenter.postData(UserApi.getBUYLIST, headsmap, map1, BuyListBean.class);
         }
     }
 
@@ -76,40 +76,40 @@ public class BuyActivity extends BaseMvpActivity<presenter> implements Contract.
         mTitle = findViewById(R.id.tv_title);
         mTitle.setText("买入记录");
         mTitle.setTextSize(16);
-        LinearLayoutManager manager=new LinearLayoutManager(mContext);
+        LinearLayoutManager manager = new LinearLayoutManager(mContext);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecy.setLayoutManager(manager);
-        materialRefreshLayout = (MaterialRefreshLayout) findViewById(R.id.refresh);
+        materialRefreshLayout = findViewById(R.id.refresh);
         materialRefreshLayout.setIsOverLay(false);
         materialRefreshLayout.setWaveShow(false);
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(final MaterialRefreshLayout materialRefreshLayout) {
                 if (username1 == true) {
-                    type="2";
-                    c="1";
-                    status="0";
-                    HashMap<String,Object> headsmap=new HashMap<>();
-                    HashMap<String,Object> map=new HashMap<>();
-                    map.put("uid",mUid);
-                    map.put("shell",mShell);
-                    map.put("c",c);
-                    map.put("status",status);
-                    map.put("type",type);
-                    mPresenter.postData(UserApi.getBUYLIST,headsmap,map,BuyListBean.class);
-                   // buyListAdapter.notifyDataSetChanged();
+                    type = "2";
+                    c = "1";
+                    status = "0";
+                    HashMap<String, Object> headsmap = new HashMap<>();
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("uid", mUid);
+                    map.put("shell", mShell);
+                    map.put("c", c);
+                    map.put("status", status);
+                    map.put("type", type);
+                    mPresenter.postData(UserApi.getBUYLIST, headsmap, map, BuyListBean.class);
+                    // buyListAdapter.notifyDataSetChanged();
                 } else if (username1 == false) {
-                    type="1";
-                    c="1";
-                    status="0";
-                    HashMap<String,Object> headsmap=new HashMap<>();
-                    HashMap<String,Object> map1=new HashMap<>();
-                    map1.put("uid",mUid);
-                    map1.put("shell",mShell);
-                    map1.put("c",c);
-                    map1.put("status",status);
-                    map1.put("type",type);
-                    mPresenter.postData(UserApi.getBUYLIST,headsmap,map1,BuyListBean.class);
+                    type = "1";
+                    c = "1";
+                    status = "0";
+                    HashMap<String, Object> headsmap = new HashMap<>();
+                    HashMap<String, Object> map1 = new HashMap<>();
+                    map1.put("uid", mUid);
+                    map1.put("shell", mShell);
+                    map1.put("c", c);
+                    map1.put("status", status);
+                    map1.put("type", type);
+                    mPresenter.postData(UserApi.getBUYLIST, headsmap, map1, BuyListBean.class);
                     //buyListAdapter.notifyDataSetChanged();
                 }
             }
@@ -117,30 +117,30 @@ public class BuyActivity extends BaseMvpActivity<presenter> implements Contract.
             @Override
             public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
                 if (username1 == true) {
-                    type="2";
-                    c="1";
-                    status="0";
-                    HashMap<String,Object> headsmap=new HashMap<>();
-                    HashMap<String,Object> map=new HashMap<>();
-                    map.put("uid",mUid);
-                    map.put("shell",mShell);
-                    map.put("c",c);
-                    map.put("status",status);
-                    map.put("type",type);
-                    mPresenter.postData(UserApi.getBUYLIST,headsmap,map,BuyListBean.class);
+                    type = "2";
+                    c = "1";
+                    status = "0";
+                    HashMap<String, Object> headsmap = new HashMap<>();
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("uid", mUid);
+                    map.put("shell", mShell);
+                    map.put("c", c);
+                    map.put("status", status);
+                    map.put("type", type);
+                    mPresenter.postData(UserApi.getBUYLIST, headsmap, map, BuyListBean.class);
 
                 } else if (username1 == false) {
-                    type="1";
-                    c="1";
-                    status="0";
-                    HashMap<String,Object> headsmap=new HashMap<>();
-                    HashMap<String,Object> map1=new HashMap<>();
-                    map1.put("uid",mUid);
-                    map1.put("shell",mShell);
-                    map1.put("c",c);
-                    map1.put("status",status);
-                    map1.put("type",type);
-                    mPresenter.postData(UserApi.getBUYLIST,headsmap,map1,BuyListBean.class);
+                    type = "1";
+                    c = "1";
+                    status = "0";
+                    HashMap<String, Object> headsmap = new HashMap<>();
+                    HashMap<String, Object> map1 = new HashMap<>();
+                    map1.put("uid", mUid);
+                    map1.put("shell", mShell);
+                    map1.put("c", c);
+                    map1.put("status", status);
+                    map1.put("type", type);
+                    mPresenter.postData(UserApi.getBUYLIST, headsmap, map1, BuyListBean.class);
                 }
             }
         });
@@ -164,18 +164,14 @@ public class BuyActivity extends BaseMvpActivity<presenter> implements Contract.
 
     @Override
     public void getData(Object object) {
-        BuyListBean buyListBean= (BuyListBean) object;
-        if (buyListBean.error==0){
+        BuyListBean buyListBean = (BuyListBean) object;
+        if (buyListBean.error == 0) {
             List<BuyListBean.DataBean> data = buyListBean.data;
-            BuyListAdapter buyListAdapter=new BuyListAdapter(mContext,data);
+            BuyListAdapter buyListAdapter = new BuyListAdapter(mContext, data);
             mRecy.setAdapter(buyListAdapter);
-            /* List<BuyListBean.DataBean> data = buyListBean.data;*/
-          /*  buyListAdapter = new BuyListAdapter(mContext,data);
-            mRecy.setAdapter(buyListAdapter);*/
-            //Toast.makeText(mContext,"成功",Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(mContext,buyListBean.msg,Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(mContext, buyListBean.msg, Toast.LENGTH_SHORT).show();
         }
     }
-    }
+}
 

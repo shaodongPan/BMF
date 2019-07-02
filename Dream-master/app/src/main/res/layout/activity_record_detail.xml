@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tv_pay"
+        android:layout_below="@id/title"
+        android:layout_marginBottom="@dimen/dimen10">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/view_bg"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen150"
+                android:background="@color/colorLogin"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen20"
+                android:layout_marginTop="@dimen/dimen10"
+                android:text="交易金额"
+                android:textColor="@color/item_white"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen10"
+                android:text="57.0000"
+                android:textColor="@color/item_white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/tv_amount"
+                app:layout_constraintTop_toBottomOf="@id/tv_amount" />
+
+            <TextView
+                android:id="@+id/tv_buy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen20"
+                android:layout_marginTop="@dimen/dimen10"
+                android:text="买入数量 30.0000 DMFB"
+                android:textColor="@color/item_white"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_price" />
+
+            <TextView
+                android:id="@+id/tv_sell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen20"
+                android:layout_marginTop="@dimen/dimen10"
+                android:text="卖出数量 30.0000 DMFB"
+                android:textColor="@color/item_white"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_buy" />
+
+            <LinearLayout
+                android:id="@+id/ll_member_sell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen20"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="@id/tv_amount"
+                app:layout_constraintTop_toBottomOf="@id/view_bg">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="卖出会员"
+                    android:textColor="@color/rgb666666"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen8"
+                    android:text="15890009824"
+                    android:textColor="@color/blue"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_member_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen10"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="@id/tv_amount"
+                app:layout_constraintTop_toBottomOf="@id/ll_member_sell">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="会员电话"
+                    android:textColor="@color/rgb666666"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen8"
+                    android:text="15890009824"
+                    android:textColor="@color/blue"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_member_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen10"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="@id/tv_amount"
+                app:layout_constraintTop_toBottomOf="@id/ll_member_phone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="卖出时间"
+                    android:textColor="@color/rgb666666"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen8"
+                    android:text="2019-07-02  09:42"
+                    android:textColor="@color/blue"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view_line"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/dimen10"
+                android:background="@color/line1"
+                app:layout_constraintTop_toBottomOf="@id/ll_member_time" />
+
+            <LinearLayout
+                android:id="@+id/ll_certificate"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen100"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/view_line">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/iv_pay_upload"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/dimen30"
+                        android:src="@mipmap/wallet_detail_1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/iv_pay_upload"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/dimen5"
+                        android:text="上传支付凭证" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/iv_pay_not_upload"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/dimen30"
+                        android:src="@mipmap/wallet_detail_2" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/iv_pay_not_upload"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/dimen5"
+                        android:text="暂未上传凭证" />
+                </RelativeLayout>
+            </LinearLayout>
+
+
+            <View
+                android:id="@+id/view_line2"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/line1"
+                app:layout_constraintTop_toBottomOf="@id/ll_certificate" />
+
+            <TextView
+                android:id="@+id/tv_note_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen15"
+                android:text="交易提醒"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/tv_amount"
+                app:layout_constraintTop_toBottomOf="@id/view_line2" />
+
+
+            <TextView
+                android:id="@+id/tv_note_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen20"
+                android:lineSpacingExtra="@dimen/dimen2"
+                android:paddingEnd="@dimen/dimen50"
+                android:text="1.您的汇款讲直接进入卖方账户，交易过程中卖方出售的数字资产，将由平台托管保护"
+                android:textColor="@color/rgb666666"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@id/tv_amount"
+                app:layout_constraintTop_toBottomOf="@id/tv_note_title" />
+
+            <TextView
+                android:id="@+id/tv_note_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen20"
+                android:lineSpacingExtra="@dimen/dimen2"
+                android:paddingEnd="@dimen/dimen50"
+                android:text="2.请在规定时间内完成付款，并务必点击我以付款，将由平台托管保护，卖方确认收款后，系统会将数字货币转到您的账户"
+                android:textColor="@color/rgb666666"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@id/tv_amount"
+                app:layout_constraintTop_toBottomOf="@id/tv_note_1" />
+
+            <TextView
+                android:id="@+id/tv_note_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen20"
+                android:lineSpacingExtra="@dimen/dimen2"
+                android:paddingEnd="@dimen/dimen50"
+                android:text="2.如果您在规定时间内没有打款，就意味着本次订单打款超时，您的账户有可能会被锁定，多次出现类似情况将被封号。"
+                android:textColor="@color/rgb666666"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@id/tv_amount"
+                app:layout_constraintTop_toBottomOf="@id/tv_note_2" />
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+
+    <TextView
+        android:id="@+id/tv_pay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen50"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorLogin"
+        android:gravity="center"
+        android:text="我已付款"
+        android:textColor="@color/item_white"
+        android:textSize="18sp" />
+</RelativeLayout>

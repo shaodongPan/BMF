@@ -95,6 +95,7 @@
         <activity android:name=".activity.SellNumActivity" />
         <activity android:name=".activity.CrowdActivity"></activity>
         <activity android:name=".activity.TakePhotoActivity" />
+        <activity android:name=".activity.moneylu.RecordDetailActivity"/>
     </application>
 
 </manifest>

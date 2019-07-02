@@ -1,15 +1,18 @@
 package dream.api.dmf.cn.dreaming.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
 import dream.api.dmf.cn.dreaming.R;
+import dream.api.dmf.cn.dreaming.activity.moneylu.RecordDetailActivity;
 import dream.api.dmf.cn.dreaming.bean.SellBean;
 
 /**
@@ -29,23 +32,23 @@ public class SellAdapter extends RecyclerView.Adapter<SellAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view =View.inflate(mContext,R.layout.lusell_item,null);      //LayoutInflater.from(mContext).inflate(, parent, false);
+        View view = View.inflate(mContext, R.layout.lusell_item, null);      //LayoutInflater.from(mContext).inflate(, parent, false);
         holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-            holder.headnumber.setText(datase.get(i).realpay);
-            holder.number.setText(datase.get(i).amount);
-            holder.daipay.setText(datase.get(i).checked);
-            holder.buytime.setText(datase.get(i).addtime);
-            holder.price.setText(datase.get(i).price);
+        holder.headnumber.setText(datase.get(i).realpay);
+        holder.number.setText(datase.get(i).amount);
+        holder.daipay.setText(datase.get(i).checked);
+        holder.buytime.setText(datase.get(i).addtime);
+        holder.price.setText(datase.get(i).price);
     }
 
     @Override
     public int getItemCount() {
-        if (datase==null){
+        if (datase == null) {
             return 0;
         }
         return datase.size();
