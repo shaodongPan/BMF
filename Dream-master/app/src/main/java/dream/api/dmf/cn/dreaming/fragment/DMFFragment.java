@@ -70,14 +70,17 @@ public class DMFFragment extends BaseMvpFragment<presenter> implements Contract.
     protected void initView(View view) {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
         username1 = sharedPreferences.getBoolean("Username", true);
-        done = sharedPreferences.getString(UserApi.STock_mdf, "");
-        dtwo = sharedPreferences.getString(UserApi.balanceDMF, "");
-        dthree = sharedPreferences.getString(UserApi.regmoneyDMF, "");
-        dfour = sharedPreferences.getString(UserApi.credit3, "");
-        hone = sharedPreferences.getString(UserApi.STOCK, "");
-        htwo = sharedPreferences.getString(UserApi.balance, "");
-        hthree = sharedPreferences.getString(UserApi.regmoney, "");
-        hfour = sharedPreferences.getString(UserApi.credit4, "");
+        done = sharedPreferences.getString(UserApi.STock_mdf, "0");
+        dfour = sharedPreferences.getString(UserApi.credit3, "0");
+        hone = sharedPreferences.getString(UserApi.STOCK, "0");
+        hfour = sharedPreferences.getString(UserApi.credit4, "0");
+        dtwo = sharedPreferences.getString(UserApi.balanceDMF, "0");
+        dthree = sharedPreferences.getString(UserApi.regmoneyDMF, "0");
+
+
+        htwo = sharedPreferences.getString(UserApi.balance, "0");
+        hthree = sharedPreferences.getString(UserApi.regmoney, "0");
+
         name = view.findViewById(R.id.dname);
         mname = view.findViewById(R.id.d_name);
         one = view.findViewById(R.id.num_one);

@@ -67,6 +67,11 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
     CheckBox loginExe;
     @BindView(R.id.s_edsell)
     TextView sEdsell;
+    @BindView(R.id.tv_type)
+    TextView tvType;
+    @BindView(R.id.tv_account)
+    TextView tvAccount;
+
     @BindView(R.id.s_butn)
     Button sButn;
     Unbinder unbinder;
@@ -90,6 +95,7 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
     private CheckBox mExe;
     private FinishAdapter adapter;
     private MaterialRefreshLayout materialRefreshLayout;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected presenter createPresenter() {
@@ -104,7 +110,7 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
     @Override
     protected void initView(View view) {
         mPrice = view.findViewById(R.id.s_price);
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
         username1 = sharedPreferences.getBoolean("Username", true);
         dmfday = sharedPreferences.getString(UserApi.dmf_day_Today, "");
         mUid = sharedPreferences.getString(UserApi.Uid, "");
@@ -255,6 +261,19 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder = ButterKnife.bind(this, rootView);
+        String done = sharedPreferences.getString(UserApi.STock_mdf, "0");
+        String dfour = sharedPreferences.getString(UserApi.credit3, "0");
+        String hone = sharedPreferences.getString(UserApi.STOCK, "0");
+        String hfour = sharedPreferences.getString(UserApi.credit4, "0");
+        if (username1) {
+            tvType.setText("DMF");
+            tvAccount.setText(done);
+            sEdsell.setText(dfour);
+        } else {
+            tvType.setText("HYT");
+            tvAccount.setText(hone);
+            sEdsell.setText(hfour);
+        }
         return rootView;
     }
 

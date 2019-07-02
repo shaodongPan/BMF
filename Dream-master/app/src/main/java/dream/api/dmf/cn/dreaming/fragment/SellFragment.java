@@ -39,8 +39,7 @@ import dream.api.dmf.cn.dreaming.utils.BuyNumDialog;
 public class SellFragment extends BaseMvpFragment<presenter> implements Contract.Iview {
 
     Unbinder unbinder;
-    @BindView(R.id.s_edsell)
-    TextView sEdsell;
+
     @BindView(R.id.s_price)
     TextView sPrice;
     @BindView(R.id.ss_num)
@@ -51,6 +50,14 @@ public class SellFragment extends BaseMvpFragment<presenter> implements Contract
     TextView sBanck;
     @BindView(R.id.ll_pay_info)
     LinearLayout llPayInfo;
+    @BindView(R.id.tv_type)
+    TextView tvType;
+    @BindView(R.id.ed_one)
+    TextView edOne;
+    @BindView(R.id.ed_num)
+    TextView edNum;
+    @BindView(R.id.s_edsell)
+    TextView eEdsell;
     @BindView(R.id.s_num)
     TextView sNum;
     EditText sRpass;
@@ -78,6 +85,7 @@ public class SellFragment extends BaseMvpFragment<presenter> implements Contract
     private TextView edone;
     private TextView edtwo;
     private IsLoginBean isLoginBean;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected presenter createPresenter() {
@@ -92,14 +100,16 @@ public class SellFragment extends BaseMvpFragment<presenter> implements Contract
 
     @Override
     protected void initView(View view) {
+
         mPrice = view.findViewById(R.id.s_price);
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
         mUid = sharedPreferences.getString(UserApi.Uid, "");
         mShell = sharedPreferences.getString(UserApi.Shell, "");
 
         username1 = sharedPreferences.getBoolean("Username", true);
         edone = view.findViewById(R.id.ed_one);
         edtwo = view.findViewById(R.id.ed_num);
+
 
         dmfday = sharedPreferences.getString(UserApi.dmf_day_Today, "");
         mEd = sharedPreferences.getString(UserApi.DMFED, "");
@@ -180,7 +190,6 @@ public class SellFragment extends BaseMvpFragment<presenter> implements Contract
             DuSellBean duSellBean = (DuSellBean) object;
             if (duSellBean.error.equals("0")) {
                 Toast.makeText(mContext, "卖出成功", Toast.LENGTH_SHORT).show();
-                number.isEmpty();
                 sNump.setText("");
                 sNum.setText("");
                 sRpass.setText("");
@@ -200,6 +209,20 @@ public class SellFragment extends BaseMvpFragment<presenter> implements Contract
         // TODO: inflate a fragment view
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder1 = ButterKnife.bind(this, rootView);
+
+        String done = sharedPreferences.getString(UserApi.STock_mdf, "0");
+        String dfour = sharedPreferences.getString(UserApi.credit3, "0");
+        String hone = sharedPreferences.getString(UserApi.STOCK, "0");
+        String hfour = sharedPreferences.getString(UserApi.credit4, "0");
+        if (username1) {
+            tvType.setText("DMF");
+            edOne.setText(done);
+            eEdsell.setText(dfour);
+        } else {
+            tvType.setText("HYT");
+            edOne.setText(hone);
+            eEdsell.setText(hfour);
+        }
         return rootView;
     }
 
