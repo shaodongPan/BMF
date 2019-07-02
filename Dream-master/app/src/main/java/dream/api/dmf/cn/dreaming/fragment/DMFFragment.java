@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.HashMap;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -23,6 +25,7 @@ import dream.api.dmf.cn.dreaming.api.UserApi;
 import dream.api.dmf.cn.dreaming.base.BaseMvpFragment;
 import dream.api.dmf.cn.dreaming.base.mvp.Contract;
 import dream.api.dmf.cn.dreaming.base.mvp.presenter.presenter;
+import dream.api.dmf.cn.dreaming.bean.IsLoginBean;
 
 
 public class DMFFragment extends BaseMvpFragment<presenter> implements Contract.Iview {
@@ -40,14 +43,7 @@ public class DMFFragment extends BaseMvpFragment<presenter> implements Contract.
     private TextView two;
     private TextView three;
     private TextView four;
-    private String done;
-    private String dtwo;
-    private String dthree;
-    private String dfour;
-    private String hone;
-    private String htwo;
-    private String hthree;
-    private String hfour;
+
 
     public static Fragment newInstance() {
         DMFFragment fragment = new DMFFragment();
@@ -68,56 +64,49 @@ public class DMFFragment extends BaseMvpFragment<presenter> implements Contract.
 
     @Override
     protected void initView(View view) {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
-        username1 = sharedPreferences.getBoolean("Username", true);
-        done = sharedPreferences.getString(UserApi.STock_mdf, "0");
-        dfour = sharedPreferences.getString(UserApi.credit3, "0");
-        hone = sharedPreferences.getString(UserApi.STOCK, "0");
-        hfour = sharedPreferences.getString(UserApi.credit4, "0");
-        dtwo = sharedPreferences.getString(UserApi.balanceDMF, "0");
-        dthree = sharedPreferences.getString(UserApi.regmoneyDMF, "0");
-
-
-        htwo = sharedPreferences.getString(UserApi.balance, "0");
-        hthree = sharedPreferences.getString(UserApi.regmoney, "0");
-
         name = view.findViewById(R.id.dname);
         mname = view.findViewById(R.id.d_name);
         one = view.findViewById(R.id.num_one);
         two = view.findViewById(R.id.num_two);
         three = view.findViewById(R.id.num_three);
         four = view.findViewById(R.id.num_four);
-        if (username1 ==true){
-            name.setText("DMFB");
-            mname.setText("FDMFB");
-            one.setText(dtwo);
-            two.setText(done);
-            three.setText(hfour);
-            four.setText(dthree);
-
-        }else if (username1 ==false){
-            one.setText(hone);
-            two.setText(htwo);
-            three.setText(dfour);
-            four.setText(hthree);
-        }
     }
 
     @Override
     protected void getData() {
-
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
-
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
+        username1 = sharedPreferences.getBoolean("Username", true);
+        String mUid = sharedPreferences.getString(UserApi.Uid, "");
+        String mShell = sharedPreferences.getString(UserApi.Shell, "");
+        HashMap<String, Object> headmap = new HashMap<>();
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("uid", mUid);
+        map.put("shell", mShell);
+        mPresenter.postData(UserApi.getIsLogin, headmap, map, IsLoginBean.class);
     }
 
     @Override
     public void getData(Object object) {
-
+        if (object instanceof IsLoginBean) {
+            IsLoginBean isLoginBean = (IsLoginBean) object;
+            if (username1) {
+                name.setText("DMFB");
+                mname.setText("FDMFB");
+                one.setText(isLoginBean.stock_dmf);
+                two.setText(isLoginBean.getBalanceDmf());
+                three.setText(isLoginBean.credit3);
+                four.setText(isLoginBean.regmoney_dmf);
+            } else {
+                one.setText(isLoginBean.stock);
+                two.setText(isLoginBean.balance);
+                three.setText(isLoginBean.credit4);
+                four.setText(isLoginBean.regmoney);
+            }
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
         unbinder = ButterKnife.bind(this, rootView);
         return rootView;
@@ -129,7 +118,7 @@ public class DMFFragment extends BaseMvpFragment<presenter> implements Contract.
         unbinder.unbind();
     }
 
-    @OnClick({ R.id.m_money_lu, R.id.m_money_qq, R.id.m_money_q})
+    @OnClick({R.id.m_money_lu, R.id.m_money_qq, R.id.m_money_q})
     public void onViewClicked(View view) {
         switch (view.getId()) {
            /* //转账
@@ -138,11 +127,11 @@ public class DMFFragment extends BaseMvpFragment<presenter> implements Contract.
                 break;*/
             //交易记录
             case R.id.m_money_lu:
-                startActivity(new Intent(getActivity(),MoneyluActivity.class));
+                startActivity(new Intent(getActivity(), MoneyluActivity.class));
                 break;
             //钱包
             case R.id.m_money_qq:
-                startActivity(new Intent(getActivity(),MoneyMLActivity.class));
+                startActivity(new Intent(getActivity(), MoneyMLActivity.class));
                 break;
          /*    //HYT转入
             case R.id.m_money_r:
@@ -154,7 +143,7 @@ public class DMFFragment extends BaseMvpFragment<presenter> implements Contract.
                 break;*/
             //金元转换
             case R.id.m_money_q:
-                startActivity(new Intent(getActivity(),MoneyQActivity.class));
+                startActivity(new Intent(getActivity(), MoneyQActivity.class));
                 break;
         }
     }

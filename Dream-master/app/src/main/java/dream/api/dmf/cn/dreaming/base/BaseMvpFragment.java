@@ -9,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import dream.api.dmf.cn.dreaming.api.UserApi;
+import dream.api.dmf.cn.dreaming.bean.IsLoginBean;
+
 public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment
 {
     protected P mPresenter;
@@ -42,7 +45,6 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment
     @Override
     public void onResume() {
         super.onResume();
-
     }
 
     protected abstract P createPresenter();

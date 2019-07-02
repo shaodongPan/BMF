@@ -74,7 +74,7 @@ public class SellNumActivity extends BaseMvpActivity<presenter> implements Contr
                             map.put("id", mId);
                             map.put("paytype", paytype);
                             mPresenter.postData(UserApi.getSELLid, headmap, map, BuBean.class);
-                        /*    edone.setText(isLoginBean.stock_mdf);
+                        /*    edone.setText(isLoginBean.stock_dmf);
                             edtwo.setText(isLoginBean.regmoney_dmf);*/
 
                         } else if (username1 == false) {

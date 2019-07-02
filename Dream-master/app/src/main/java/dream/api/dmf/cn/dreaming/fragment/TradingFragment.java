@@ -6,26 +6,20 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 
 import java.util.ArrayList;
@@ -46,7 +40,6 @@ import dream.api.dmf.cn.dreaming.base.mvp.presenter.presenter;
 import dream.api.dmf.cn.dreaming.bean.IsLoginBean;
 import dream.api.dmf.cn.dreaming.bean.TradingBean;
 import dream.api.dmf.cn.dreaming.utils.LogUtils;
-import dream.api.dmf.cn.dreaming.view.ChartView;
 
 public class TradingFragment extends BaseMvpFragment<presenter> implements Contract.Iview {
     private String HYT = "HYT";
@@ -202,7 +195,7 @@ public class TradingFragment extends BaseMvpFragment<presenter> implements Contr
             sharedPreferences.edit().putString(UserApi.HUPDATE, hupdate).commit();
             sharedPreferences.edit().putString(UserApi.ac_status, isLoginBean.ac_status).commit();
             //dmf
-            sharedPreferences.edit().putString(UserApi.STock_mdf, isLoginBean.stock_mdf).commit();
+            sharedPreferences.edit().putString(UserApi.STock_mdf, isLoginBean.stock_dmf).commit();
             sharedPreferences.edit().putString(UserApi.balanceDMF, isLoginBean.balance_dmf).commit();
             sharedPreferences.edit().putString(UserApi.regmoneyDMF, isLoginBean.regmoney_dmf).commit();
             sharedPreferences.edit().putString(UserApi.credit3, isLoginBean.credit3).commit();

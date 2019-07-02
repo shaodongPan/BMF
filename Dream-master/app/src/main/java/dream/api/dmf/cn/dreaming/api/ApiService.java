@@ -51,6 +51,13 @@ public interface ApiService {
                                           @Field("uid") String uid,
                                           @Field("shell") String shell);
 
+    @FormUrlEncoded
+    @POST("index.php?mod=mobile&act=islogin")
+    Observable<ResponseBody> verificaLogin(@Field("truename") String truename,
+                                          @Field("idcard") String idcard,
+                                          @Field("uid") String uid,
+                                          @Field("shell") String shell);
+
     @POST
     @Multipart
     Observable<ResponseBody> postMorePicture(@Url String url, @HeaderMap Map<String, Object> headMap, @QueryMap Map<String, Object> bodyMap, @Part MultipartBody.Part img);

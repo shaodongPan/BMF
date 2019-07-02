@@ -81,7 +81,7 @@ public class MoneyMLActivity extends BaseMvpActivity<presenter> implements Contr
         if (object instanceof IsLoginBean){
             IsLoginBean isLoginBean= (IsLoginBean) object;
             if (username1 == true) {
-                mOne.setText(isLoginBean.stock_mdf);
+                mOne.setText(isLoginBean.stock_dmf);
                 mTwo.setText(isLoginBean.balance_dmf);
                 mThree.setText(isLoginBean.regmoney_dmf);
                 mFour.setText(isLoginBean.credit3);

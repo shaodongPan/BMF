@@ -129,10 +129,10 @@ public class BitmapUtil {
             String state = Environment.getExternalStorageState();
             //如果状态不是mounted，无法读写
             if (!state.equals(Environment.MEDIA_MOUNTED)) {
-               LogUtils.v("无法读写");
+                LogUtils.v("无法读写");
             }
 //            String dir = Environment.getExternalStorageDirectory() + "/BFC/" + picName + ".jpg";
-            String dir=Environment.getExternalStorageDirectory().getAbsolutePath()+"/BFC/"+picName+".jpg";
+            String dir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/BFC/" + picName + ".jpg";
 //            String dir=+"/BFC/"+picName+".jpg";
             LogUtils.v(dir);
             File f = new File(dir);
@@ -195,13 +195,14 @@ public class BitmapUtil {
             //保存图片后发送广播通知更新数据库
             Uri uri = Uri.fromFile(file);
 
-                return uri;
+            return uri;
         } catch (IOException e) {
             e.printStackTrace();
             LogUtils.v(e.toString());
         }
         return null;
     }
+
     public static Bitmap createBitmap(View view) {
         view.buildDrawingCache();
         Bitmap bitmap = view.getDrawingCache();

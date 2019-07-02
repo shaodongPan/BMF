@@ -24,7 +24,7 @@ public class IsLoginBean {
      * stock : 0.0000
      * balance : 41000.0000
      * regmoney : 41000.00
-     * stock_mdf : 41000.0000
+     * stock_dmf : 41000.0000
      * balance_dmf : 41000.0000
      * regmoney_dmf : 41000.0000
      * buy_num : ["10","30","50","100","500","1000"]
@@ -56,9 +56,9 @@ public class IsLoginBean {
     public Object idcard;
     public String ac_status;
     public String stock;
-    public String balance;
+    public String balance = "0.0";
     public String regmoney;
-    public String stock_mdf;
+    public String stock_dmf;
     public String balance_dmf;
     public String regmoney_dmf;
     public String toshopmoney;
@@ -77,6 +77,11 @@ public class IsLoginBean {
     public List<String> jy4;
     public List<String> dmf_num;
     public List<String> tdmf_num;
+
+
+    public String getBalanceDmf() {
+        return balance_dmf == null ? "0.0" : balance_dmf;
+    }
 
     public static class HytDayPriceBean {
         /**
