@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import org.devio.takephoto.model.TImage;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,6 +29,8 @@ import dream.api.dmf.cn.dreaming.api.UserApi;
 import dream.api.dmf.cn.dreaming.base.mvp.Contract;
 import dream.api.dmf.cn.dreaming.base.mvp.presenter.presenter;
 import dream.api.dmf.cn.dreaming.bean.BankBean;
+import dream.api.dmf.cn.dreaming.bean.PhotoBean;
+import okhttp3.MultipartBody;
 
 public class AliActivity extends TakePhotoActivity implements Contract.Iview {
     TextView mTitle;
@@ -102,6 +105,24 @@ public class AliActivity extends TakePhotoActivity implements Contract.Iview {
 
     }
 
+    @Override
+    public void getPhotoData(Object o) {
+        super.getPhotoData(o);
+        checkResultIsPhotoUpload(o);
+    }
+
+    private void checkResultIsPhotoUpload(Object o) {
+        if (o instanceof PhotoBean) {
+            PhotoBean bankBean = (PhotoBean) o;
+            int error = bankBean.getError();
+            if (error == 0) {
+                Toast.makeText(mContext, "上传成功", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(mContext, "上传失败,请重试", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
     @OnClick({R.id.iv_back
             , R.id.iv_img
             , R.id.tv_send})
@@ -155,7 +176,16 @@ public class AliActivity extends TakePhotoActivity implements Contract.Iview {
     }
 
     private void upLoadPhoto(File file) {
+        postHeadData(UserApi.getPhoneImage, gen(file), PhotoBean.class);
+    }
 
+    public List<MultipartBody.Part> gen(File file) {
+        List<MultipartBody.Part> parts = new ArrayList<>();
+        parts.add(toRequestBodyOfText("shell", mShell));
+        parts.add(toRequestBodyOfText("uid", mUid));
+        parts.add(toRequestBodyOfImage("imgFile", file));
+        parts.add(toRequestBodyOfText("type", "alipay"));
+        return parts;
     }
 
     private void ShowImage(String path) {

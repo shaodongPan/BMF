@@ -14,12 +14,33 @@ android {
             exclude 'META-INF/proguard/androidx-annotations.pro'
         }
     }
+    signingConfigs {
+        keystore {
+            storeFile file('../app/dmf.jks')
+            storePassword 'damingfu'
+            keyAlias 'key0'
+            keyPassword 'damingfu'
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
+            // 移除无用的resource文件
+            shrinkResources false
+            debuggable false
+            //混淆规则文件
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.keystore
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    def fileName = "dmf${defaultConfig.versionName}.apk"
+                    outputFileName = fileName
+                }
+            }
         }
+
     }
+
 }
 
 dependencies {

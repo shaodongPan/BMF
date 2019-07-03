@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activity.mineactivity.SetActivity">
-    <include layout="@layout/title"/>
+
+    <include layout="@layout/title" />
+
     <TextView
         android:id="@+id/tv_account"
         android:layout_width="match_parent"
@@ -41,6 +43,7 @@
         android:paddingLeft="@dimen/dimen10"
         android:text="实名认证"
         android:textColor="@color/textBlack" />
+
     <TextView
         android:id="@+id/tv_wallet"
         android:layout_width="match_parent"
@@ -48,11 +51,11 @@
         android:layout_marginTop="@dimen/dimen1"
         android:layout_marginRight="@dimen/dimen10"
         android:background="@color/item_white"
-        android:visibility="gone"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/dimen10"
         android:text="钱包管理"
-        android:textColor="@color/textBlack" />
+        android:textColor="@color/textBlack"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_clear"

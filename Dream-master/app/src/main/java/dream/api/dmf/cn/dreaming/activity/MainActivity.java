@@ -58,6 +58,10 @@ public class MainActivity extends BaseMvpActivity<presenter> implements Contract
 
     @Override
     public void getData(Object object) {
+        if (isFinishing()) {
+            return;
+        }
+
         if (object instanceof IsLoginBean) {
             IsLoginBean isLoginBean = (IsLoginBean) object;
             sharedPreferences.edit().putString(UserApi.idcard, (String) isLoginBean.idcard).commit();
