@@ -21,6 +21,7 @@ import android.widget.Toast;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -131,8 +132,14 @@ public class SellFragment extends BaseMvpFragment<presenter> implements Contract
 
         mEd = sharedPreferences.getString(UserApi.DMFED, "");
         nums = sharedPreferences.getString(UserApi.DmfNUm, "");
-        String[] splitNums = nums.substring(1, nums.length() - 1).replace("\"", "").split(",");
-        numList = Arrays.asList(splitNums);
+
+        if (nums.length() > 1) {
+            String[] splitNums = nums.substring(1, nums.length() - 1).replace("\"", "").split(",");
+            numList = Arrays.asList(splitNums);
+        } else {
+            numList = new ArrayList<>();
+        }
+
         loginExe = view.findViewById(R.id.login_exe);
         sRpass = view.findViewById(R.id.s_rpass);
         list = Arrays.asList(getResources().getStringArray(R.array.bank));
@@ -193,9 +200,9 @@ public class SellFragment extends BaseMvpFragment<presenter> implements Contract
                 String s2 = cutDoubleNumber(Double.valueOf(Double.parseDouble(mNum) * Double.parseDouble(toshopmoney) + ""));
                 //cutDoubleNumber(Double.parseDouble(dmfday));
 
-                if (username1){
+                if (username1) {
                     sNum.setText(s1);
-                }else {
+                } else {
                     sNum.setText(s2);
                 }
                 //Toast.makeText(mContext, "111111111", Toast.LENGTH_SHORT).show();

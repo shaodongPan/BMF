@@ -28,6 +28,7 @@ public class SellNumActivity extends BaseMvpActivity<presenter> implements Contr
     private TextView mReplay;
     private TextView mAmout;
     private TextView mprice;
+    private TextView tvBuyTitle;
     private SharedPreferences sharedPreferences;
     private String mUid;
     private String mShell;
@@ -53,6 +54,13 @@ public class SellNumActivity extends BaseMvpActivity<presenter> implements Contr
                 // 获取布局中的控件
                 TextView edmail = (TextView) view.findViewById(R.id.bbuy);
                 final TextView unfalse = (TextView) view.findViewById(R.id.fal_qu);
+                TextView tvBuyTitle = findViewById(R.id.tv_buy_title);
+
+                if (username1){
+                    tvBuyTitle.setText("");
+                }else {
+
+                }
 
 //                    // 设置参数
                 builder.setTitle("卖出")
@@ -132,6 +140,8 @@ public class SellNumActivity extends BaseMvpActivity<presenter> implements Contr
         quebutn = findViewById(R.id.buy_butn);
         mCancelBt = findViewById(R.id.buy_false);
         mBack = findViewById(R.id.s_banck);
+
+
 //        pay_pannel = findViewById(R.id.pay_pannel);
         list = Arrays.asList(getResources().getStringArray(R.array.bank));
         Intent intent = getIntent();

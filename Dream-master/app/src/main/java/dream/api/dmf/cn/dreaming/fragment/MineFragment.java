@@ -41,6 +41,7 @@ import dream.api.dmf.cn.dreaming.api.UserApi;
 import dream.api.dmf.cn.dreaming.base.BaseMvpFragment;
 import dream.api.dmf.cn.dreaming.base.mvp.Contract;
 import dream.api.dmf.cn.dreaming.base.mvp.presenter.presenter;
+import dream.api.dmf.cn.dreaming.bean.IsLoginBean;
 import dream.api.dmf.cn.dreaming.bean.MsgNum;
 import dream.api.dmf.cn.dreaming.bean.SignBean;
 
@@ -152,13 +153,12 @@ public class MineFragment extends BaseMvpFragment<presenter> implements Contract
                 mPresenter.postData(UserApi.getSign, headmap, map, SignBean.class);
             }
         });
-
     }
 
     @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden && rHeadNum != null) {
+    public void getUserBean(IsLoginBean bean) {
+        super.getUserBean(bean);
+        if (rHeadNum != null && isAdded()) {
             username = sharedPreferences.getString(UserApi.UserName, "");
             mone = sharedPreferences.getString(UserApi.credit3, "");
             mtwo = sharedPreferences.getString(UserApi.credit4, "");
@@ -167,6 +167,12 @@ public class MineFragment extends BaseMvpFragment<presenter> implements Contract
             rHeadNum.setText(username);
             getData();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        requestLoginMessage();
     }
 
     @Override

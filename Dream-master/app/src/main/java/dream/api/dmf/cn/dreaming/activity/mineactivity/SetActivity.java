@@ -390,12 +390,12 @@ public class SetActivity extends AppCompatActivity implements TakePhoto.TakeResu
                         try {
                             body = responseBody.string();
                             Gson gson = new Gson();
-                            RenBean renBean = gson.fromJson(body, RenBean.class);
+                            ManBean renBean = gson.fromJson(body, ManBean.class);
                             if (renBean != null) {
-                                if (renBean.error == 0) {
+                                if (renBean.error.equals("0")) {
                                     alertDialog.dismiss();
                                 } else {
-                                    Toast.makeText(SetActivity.this, renBean.message, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(SetActivity.this, renBean.msg, Toast.LENGTH_LONG).show();
                                 }
                             }
                         } catch (Exception e) {

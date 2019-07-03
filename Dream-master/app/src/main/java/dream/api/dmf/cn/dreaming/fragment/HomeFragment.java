@@ -67,6 +67,8 @@ public class HomeFragment extends BaseMvpFragment<presenter> implements Contract
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         toolOftenAdapter = new ToolOftenAdapter(getActivity());
         recyclerView.setLayoutManager(manager);
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(toolOftenAdapter);
     }
 

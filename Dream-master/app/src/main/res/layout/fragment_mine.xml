@@ -38,7 +38,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/mine_head_img"
-                    android:text="13522301073"
                     android:textColor="#fff"
                     android:textSize="15sp" />
 
