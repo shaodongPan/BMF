@@ -103,10 +103,6 @@ public class MainActivity extends BaseMvpActivity<presenter> implements Contract
         mIdcard = sharedPreferences.getString(UserApi.idcard, "");
         boolean user = sharedPreferences.getBoolean("user", false);
 
-//        if (user == false) {
-//            startActivity(new Intent(MainActivity.this, CrowdActivity.class));
-//        }
-
         mTabbar = findViewById(dream.api.dmf.cn.dreaming.R.id.mfragment);
         mTabbar.init(getSupportFragmentManager())
                 .setImgSize(50, 50)

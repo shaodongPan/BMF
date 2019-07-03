@@ -3,6 +3,7 @@ package dream.api.dmf.cn.dreaming.fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -17,6 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -35,6 +38,7 @@ import dream.api.dmf.cn.dreaming.bean.DuSellBean;
 import dream.api.dmf.cn.dreaming.bean.IsLoginBean;
 import dream.api.dmf.cn.dreaming.utils.BankDialog;
 import dream.api.dmf.cn.dreaming.utils.BuyNumDialog;
+import dream.api.dmf.cn.dreaming.utils.ScreenSizeUtil;
 
 public class SellFragment extends BaseMvpFragment<presenter> implements Contract.Iview {
 
@@ -86,6 +90,8 @@ public class SellFragment extends BaseMvpFragment<presenter> implements Contract
     private TextView edtwo;
     private IsLoginBean isLoginBean;
     private SharedPreferences sharedPreferences;
+
+    private int mDp;
 
     @Override
     protected presenter createPresenter() {
@@ -142,6 +148,8 @@ public class SellFragment extends BaseMvpFragment<presenter> implements Contract
                 }
             }
         });
+
+        mDp = ScreenSizeUtil.Dp2Px(mContext.getApplicationContext(),10);
     }
 
     @Override
@@ -248,7 +256,7 @@ public class SellFragment extends BaseMvpFragment<presenter> implements Contract
                 dialog.setCallBack(new BankDialog.BandDialogCallBack() {
                     @Override
                     public void select(String select) {
-                        addPayInfoLayout();
+                        addPayInfoLayout(select);
                     }
                 });
                 if (list.get(0).equals("银行卡")) {
@@ -298,8 +306,22 @@ public class SellFragment extends BaseMvpFragment<presenter> implements Contract
         }
     }
 
-    private void addPayInfoLayout() {
+    private void addPayInfoLayout(String select) {
+//        if (select.equals())
+//        TextView textView = getMessageTextView(select);
+//
+//        llPayInfo.addView(textView);
+    }
 
+    private TextView getMessageTextView(String select) {
+        TextView textView = new TextView(mContext);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT
+                , ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.setMargins(mDp, mDp, 0, 0);
+        textView.setLayoutParams(layoutParams);
+        textView.setText(select);
+        textView.setTextSize(16.0f);
+        return textView;
     }
 
     @Override

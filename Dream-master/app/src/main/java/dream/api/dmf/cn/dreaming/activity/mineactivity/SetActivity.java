@@ -386,16 +386,22 @@ public class SetActivity extends AppCompatActivity implements TakePhoto.TakeResu
 
                     @Override
                     public void onNext(ResponseBody responseBody) {
-                        String body = responseBody.toString();
-                        Gson gson = new Gson();
-                        RenBean renBean = gson.fromJson(body, RenBean.class);
-                        if (renBean != null) {
-                            if (renBean.error == 0) {
-                                alertDialog.dismiss();
-                            } else {
-                                Toast.makeText(SetActivity.this, renBean.message, Toast.LENGTH_LONG).show();
+                        String body;
+                        try {
+                            body = responseBody.string();
+                            Gson gson = new Gson();
+                            RenBean renBean = gson.fromJson(body, RenBean.class);
+                            if (renBean != null) {
+                                if (renBean.error == 0) {
+                                    alertDialog.dismiss();
+                                } else {
+                                    Toast.makeText(SetActivity.this, renBean.message, Toast.LENGTH_LONG).show();
+                                }
                             }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
+
                     }
 
                     @Override
@@ -425,7 +431,7 @@ public class SetActivity extends AppCompatActivity implements TakePhoto.TakeResu
         parts.add(toRequestBodyOfText("type", getPhotoType()));
         parts.add(toRequestBodyOfImage("imgFile", part));
 
-        apiService.addImageInfo(UserApi.getPhoneImage,parts)
+        apiService.addImageInfo(UserApi.getPhoneImage, parts)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
