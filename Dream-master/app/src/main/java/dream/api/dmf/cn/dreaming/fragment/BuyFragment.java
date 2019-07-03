@@ -63,16 +63,6 @@ public class BuyFragment extends BaseMvpFragment<presenter> implements Contract.
     private String jy2;
     private String toshopmoney;
 
-    /*
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        return inflater.inflate( container, false);
-    }
-*/
-
     @Override
     protected presenter createPresenter() {
         return new presenter();

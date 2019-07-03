@@ -157,12 +157,6 @@ public class TradingFragment extends BaseMvpFragment<presenter> implements Contr
         map.put("type", ids);
         mPresenter.postData(UserApi.getMoney, headmap, map, TradingBean.class);
 
-//        HashMap<String, Object> headm = new HashMap<>();
-//        HashMap<String, Object> map2 = new HashMap<>();
-//        map2.put("uid", mUid);
-//        map2.put("shell", mShell);
-//        mPresenter.postData(UserApi.getIsLogin, headm, map2, IsLoginBean.class);
-
         requestLoginMessage();
     }
 
@@ -172,50 +166,7 @@ public class TradingFragment extends BaseMvpFragment<presenter> implements Contr
             bean = (TradingBean) object;
             initData();
         }
-        if (object instanceof IsLoginBean) {
-            isLoginBean = (IsLoginBean) object;
-            mNewprice.setText(isLoginBean.dmf_day_price.today);
-            mAddprice.setText(isLoginBean.dmf_day_price.updatemoney);
-            mhNewprice.setText(isLoginBean.hyt_day_price.today);
-            mHaddprice.setText(isLoginBean.hyt_day_price.updatemoney);
 
-            tex = isLoginBean.dmf_day_price.yestoday;
-            te = isLoginBean.dmf_day_price.today;
-            teup = isLoginBean.dmf_day_price.updatemoney;
-            hye = isLoginBean.hyt_day_price.yestoday;
-            htoday = isLoginBean.hyt_day_price.today;
-            hupdate = isLoginBean.hyt_day_price.updatemoney;
-
-            sharedPreferences.edit().putString(UserApi.dmf_day_price, tex).commit();
-            sharedPreferences.edit().putString(UserApi.dmf_day_Today, te).commit();
-            sharedPreferences.edit().putString(UserApi.updatemoney, teup).commit();
-            sharedPreferences.edit().putString(UserApi.DmfNUm, String.valueOf(isLoginBean.dmf_num)).commit();
-            sharedPreferences.edit().putString(UserApi.HYE, hye).commit();
-            sharedPreferences.edit().putString(UserApi.HTODAY, htoday).commit();
-            sharedPreferences.edit().putString(UserApi.HUPDATE, hupdate).commit();
-            sharedPreferences.edit().putString(UserApi.ac_status, isLoginBean.ac_status).commit();
-            //dmf
-            sharedPreferences.edit().putString(UserApi.STock_mdf, isLoginBean.stock_dmf).commit();
-            sharedPreferences.edit().putString(UserApi.balanceDMF, isLoginBean.balance_dmf).commit();
-            sharedPreferences.edit().putString(UserApi.regmoneyDMF, isLoginBean.regmoney_dmf).commit();
-            sharedPreferences.edit().putString(UserApi.credit3, isLoginBean.credit3).commit();
-            sharedPreferences.edit().putString(UserApi.STOCK, isLoginBean.stock).commit();
-            sharedPreferences.edit().putString(UserApi.balance, isLoginBean.balance).commit();
-            sharedPreferences.edit().putString(UserApi.regmoney, isLoginBean.regmoney).commit();
-            sharedPreferences.edit().putString(UserApi.credit4, isLoginBean.credit4).commit();
-            sharedPreferences.edit().putString(UserApi.dmf_day_Today, isLoginBean.dmf_day_price.today).commit();
-            sharedPreferences.edit().putString(UserApi.updatemoney, isLoginBean.dmf_day_price.updatemoney).commit();
-            sharedPreferences.edit().putString(UserApi.HYTT_PRICE, isLoginBean.hyt_day_price.today).commit();
-            sharedPreferences.edit().putString(UserApi.DMFED, String.valueOf(isLoginBean.dmfed)).commit();
-            sharedPreferences.edit().putString(UserApi.tdmf_num, String.valueOf(isLoginBean.tdmf_num)).commit();
-            sharedPreferences.edit().putString(UserApi.STock_mdf, isLoginBean.balance_dmf).commit();
-            sharedPreferences.edit().putString(UserApi.HYTED, String.valueOf(isLoginBean.hyted)).commit();
-            sharedPreferences.edit().putString(UserApi.BUYNUM, String.valueOf(isLoginBean.jy4)).commit();
-            sharedPreferences.edit().putString(UserApi.idcard, (String) isLoginBean.idcard).commit();
-            unmae = sharedPreferences.getString(UserApi.ac_status, "");
-
-
-        }
     }
 
     @Override

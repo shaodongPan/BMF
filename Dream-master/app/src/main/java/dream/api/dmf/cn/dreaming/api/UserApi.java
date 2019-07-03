@@ -168,4 +168,6 @@ public class UserApi {
     public static final String tdmfpmoney = "tdmfpmoney";
     public static final String jy2 = "jy2";
     public static final String toshopmoney = "toshopmoney";
+
+    public static final String buy_num = "buy_num";
 }

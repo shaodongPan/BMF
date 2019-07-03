@@ -18,6 +18,7 @@ import java.util.List;
 
 import dream.api.dmf.cn.dreaming.R;
 import dream.api.dmf.cn.dreaming.adapter.BigBuyAdapter;
+import dream.api.dmf.cn.dreaming.adapter.BuyAdapter;
 import dream.api.dmf.cn.dreaming.adapter.BuyListAdapter;
 import dream.api.dmf.cn.dreaming.api.UserApi;
 import dream.api.dmf.cn.dreaming.base.BaseMvpFragment;
@@ -32,13 +33,13 @@ public class BigBugFragment extends BaseMvpFragment<presenter> implements Contra
     private String mUid;
     private String mShell;
     private BigBean bigBean;
-    private String  t;
+    private String t;
     private String type;
-    private String c="2";
+    private String c = "2";
 
     private boolean username1;
     private RecyclerView mRecyo;
-    private String status="5";
+    private String status = "5";
     private MaterialRefreshLayout materialRefreshLayout;
     private RecyclerView mRecyt;
 
@@ -65,10 +66,10 @@ public class BigBugFragment extends BaseMvpFragment<presenter> implements Contra
         mShell = sharedPreferences.getString(UserApi.Shell, "");
         mRecyo = view.findViewById(R.id.recyo);
         mRecyt = view.findViewById(R.id.recyt);
-        LinearLayoutManager manager=new LinearLayoutManager(mContext);
+        LinearLayoutManager manager = new LinearLayoutManager(mContext);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyo.setLayoutManager(manager);
-        LinearLayoutManager manager1=new LinearLayoutManager(mContext);
+        LinearLayoutManager manager1 = new LinearLayoutManager(mContext);
         manager1.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyt.setLayoutManager(manager1);
         materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
@@ -96,14 +97,13 @@ public class BigBugFragment extends BaseMvpFragment<presenter> implements Contra
                         doRequest();
                     }
 
-                },3000);
+                }, 3000);
 
 
             }
 
             @Override
             public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
-
 
 
             }
@@ -162,30 +162,26 @@ public class BigBugFragment extends BaseMvpFragment<presenter> implements Contra
         if (object instanceof BigBean) {
             BigBean bigBean = (BigBean) object;
             if (bigBean.error == 0) {
-                //Toast.makeText(mContext,"成功",Toast.LENGTH_SHORT).show();
                 List<BigBean.DataBean> data = bigBean.data;
                 BigBuyAdapter Adapter = new BigBuyAdapter(mContext, data);
-               // mRecy.setAdapter(bigSellAdapter);
                 mRecyo.setAdapter(Adapter);
             } else {
                 Toast.makeText(mContext, bigBean.msg, Toast.LENGTH_SHORT).show();
             }
         }
-        if (object instanceof BuyListBean){
-            BuyListBean buyListBean= (BuyListBean) object;
-            if (buyListBean.error==0){
+        if (object instanceof BuyListBean) {
+            BuyListBean buyListBean = (BuyListBean) object;
+            if (buyListBean.error == 0) {
                 List<ConstomData> data = buyListBean.data;
-                BuyListAdapter buyListAdapter=new BuyListAdapter(mContext,data);
+                BuyAdapter buyListAdapter = new BuyAdapter(mContext, data);
                 mRecyt.setAdapter(buyListAdapter);
-                //Toast.makeText(mContext,"成功",Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(mContext,buyListBean.msg,Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(mContext, buyListBean.msg, Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     private void doRequest() {
-
         if (username1 == true) {
             type = "2";
             HashMap<String, Object> headmap = new HashMap<>();

@@ -21,6 +21,7 @@ public class BuyListAdapter extends RecyclerView.Adapter<BuyListAdapter.ViewHold
     Context mContext;
     List<ConstomData> data;
     ViewHolder holder;
+
     public BuyListAdapter(Context mContext, List<ConstomData> data) {
         this.mContext = mContext;
         this.data = data;
@@ -29,17 +30,13 @@ public class BuyListAdapter extends RecyclerView.Adapter<BuyListAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view =View.inflate(mContext,R.layout.buy_item,null);      //LayoutInflater.from(mContext).inflate(, parent, false);
+        View view = View.inflate(mContext, R.layout.buy_item, null);
         holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-       /* holder.tvMoney.setText(data.get(i).realpay);
-        holder.tvNum.setText(data.get(i).amount);
-        holder.tvPrice.setText(data.get(i).price);
-        holder.tvSell.setText((data.get(i).checked));*/
         holder.headnumber.setText(data.get(i).realpay);
         holder.number.setText(data.get(i).amount);
         holder.daipay.setText(data.get(i).checked);
@@ -49,22 +46,23 @@ public class BuyListAdapter extends RecyclerView.Adapter<BuyListAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        if (data==null){
+        if (data == null) {
             return 0;
         }
         return data.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-      /*  TextView tvNum;
-        TextView tvPrice;
-        TextView tvMoney;
-        TextView tvSell;*/
-      private final TextView headnumber;
+        /*  TextView tvNum;
+          TextView tvPrice;
+          TextView tvMoney;
+          TextView tvSell;*/
+        private final TextView headnumber;
         private final TextView number;
         private final TextView price;
         private final TextView daipay;
         private final TextView buytime;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             headnumber = itemView.findViewById(R.id.buy_num);

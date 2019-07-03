@@ -143,7 +143,6 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment 
         mSp.edit().putString(UserApi.dmf_day_price, bean.dmf_day_price.yestoday).commit();
         mSp.edit().putString(UserApi.dmf_day_Today, bean.dmf_day_price.today).commit();
         mSp.edit().putString(UserApi.updatemoney, bean.dmf_day_price.updatemoney).commit();
-        mSp.edit().putString(UserApi.DmfNUm, String.valueOf(bean.dmf_num)).commit();
         mSp.edit().putString(UserApi.HYE, bean.hyt_day_price.yestoday).commit();
         mSp.edit().putString(UserApi.HTODAY, bean.hyt_day_price.today).commit();
         mSp.edit().putString(UserApi.HUPDATE, bean.hyt_day_price.updatemoney).commit();
@@ -152,7 +151,6 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment 
         mSp.edit().putString(UserApi.tdmfpmoney, bean.tdmfpmoney).commit();
         mSp.edit().putString(UserApi.jy2, bean.jy2).commit();
         mSp.edit().putString(UserApi.toshopmoney, bean.toshopmoney).commit();
-
 
         //dmf
         mSp.edit().putString(UserApi.STock_mdf, bean.stock_dmf).commit();
@@ -167,11 +165,14 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment 
         mSp.edit().putString(UserApi.updatemoney, bean.dmf_day_price.updatemoney).commit();
         mSp.edit().putString(UserApi.HYTT_PRICE, bean.hyt_day_price.today).commit();
         mSp.edit().putString(UserApi.DMFED, String.valueOf(bean.dmfed)).commit();
-        mSp.edit().putString(UserApi.tdmf_num, String.valueOf(bean.tdmf_num)).commit();
         mSp.edit().putString(UserApi.STock_mdf, bean.balance_dmf).commit();
         mSp.edit().putString(UserApi.HYTED, String.valueOf(bean.hyted)).commit();
-        mSp.edit().putString(UserApi.BUYNUM, String.valueOf(bean.jy4)).commit();
         mSp.edit().putString(UserApi.idcard, (String) bean.idcard).commit();
+
+        mSp.edit().putString(UserApi.buy_num, String.valueOf(bean.buy_num)).commit();
+        mSp.edit().putString(UserApi.BUYNUM, String.valueOf(bean.jy4)).commit();
+        mSp.edit().putString(UserApi.DmfNUm, String.valueOf(bean.dmf_num)).commit();
+        mSp.edit().putString(UserApi.tdmf_num, String.valueOf(bean.tdmf_num)).commit();
     }
 
     @Override
