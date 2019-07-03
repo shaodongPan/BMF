@@ -10,16 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:textColor="@color/textWhite" />
+        android:textColor="@color/textWhite"
+        android:textSize="20sp" />
 
     <ImageView
         android:id="@+id/iv_back"
-        android:layout_gravity="center_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dimen14"
-
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/dimen20"
         android:src="@mipmap/bg_back" />
-
-
 </FrameLayout>

@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import dream.api.dmf.cn.dreaming.R;
+import dream.api.dmf.cn.dreaming.activity.MoneyRecordActivity;
 import dream.api.dmf.cn.dreaming.activity.moneyactivity.MoneyMLActivity;
 import dream.api.dmf.cn.dreaming.activity.moneyactivity.MoneyQActivity;
 import dream.api.dmf.cn.dreaming.activity.moneyactivity.MoneyluActivity;
@@ -26,7 +27,6 @@ import dream.api.dmf.cn.dreaming.base.BaseMvpFragment;
 import dream.api.dmf.cn.dreaming.base.mvp.Contract;
 import dream.api.dmf.cn.dreaming.base.mvp.presenter.presenter;
 import dream.api.dmf.cn.dreaming.bean.IsLoginBean;
-
 
 public class DMFFragment extends BaseMvpFragment<presenter> implements Contract.Iview {
     @BindView(R.id.m_money_lu)
@@ -46,11 +46,8 @@ public class DMFFragment extends BaseMvpFragment<presenter> implements Contract.
 
 
     public static Fragment newInstance() {
-        DMFFragment fragment = new DMFFragment();
-
-        return fragment;
+        return new DMFFragment();
     }
-
 
     @Override
     protected presenter createPresenter() {
@@ -118,7 +115,9 @@ public class DMFFragment extends BaseMvpFragment<presenter> implements Contract.
         unbinder.unbind();
     }
 
-    @OnClick({R.id.m_money_lu, R.id.m_money_qq, R.id.m_money_q})
+    @OnClick({R.id.m_money_lu
+            , R.id.m_money_qq
+            , R.id.m_money_q})
     public void onViewClicked(View view) {
         switch (view.getId()) {
            /* //转账

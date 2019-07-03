@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.HashMap;
+
 import butterknife.ButterKnife;
 
 public abstract class BaseMvpActivity<P extends BasePresenter> extends AppCompatActivity {
@@ -68,6 +70,9 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends AppCompat
         mPresenter.detachV();
     }
 
+    public HashMap<String, Object> getHeadMap() {
+        return new HashMap<>();
+    }
 
     public abstract void getThisData();
 

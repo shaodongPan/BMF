@@ -3,6 +3,7 @@ package dream.api.dmf.cn.dreaming.activity.moneyactivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import java.util.HashMap;
 
 import butterknife.BindView;
 import dream.api.dmf.cn.dreaming.R;
+import dream.api.dmf.cn.dreaming.activity.MoneyRecordActivity;
 import dream.api.dmf.cn.dreaming.activity.mineactivity.MJListActivity;
 import dream.api.dmf.cn.dreaming.api.UserApi;
 import dream.api.dmf.cn.dreaming.base.BaseMvpActivity;
@@ -19,24 +21,30 @@ import dream.api.dmf.cn.dreaming.base.mvp.Contract;
 import dream.api.dmf.cn.dreaming.base.mvp.presenter.presenter;
 import dream.api.dmf.cn.dreaming.bean.IsLoginBean;
 
-public class MoneyMLActivity extends BaseMvpActivity<presenter> implements Contract.Iview,View.OnClickListener  {
+public class MoneyMLActivity extends BaseMvpActivity<presenter> implements Contract.Iview, View.OnClickListener {
+
+    public static final String TYPE = "TYPE";
+    public static final String C = "C";
+    public static final String TYPE_HTY = "18";
+    public static final String TYPE_FHTY = "4";
 
     @BindView(R.id.tv_title)
     TextView mTitle;
     @BindView(R.id.iv_back)
     ImageView mBack;
 
-    private TextView mOne,mTwo,mThree,mFour;
+    private TextView mOne, mTwo, mThree, mFour;
     private String mUid;
     private String mShell;
     private Boolean username1;
+
     @Override
     public void getThisData() {
-        HashMap<String,Object> headmap=new HashMap<>();
-        HashMap<String,Object> map=new HashMap<>();
-        map.put("uid",mUid);
-        map.put("shell",mShell);
-        mPresenter.postData(UserApi.getIsLogin,headmap,map,IsLoginBean.class);
+        HashMap<String, Object> headmap = new HashMap<>();
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("uid", mUid);
+        map.put("shell", mShell);
+        mPresenter.postData(UserApi.getIsLogin, headmap, map, IsLoginBean.class);
     }
 
     @Override
@@ -78,8 +86,8 @@ public class MoneyMLActivity extends BaseMvpActivity<presenter> implements Contr
 
     @Override
     public void getData(Object object) {
-        if (object instanceof IsLoginBean){
-            IsLoginBean isLoginBean= (IsLoginBean) object;
+        if (object instanceof IsLoginBean) {
+            IsLoginBean isLoginBean = (IsLoginBean) object;
             if (username1 == true) {
                 mOne.setText(isLoginBean.stock_dmf);
                 mTwo.setText(isLoginBean.balance_dmf);
@@ -91,26 +99,35 @@ public class MoneyMLActivity extends BaseMvpActivity<presenter> implements Contr
                 mThree.setText(isLoginBean.regmoney);
                 mFour.setText(isLoginBean.credit4);
             }
-
         }
     }
+
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.mone:
-                Toast.makeText(mContext,"正在开发中",Toast.LENGTH_SHORT).show();
+                startMoneyRecordActivity(TYPE_HTY);
                 break;
             case R.id.mtwo:
-                Toast.makeText(mContext,"正在开发中",Toast.LENGTH_SHORT).show();
+                startMoneyRecordActivity(TYPE_FHTY);
                 break;
             case R.id.mthree:
-                Toast.makeText(mContext,"正在开发中",Toast.LENGTH_SHORT).show();
+
                 break;
             case R.id.mfour:
-                startActivity(new Intent(mContext,MJListActivity.class));
+                startActivity(new Intent(mContext, MJListActivity.class));
                 finish();
                 break;
-
         }
+    }
+
+    private void startMoneyRecordActivity(String type) {
+        Intent intent = new Intent();
+        intent.setClass(mContext, MoneyRecordActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString(TYPE, type);
+        bundle.putString(C, username1 ? "2" : "1");
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

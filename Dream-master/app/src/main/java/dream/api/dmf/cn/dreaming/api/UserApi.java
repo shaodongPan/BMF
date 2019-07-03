@@ -106,6 +106,8 @@ public class UserApi {
 
     public static final String getSign = "index.php?mod=mobile&act=clockon";
 
+    public static final String getLog = "index.php?mod=mobile&act=logs";
+
     public static final String SP = "SP";
     public static final String TrueName = "TrueName";
     public static final String Groupname_cn = "Groupname_cn";
