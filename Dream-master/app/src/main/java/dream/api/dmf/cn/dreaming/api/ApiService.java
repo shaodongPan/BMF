@@ -53,10 +53,8 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("index.php?mod=mobile&act=islogin")
-    Observable<ResponseBody> verificaLogin(@Field("truename") String truename,
-                                          @Field("idcard") String idcard,
-                                          @Field("uid") String uid,
-                                          @Field("shell") String shell);
+    Observable<ResponseBody> verifyLogin(@Field("uid") String uid,
+                                         @Field("shell") String shell);
 
     @POST
     @Multipart

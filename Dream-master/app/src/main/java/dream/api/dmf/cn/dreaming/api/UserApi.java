@@ -162,4 +162,6 @@ public class UserApi {
     public static final String BUYNUM = "BUYNUM";
     public static final String LOGIN_ACCOUNT = "login_account";
 
+    public static final String SAVE_USER_INFO = "SAVE_USER_INFO";
+
 }
