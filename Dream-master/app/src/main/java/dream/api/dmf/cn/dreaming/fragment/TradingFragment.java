@@ -157,17 +157,17 @@ public class TradingFragment extends BaseMvpFragment<presenter> implements Contr
         map.put("type", ids);
         mPresenter.postData(UserApi.getMoney, headmap, map, TradingBean.class);
 
-        HashMap<String, Object> headm = new HashMap<>();
-        HashMap<String, Object> map2 = new HashMap<>();
-        map2.put("uid", mUid);
-        map2.put("shell", mShell);
-        mPresenter.postData(UserApi.getIsLogin, headm, map2, IsLoginBean.class);
+//        HashMap<String, Object> headm = new HashMap<>();
+//        HashMap<String, Object> map2 = new HashMap<>();
+//        map2.put("uid", mUid);
+//        map2.put("shell", mShell);
+//        mPresenter.postData(UserApi.getIsLogin, headm, map2, IsLoginBean.class);
 
+        requestLoginMessage();
     }
 
     @Override
     public void getData(Object object) {
-        LogUtils.v(object.toString());
         if (object instanceof TradingBean) {
             bean = (TradingBean) object;
             initData();
@@ -178,14 +178,14 @@ public class TradingFragment extends BaseMvpFragment<presenter> implements Contr
             mAddprice.setText(isLoginBean.dmf_day_price.updatemoney);
             mhNewprice.setText(isLoginBean.hyt_day_price.today);
             mHaddprice.setText(isLoginBean.hyt_day_price.updatemoney);
-            // Gson gson=new Gson();
-            //String jsonStr = gson.toJson(isLoginBean.hyt_day_price);
+
             tex = isLoginBean.dmf_day_price.yestoday;
             te = isLoginBean.dmf_day_price.today;
             teup = isLoginBean.dmf_day_price.updatemoney;
             hye = isLoginBean.hyt_day_price.yestoday;
             htoday = isLoginBean.hyt_day_price.today;
             hupdate = isLoginBean.hyt_day_price.updatemoney;
+
             sharedPreferences.edit().putString(UserApi.dmf_day_price, tex).commit();
             sharedPreferences.edit().putString(UserApi.dmf_day_Today, te).commit();
             sharedPreferences.edit().putString(UserApi.updatemoney, teup).commit();
@@ -227,6 +227,24 @@ public class TradingFragment extends BaseMvpFragment<presenter> implements Contr
     }
 
     @Override
+    public void getUserBean(IsLoginBean bean) {
+        super.getUserBean(bean);
+        mNewprice.setText(bean.dmf_day_price.today);
+        mAddprice.setText(bean.dmf_day_price.updatemoney);
+        mhNewprice.setText(bean.hyt_day_price.today);
+        mHaddprice.setText(bean.hyt_day_price.updatemoney);
+
+        tex = bean.dmf_day_price.yestoday;
+        te = bean.dmf_day_price.today;
+        teup = bean.dmf_day_price.updatemoney;
+        hye = bean.hyt_day_price.yestoday;
+        htoday = bean.hyt_day_price.today;
+        hupdate = bean.hyt_day_price.updatemoney;
+
+        unmae = sharedPreferences.getString(UserApi.ac_status, "");
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
@@ -239,6 +257,9 @@ public class TradingFragment extends BaseMvpFragment<presenter> implements Contr
             case R.id.r_butn:
                 mOname.setText("DMF");
                 mOname.setTextSize(16);
+                if (unmae == null) {
+                    return;
+                }
                 if (unmae.equals("2")) {
                     Intent intent = new Intent(getActivity(), MoneyActivity.class);
                     intent.putExtra("name", tex);
@@ -253,6 +274,9 @@ public class TradingFragment extends BaseMvpFragment<presenter> implements Contr
                 }
                 break;
             case R.id.r_butn2:
+                if (unmae == null) {
+                    return;
+                }
                 if (unmae.equals("2")) {
                     Intent intent2 = new Intent(getActivity(), MoneyActivity.class);
                     intent2.putExtra("name", hye);

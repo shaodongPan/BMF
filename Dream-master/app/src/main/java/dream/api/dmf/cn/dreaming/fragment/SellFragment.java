@@ -194,6 +194,9 @@ public class SellFragment extends BaseMvpFragment<presenter> implements Contract
 
     @Override
     public void getData(Object object) {
+        if (!isAdded()){
+            return;
+        }
         if (object instanceof DuSellBean) {
             DuSellBean duSellBean = (DuSellBean) object;
             if (duSellBean.error.equals("0")) {
@@ -226,10 +229,12 @@ public class SellFragment extends BaseMvpFragment<presenter> implements Contract
             tvType.setText("DMF");
             edOne.setText(done);
             eEdsell.setText(dfour);
+            sButn.setText("卖出(DMF)");
         } else {
             tvType.setText("HYT");
             edOne.setText(hone);
             eEdsell.setText(hfour);
+            sButn.setText("卖出(HYTB)");
         }
         return rootView;
     }

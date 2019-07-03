@@ -88,37 +88,37 @@ public class BuyFragment extends BaseMvpFragment<presenter> implements Contract.
         mShell = sharedPreferences.getString(UserApi.Shell, "");
         nums = sharedPreferences.getString(UserApi.DmfNUm, "");
         tvBug = view.findViewById(R.id.tv_bug);
-         eTeprice = view.findViewById(R.id.e_teprice);
-         mEdphone = view.findViewById(R.id.tv_edphone);
+        eTeprice = view.findViewById(R.id.e_teprice);
+        mEdphone = view.findViewById(R.id.tv_edphone);
         loginExe = view.findViewById(R.id.login_exe);
         String[] splitNums = nums.substring(1, nums.length() - 1).replace("\"", "").split(",");
         numList = Arrays.asList(splitNums);
         list = Arrays.asList(getResources().getStringArray(R.array.bank));
-        if (username1 ==true){
+        if (username1 == true) {
+            tvBug.setText("买入(DMF)");
 
-
-        }else if (username1 ==false){
+        } else if (username1 == false) {
             String Hed = sharedPreferences.getString(UserApi.HYTED, "");
-            tvBug.setText("DMF买入");
+            tvBug.setText("买入(HYT)");
             eTeprice.setText(hytday);
         }
         if (mEdphone.getInputType() == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
             //密码可见,点击之后设置成不可见的
             mEdphone.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
 
-        }else {
+        } else {
             //不可见设置成可见
             mEdphone.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         }
         loginExe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (!isChecked){
+                if (!isChecked) {
                     if (mEdphone.getInputType() == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
                         //不可见设置成可见
                         mEdphone.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                     }
-                }else {
+                } else {
 
                     //密码可见,点击之后设置成不可见的
                     mEdphone.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
@@ -126,7 +126,6 @@ public class BuyFragment extends BaseMvpFragment<presenter> implements Contract.
                 }
             }
         });
-
 
 
     }
@@ -156,7 +155,6 @@ public class BuyFragment extends BaseMvpFragment<presenter> implements Contract.
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO: inflate a fragment view
@@ -172,7 +170,6 @@ public class BuyFragment extends BaseMvpFragment<presenter> implements Contract.
     }
 
 
-
     @OnClick({R.id.e_num, R.id.bank_nin, R.id.tv_bug})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -180,35 +177,35 @@ public class BuyFragment extends BaseMvpFragment<presenter> implements Contract.
                 new BuyNumDialog(mContext, numList, eNum);
                 break;
             case R.id.bank_nin:
-              //new BankDialog(mContext, list, bankNin);
+                //new BankDialog(mContext, list, bankNin);
                 break;
             case R.id.tv_bug:
-                if (username1==true){
-                    HashMap<String,Object> headmap=new HashMap<>();
-                    HashMap<String,Object> map=new HashMap<>();
+                if (username1 == true) {
+                    HashMap<String, Object> headmap = new HashMap<>();
+                    HashMap<String, Object> map = new HashMap<>();
                     mNum = eNum.getText().toString();
                     String mPhone = mEdphone.getText().toString().trim();
                     //String mprice = eTeprice.getText().toString();
-                    map.put("uid",mUid);
-                    map.put("shell",mShell);
-                    map.put("repass",mPhone);
+                    map.put("uid", mUid);
+                    map.put("shell", mShell);
+                    map.put("repass", mPhone);
                     map.put("howmoney", mNum);
-                    map.put("sellprice",bankNin);
-                    mPresenter.postData(UserApi.getMDFBUG,headmap,map,EBuyBean.class);
+                    map.put("sellprice", bankNin);
+                    mPresenter.postData(UserApi.getMDFBUG, headmap, map, EBuyBean.class);
 
-                }else if (username1==false){
-                 /*   String Hed = sharedPreferences.getString(UserApi.HYTED, "");*/
-                    HashMap<String,Object> headmap=new HashMap<>();
-                    HashMap<String,Object> map=new HashMap<>();
+                } else if (username1 == false) {
+                    /*   String Hed = sharedPreferences.getString(UserApi.HYTED, "");*/
+                    HashMap<String, Object> headmap = new HashMap<>();
+                    HashMap<String, Object> map = new HashMap<>();
                     mNum = eNum.getText().toString();
                     String mPhone = mEdphone.getText().toString().trim();
                     //String mprice = eTeprice.getText().toString();
-                    map.put("uid",mUid);
-                    map.put("shell",mShell);
-                    map.put("repass",mPhone);
+                    map.put("uid", mUid);
+                    map.put("shell", mShell);
+                    map.put("repass", mPhone);
                     map.put("howmoney", mNum);
-                    map.put("sellprice",bankNin);
-                    mPresenter.postData(UserApi.getMRBUG,headmap,map,EBuyBean.class);
+                    map.put("sellprice", bankNin);
+                    mPresenter.postData(UserApi.getMRBUG, headmap, map, EBuyBean.class);
 
                 }
 
@@ -236,30 +233,32 @@ public class BuyFragment extends BaseMvpFragment<presenter> implements Contract.
                // String mBank = bankNin.getText().toString();
 
               *//*  int nus=dmfday*mNum;*//*
-            *//*    int atr1 = Integer.parseInt(mNum);
+             *//*    int atr1 = Integer.parseInt(mNum);
                 int atr2 = Integer.parseInt(mprice);*//*
-               *//* int  nus=atr2*atr1;*//*
+             *//* int  nus=atr2*atr1;*//*
                 if (mPhone.isEmpty()){
                     Toast.makeText(mContext,"安全密码不能为空",Toast.LENGTH_SHORT).show();
                 }else{
 
                 }
-*/           break;
+*/
+                break;
         }
     }
+
     @Override
     public void getData(Object object) {
-        LogUtils.v(object+"");
-        if (object instanceof EBuyBean){
-            EBuyBean eBuyBean= (EBuyBean) object;
-            if (eBuyBean.error.equals("0")){
+        LogUtils.v(object + "");
+        if (object instanceof EBuyBean) {
+            EBuyBean eBuyBean = (EBuyBean) object;
+            if (eBuyBean.error.equals("0")) {
 
-                Toast.makeText(mContext,"购买成功",Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "购买成功", Toast.LENGTH_SHORT).show();
                 //eNum.setText("请选择购买数量");
                 bankNin.setText("");
                 mEdphone.setText("");
-            }else{
-                Toast.makeText(mContext,eBuyBean.msg,Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(mContext, eBuyBean.msg, Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -270,11 +269,12 @@ public class BuyFragment extends BaseMvpFragment<presenter> implements Contract.
         super.onResume();
 
     }
+
     public static String cutDoubleNumber(Double number) {
 //
         java.text.DecimalFormat df = new java.text.DecimalFormat("0.0");
         df.setRoundingMode(RoundingMode.FLOOR);
-        String d=df.format(number);
+        String d = df.format(number);
 
         //四舍五入保留两位小数,number.toString()是一个Double值
 //        double v = new BigDecimal(number.toString()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();

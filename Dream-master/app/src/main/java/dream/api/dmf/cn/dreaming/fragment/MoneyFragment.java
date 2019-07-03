@@ -20,25 +20,43 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import dream.api.dmf.cn.dreaming.R;
 import dream.api.dmf.cn.dreaming.api.UserApi;
+import dream.api.dmf.cn.dreaming.base.BaseMvpFragment;
+import dream.api.dmf.cn.dreaming.base.mvp.Contract;
+import dream.api.dmf.cn.dreaming.base.mvp.presenter.presenter;
+import dream.api.dmf.cn.dreaming.bean.IsLoginBean;
 
-public class MoneyFragment extends Fragment {
+public class MoneyFragment extends BaseMvpFragment<presenter> implements Contract.Iview {
 
-    private RadioGroup mGroup;
-    private RadioButton mButton1, mButton2;
-    private ViewPager mPage;
     private ArrayList<Fragment> list;
     private List mHytlist;
-    private Button mUpMoney;
-    private View view, view2;
-    private TextView mYesDay, mYesDay2;
-    private TextView mToDay, mToDay2, mUpMoney2;
+
     private String peice;
     private String hToday;
     private String hye;
     private String yUpdate;
     private String updatep;
+    private String dmfday;
+
+    @BindView(R.id.tGroup)
+    RadioGroup mGroup;
+    @BindView(R.id.m_button1)
+    RadioButton mButton1;
+    @BindView(R.id.m_button2)
+    RadioButton mButton2;
+    @BindView(R.id.m_pager)
+    ViewPager mPage;
+    @BindView(R.id.yesteday)
+    TextView mYesDay;
+    @BindView(R.id.today)
+    TextView mToDay;
+    @BindView(R.id.updatemoney)
+    Button mUpMoney;
+
+    private boolean username1;
+    private SharedPreferences sharedPreferences;
 
     public static Fragment newInstance() {
         MoneyFragment fragment = new MoneyFragment();
@@ -46,29 +64,48 @@ public class MoneyFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
-        boolean username1 = sharedPreferences.getBoolean("Username", true);
-        String dmfday = sharedPreferences.getString(UserApi.dmf_day_Today, "");
+    protected presenter createPresenter() {
+        return new presenter();
+    }
+
+    @Override
+    protected int getFragmentView() {
+        return R.layout.fragment_money;
+    }
+
+    @Override
+    protected void initView(View view) {
+        sharedPreferences = getActivity().getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
+        username1 = sharedPreferences.getBoolean("Username", true);
+
+        initData();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
+    protected void getData() {
+        requestLoginMessage();
+    }
+
+
+    @Override
+    public void getUserBean(IsLoginBean bean) {
+        super.getUserBean(bean);
+
+        dmfday = sharedPreferences.getString(UserApi.dmf_day_Today, "");
         peice = sharedPreferences.getString(UserApi.dmf_day_price, "");
         updatep = sharedPreferences.getString(UserApi.updatemoney, "");
         hToday = sharedPreferences.getString(UserApi.HTODAY, "");
         hye = sharedPreferences.getString(UserApi.HYE, "");
         yUpdate = sharedPreferences.getString(UserApi.HUPDATE, "");
 
-        view = View.inflate(getActivity(), R.layout.fragment_money, null);
-
-        mGroup = view.findViewById(R.id.tGroup);
-        mButton1 = view.findViewById(R.id.m_button1);
-        mButton2 = view.findViewById(R.id.m_button2);
-        mPage = view.findViewById(R.id.m_pager);
-        mYesDay = view.findViewById(R.id.yesteday);
-        mToDay = view.findViewById(R.id.today);
-        mUpMoney = view.findViewById(R.id.updatemoney);
-
-
         if (username1) {
-
             mToDay.setText(dmfday);
             if (Double.parseDouble(updatep) < 0) {
 
@@ -79,7 +116,7 @@ public class MoneyFragment extends Fragment {
 
             mYesDay.setText(peice);
 
-        } else  {
+        } else {
             mToDay.setText(hToday);
             if (Double.parseDouble(yUpdate) < 1) {
                 mUpMoney.setText("-" + cutDoubleNumber(Double.parseDouble(yUpdate)));
@@ -90,9 +127,8 @@ public class MoneyFragment extends Fragment {
             mYesDay.setText(hye);
 
         }
-        initData();
-        return view;
     }
+
 
     protected void initData() {
         list = new ArrayList<>();
@@ -149,5 +185,10 @@ public class MoneyFragment extends Fragment {
         java.text.DecimalFormat df = new java.text.DecimalFormat("0.0");
         df.setRoundingMode(RoundingMode.FLOOR);
         return df.format(number);
+    }
+
+    @Override
+    public void getData(Object object) {
+
     }
 }

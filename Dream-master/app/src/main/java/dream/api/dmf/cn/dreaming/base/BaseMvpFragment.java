@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import dream.api.dmf.cn.dreaming.api.ApiService;
 import dream.api.dmf.cn.dreaming.api.UserApi;
+import dream.api.dmf.cn.dreaming.app.MyApp;
 import dream.api.dmf.cn.dreaming.bean.IsLoginBean;
 import dream.api.dmf.cn.dreaming.utils.RetrofitUtils;
 import dream.api.dmf.cn.dreaming.utils.StringUtils;
@@ -48,12 +49,10 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment 
         View view = inflater.inflate(getFragmentView(), container, false);
         unbinder1 = ButterKnife.bind(this, view);
         mContext = getActivity();
-        initView(view);
 
-        mSp = mContext.getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
-        mUid = mSp.getString(UserApi.Uid, "");
-        mShell = mSp.getString(UserApi.Shell, "");
-        mDisposable = new CompositeDisposable();
+
+//        mDisposable = new CompositeDisposable();
+        initView(view);
         return view;
     }
 
@@ -61,16 +60,15 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder1.unbind();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         //如果队列中还有未完成的请求，直接清除
-        if (!mDisposable.isDisposed()) {
-            mDisposable.clear();
-        }
+//        if (!mDisposable.isDisposed()) {
+//            mDisposable.clear();
+//        }
         mPresenter.detachV();
     }
 
@@ -93,13 +91,16 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment 
      * 请求isLogin接口，并存储数据到sp中
      */
     public void requestLoginMessage() {
-        Disposable disposable = apiService.verifyLogin(mUid, mShell)
+        mSp = getContext().getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
+        mUid = mSp.getString(UserApi.Uid, "");
+        mShell = mSp.getString(UserApi.Shell, "");
+         apiService.verifyLogin(mUid, mShell)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(resultConsumer, errorConsumer);
 
         //添加到队列
-        mDisposable.add(disposable);
+//        mDisposable.add(disposable);
     }
 
     Consumer<Throwable> errorConsumer = new Consumer<Throwable>() {
@@ -117,6 +118,7 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment 
                 String dataString = responseBody.string();
                 if (!StringUtils.isEmpty(dataString)) {
                     //存数据到本地
+
                     mSp.edit().putString(UserApi.SAVE_USER_INFO, dataString).apply();
                     parseUserData(dataString);
                 }
@@ -138,6 +140,32 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment 
 
     public void getUserBean(IsLoginBean bean){
         //子类实现获取userBean
+        mSp.edit().putString(UserApi.dmf_day_price, bean.dmf_day_price.yestoday).commit();
+        mSp.edit().putString(UserApi.dmf_day_Today, bean.dmf_day_price.today).commit();
+        mSp.edit().putString(UserApi.updatemoney, bean.dmf_day_price.updatemoney).commit();
+        mSp.edit().putString(UserApi.DmfNUm, String.valueOf(bean.dmf_num)).commit();
+        mSp.edit().putString(UserApi.HYE, bean.hyt_day_price.yestoday).commit();
+        mSp.edit().putString(UserApi.HTODAY, bean.hyt_day_price.today).commit();
+        mSp.edit().putString(UserApi.HUPDATE, bean.hyt_day_price.updatemoney).commit();
+        mSp.edit().putString(UserApi.ac_status, bean.ac_status).commit();
+        //dmf
+        mSp.edit().putString(UserApi.STock_mdf, bean.stock_dmf).commit();
+        mSp.edit().putString(UserApi.balanceDMF, bean.balance_dmf).commit();
+        mSp.edit().putString(UserApi.regmoneyDMF, bean.regmoney_dmf).commit();
+        mSp.edit().putString(UserApi.credit3, bean.credit3).commit();
+        mSp.edit().putString(UserApi.STOCK, bean.stock).commit();
+        mSp.edit().putString(UserApi.balance, bean.balance).commit();
+        mSp.edit().putString(UserApi.regmoney, bean.regmoney).commit();
+        mSp.edit().putString(UserApi.credit4, bean.credit4).commit();
+        mSp.edit().putString(UserApi.dmf_day_Today, bean.dmf_day_price.today).commit();
+        mSp.edit().putString(UserApi.updatemoney, bean.dmf_day_price.updatemoney).commit();
+        mSp.edit().putString(UserApi.HYTT_PRICE, bean.hyt_day_price.today).commit();
+        mSp.edit().putString(UserApi.DMFED, String.valueOf(bean.dmfed)).commit();
+        mSp.edit().putString(UserApi.tdmf_num, String.valueOf(bean.tdmf_num)).commit();
+        mSp.edit().putString(UserApi.STock_mdf, bean.balance_dmf).commit();
+        mSp.edit().putString(UserApi.HYTED, String.valueOf(bean.hyted)).commit();
+        mSp.edit().putString(UserApi.BUYNUM, String.valueOf(bean.jy4)).commit();
+        mSp.edit().putString(UserApi.idcard, (String) bean.idcard).commit();
     }
     @Override
     public void onDetach() {

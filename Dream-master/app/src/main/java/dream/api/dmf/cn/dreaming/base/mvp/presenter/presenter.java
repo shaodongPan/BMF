@@ -43,12 +43,16 @@ public class presenter extends BasePresenter<Contract.Iview, model> implements C
 
     @Override
     public void getDataTrue(Object data) {
-        mView.getData(data);
+        if (mView != null) {
+            mView.getData(data);
+        }
     }
 
     @Override
     public void getDataFalse(Throwable e) {
-        mView.getData(e);
+        if (mView != null) {
+            mView.getData(e);
+        }
     }
 
     @Override
