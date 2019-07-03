@@ -81,13 +81,6 @@ public class MainActivity extends BaseMvpActivity<presenter> implements Contract
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
-
-    }
-
-    @Override
     public void getThisData() {
         HashMap<String, Object> headmap = new HashMap<>();
         HashMap<String, Object> map = new HashMap<>();

@@ -112,12 +112,6 @@ public class BankActivity extends BaseMvpActivity<presenter> implements Contract
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 
     @OnClick({R.id.tv_bank, R.id.tv_send})
     public void onViewClicked(View view) {

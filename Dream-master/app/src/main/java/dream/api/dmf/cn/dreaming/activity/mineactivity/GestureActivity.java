@@ -7,8 +7,6 @@ import dream.api.dmf.cn.dreaming.base.mvp.presenter.presenter;
 
 public class GestureActivity extends BaseMvpActivity<presenter> implements Contract.Iview {
 
-
-
     @Override
     public void getThisData() {
 

@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 
+import butterknife.ButterKnife;
+
 public abstract class BaseMvpActivity<P extends BasePresenter> extends AppCompatActivity {
     public P mPresenter;
     public Context mContext;
@@ -16,15 +18,14 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends AppCompat
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getView());
+        ButterKnife.bind(this);
         mContext = this;
         getInitData();
         if (mPresenter == null) {
             mPresenter = createP();
         }
-
         mPresenter.attachV(this);
         stateNetWork();
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //透明状态栏
             //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);

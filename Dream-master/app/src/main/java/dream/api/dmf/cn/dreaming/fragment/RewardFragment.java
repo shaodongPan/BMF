@@ -226,6 +226,10 @@ public class RewardFragment extends BaseMvpFragment<presenter> implements Contra
             case R.id.r_dan://推荐清单
                 intent = new Intent(getActivity(), RewardDanActivity.class);
                 break;
+            //跳转到网络图谱
+            case R.id.r_tu:
+                intent = new Intent(getActivity(), RewardPicesActivity.class);
+                break;
             //奖励列表
             case R.id.r_showlist:
                 intent = new Intent(getActivity(), RewardListActivity.class);
@@ -246,10 +250,7 @@ public class RewardFragment extends BaseMvpFragment<presenter> implements Contra
             case R.id.r_jifen:
                 intent = new Intent(getActivity(), RewardzzActivity.class);
                 break;
-            //跳转到网络图谱
-            case R.id.r_tu:
-                intent = new Intent(getActivity(), RewardPicesActivity.class);
-                break;
+
         }
         if (intent != null) {
             intent.putExtra("data", mLastNumber);

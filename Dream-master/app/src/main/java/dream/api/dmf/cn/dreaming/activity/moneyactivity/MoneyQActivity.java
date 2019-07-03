@@ -148,13 +148,6 @@ public class MoneyQActivity extends BaseMvpActivity<presenter> implements Contra
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
 
     @OnClick({R.id.login_exe, R.id.m_butn})
     public void onViewClicked(View view) {

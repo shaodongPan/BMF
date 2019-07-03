@@ -80,13 +80,6 @@ public class ForgetActivity extends BaseMvpActivity<presenter> implements Contra
 
     @Override
     public void getData(Object object) {
-
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

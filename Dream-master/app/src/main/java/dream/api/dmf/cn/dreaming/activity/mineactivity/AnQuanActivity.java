@@ -62,13 +62,6 @@ public class AnQuanActivity extends BaseMvpActivity<presenter> implements Contra
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
     @OnClick({R.id.iv_back, R.id.tv_gesture, R.id.tv_pswd, R.id.tv_safe})
     public void onViewClicked(View view) {
         switch (view.getId()) {

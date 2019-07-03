@@ -97,7 +97,6 @@ public class RewardTiActivity extends BaseMvpActivity<presenter> implements Cont
 
     @Override
     public void getData(Object object) {
-
         if (object instanceof Throwable) {
             String error = ((Throwable) object).getMessage();
             Toast.makeText(mContext, JsonUtil.getError(error), Toast.LENGTH_SHORT).show();
@@ -116,12 +115,6 @@ public class RewardTiActivity extends BaseMvpActivity<presenter> implements Cont
 
             }
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
     }
 
     @OnClick({R.id.login_exe, R.id.m_butn})

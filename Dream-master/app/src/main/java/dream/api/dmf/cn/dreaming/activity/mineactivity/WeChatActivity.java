@@ -87,13 +87,6 @@ public class WeChatActivity extends BaseMvpActivity<presenter> implements Contra
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
     @OnClick({R.id.iv_back, R.id.iv_img, R.id.tv_send})
     public void onViewClicked(View view) {
         switch (view.getId()) {

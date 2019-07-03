@@ -162,13 +162,6 @@ public class ChangePswdActivity extends BaseMvpActivity<presenter> implements Co
             }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
     @OnClick({R.id.iv_back, R.id.tv_change})
     public void onViewClicked(View view) {
         switch (view.getId()) {

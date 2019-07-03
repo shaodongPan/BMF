@@ -137,13 +137,6 @@ public class LoginActivity extends BaseMvpActivity<presenter> implements Contrac
         return new presenter();
     }
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
     @Override
     public void getData(Object object) {
         if (object instanceof LoginBean){

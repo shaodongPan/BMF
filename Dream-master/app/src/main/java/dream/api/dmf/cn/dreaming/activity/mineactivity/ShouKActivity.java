@@ -61,13 +61,6 @@ public class ShouKActivity extends BaseMvpActivity<presenter> implements Contrac
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
-
     @OnClick({R.id.tv_bank
             , R.id.tv_aLi
             , R.id.tv_weiChat

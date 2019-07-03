@@ -80,12 +80,6 @@ public class MoneyluActivity extends BaseMvpActivity<presenter> implements Contr
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
-    }
-
     @OnClick(R.id.iv_back)
     public void onViewClicked() {
         finish();

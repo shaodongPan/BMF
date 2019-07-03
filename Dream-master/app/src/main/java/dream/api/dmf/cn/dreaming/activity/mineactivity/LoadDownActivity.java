@@ -103,19 +103,13 @@ public class LoadDownActivity extends BaseMvpActivity<presenter> implements Cont
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-
-    } private void shareBitmap() {
+    private void shareBitmap() {
 //        /** * 分享图片 */
-        Bitmap bitmap =BitmapUtil.createBitmap(rl);
+        Bitmap bitmap = BitmapUtil.createBitmap(rl);
         Intent share_intent = new Intent();
         share_intent.setAction(Intent.ACTION_SEND);//设置分享行为
         share_intent.setType("image/*");  //设置分享内容的类型
-        share_intent.putExtra(Intent.EXTRA_STREAM, BitmapUtil.saveImageToGallery(mContext,bitmap));
+        share_intent.putExtra(Intent.EXTRA_STREAM, BitmapUtil.saveImageToGallery(mContext, bitmap));
         //创建分享的Dialog
         share_intent = Intent.createChooser(share_intent, "我要推广");
         startActivity(share_intent);
@@ -135,7 +129,8 @@ public class LoadDownActivity extends BaseMvpActivity<presenter> implements Cont
 
         }
     }
-    public void getDa(){
+
+    public void getDa() {
         int sdkInt = Build.VERSION.SDK_INT;
         if (sdkInt > Build.VERSION_CODES.HONEYCOMB) {// api11
             ClipboardManager copy = (ClipboardManager) LoadDownActivity.this.getSystemService(Context.CLIPBOARD_SERVICE);
@@ -149,6 +144,7 @@ public class LoadDownActivity extends BaseMvpActivity<presenter> implements Cont
                     Toast.LENGTH_SHORT).show();
         }
     }
+
     public static String getDeviceInfo(Context context) {
         try {
             org.json.JSONObject json = new org.json.JSONObject();
@@ -175,6 +171,7 @@ public class LoadDownActivity extends BaseMvpActivity<presenter> implements Cont
         }
         return null;
     }
+
     public static String getMac(Context context) {
         String mac = "";
         if (context == null) {
@@ -184,13 +181,14 @@ public class LoadDownActivity extends BaseMvpActivity<presenter> implements Cont
             mac = getMacBySystemInterface(context);
         } else {
             mac = getMacByJavaAPI();
-            if (TextUtils.isEmpty(mac)){
+            if (TextUtils.isEmpty(mac)) {
                 mac = getMacBySystemInterface(context);
             }
         }
         return mac;
 
     }
+
     private static String getMacBySystemInterface(Context context) {
         if (context == null) {
             return "";
@@ -207,6 +205,7 @@ public class LoadDownActivity extends BaseMvpActivity<presenter> implements Cont
             return "";
         }
     }
+
     public static boolean checkPermission(Context context, String permission) {
         boolean result = false;
         if (context == null) {
@@ -233,6 +232,7 @@ public class LoadDownActivity extends BaseMvpActivity<presenter> implements Cont
         }
         return result;
     }
+
     @TargetApi(9)
     private static String getMacByJavaAPI() {
         try {
@@ -258,8 +258,6 @@ public class LoadDownActivity extends BaseMvpActivity<presenter> implements Cont
         }
         return null;
     }
-
-
 
 
 }
