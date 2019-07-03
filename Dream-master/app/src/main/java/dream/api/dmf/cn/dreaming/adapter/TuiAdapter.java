@@ -38,10 +38,10 @@ public class TuiAdapter extends RecyclerView.Adapter<TuiAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
           viewHolder.mName.setText(data.get(i).realname);
-        viewHolder.mTime.setText("Ê±¼ä:" + data.get(i).createtime);
-        viewHolder.money.setText("»áÔ±µÈ¼¶:" + data.get(i).level);
-        viewHolder.mPhone.setText("»áÔ±±àºÅ:" + data.get(i).number);
-        viewHolder.tMoney.setText("×Ü½±½ğ:" + data.get(i).total_rewqrd);
+        viewHolder.mTime.setText("æ—¶é—´:" + data.get(i).createtime);
+        viewHolder.money.setText("ä¼šå‘˜ç­‰çº§:" + data.get(i).level);
+        viewHolder.mPhone.setText("ä¼šå‘˜ç¼–å·:" + data.get(i).number);
+        viewHolder.tMoney.setText("æ€»å¥–é‡‘:" + data.get(i).total_rewqrd);
     }
 
     @Override

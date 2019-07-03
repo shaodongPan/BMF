@@ -75,6 +75,8 @@ public class UserApi {
     public static final String getFUWU = "http://api.xg360.cc/index.php?mod=mobile&act=contact";
     //奖励列表
     public static final String getREList = "https://rwd.xg360.cc/index/reward/reward_list";
+    //积分转换DMF-获取比率
+    public static final String getIntegral = "https://rwd.xg360.cc/index/integral/integral_page";
     //奖励列表当月统计
     public static final String getData = "https://rwd.xg360.cc/index/reward/total_month";
     //大厅交易买入DMF
@@ -102,7 +104,7 @@ public class UserApi {
 
     public static final String getOk = "index.php?mod=mobile&act=trade_affirm";
 
-    public static final String getSign="index.php?mod=mobile&act=clockon";
+    public static final String getSign = "index.php?mod=mobile&act=clockon";
 
     public static final String SP = "SP";
     public static final String TrueName = "TrueName";
@@ -156,5 +158,6 @@ public class UserApi {
     public static final String BACKADDRESS = "BACKADDRESS";
     public static final String BACKNAME = "BACKNAME";
     public static final String BUYNUM = "BUYNUM";
+    public static final String LOGIN_ACCOUNT = "login_account";
 
 }
