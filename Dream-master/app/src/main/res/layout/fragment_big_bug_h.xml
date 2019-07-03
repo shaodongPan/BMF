@@ -164,26 +164,7 @@
                 android:layout_height="@dimen/dimen2"
                 android:layout_marginTop="@dimen/dimen1"
                 android:background="#CCCCCC" />
-            <!-- <LinearLayout
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:orientation="horizontal"
-                 android:padding="@dimen/dimen10">
-                 <TextView
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:text="卖出价格:"/>
-                 <EditText
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:layout_marginLeft="@dimen/dimen10"
-                     android:background="@null"/>
-             </LinearLayout>
-             <View
-                 android:layout_width="match_parent"
-                 android:layout_height="@dimen/dimen2"
-                 android:layout_marginTop="@dimen/dimen1"
-                 android:background="#CCCCCC"/>-->
+
             <Button
                 android:id="@+id/tv_bug"
                 android:layout_width="match_parent"
@@ -218,7 +199,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dimen5"
-                        android:text="买入大厅-等待买出记录" />
+                        android:text="我的买入列表" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -290,7 +271,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dimen5"
-                        android:text="买入大厅-最近成功记录" />
+                        android:text="我的买入交易列表" />
                 </LinearLayout>
 
                 <LinearLayout

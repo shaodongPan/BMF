@@ -91,6 +91,11 @@ public class SellFragment extends BaseMvpFragment<presenter> implements Contract
     private IsLoginBean isLoginBean;
     private SharedPreferences sharedPreferences;
 
+    private String dmfpmoney;
+    private String tdmfpmoney;
+    private String jy2;
+    private String toshopmoney;
+
     private int mDp;
 
     @Override
@@ -118,6 +123,12 @@ public class SellFragment extends BaseMvpFragment<presenter> implements Contract
 
 
         dmfday = sharedPreferences.getString(UserApi.dmf_day_Today, "");
+
+        dmfpmoney = sharedPreferences.getString(UserApi.dmfpmoney, "");
+        tdmfpmoney = sharedPreferences.getString(UserApi.tdmfpmoney, "");
+        jy2 = sharedPreferences.getString(UserApi.jy2, "");
+        toshopmoney = sharedPreferences.getString(UserApi.toshopmoney, "");
+
         mEd = sharedPreferences.getString(UserApi.DMFED, "");
         nums = sharedPreferences.getString(UserApi.DmfNUm, "");
         String[] splitNums = nums.substring(1, nums.length() - 1).replace("\"", "").split(",");
@@ -125,6 +136,13 @@ public class SellFragment extends BaseMvpFragment<presenter> implements Contract
         loginExe = view.findViewById(R.id.login_exe);
         sRpass = view.findViewById(R.id.s_rpass);
         list = Arrays.asList(getResources().getStringArray(R.array.bank));
+
+        if (username1) {
+            mPrice.setText(dmfpmoney);
+        } else {
+            mPrice.setText(toshopmoney);
+        }
+
         if (sRpass.getInputType() == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
             //密码可见,点击之后设置成不可见的
             sRpass.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
@@ -149,12 +167,12 @@ public class SellFragment extends BaseMvpFragment<presenter> implements Contract
             }
         });
 
-        mDp = ScreenSizeUtil.Dp2Px(mContext.getApplicationContext(),10);
+        mDp = ScreenSizeUtil.Dp2Px(mContext.getApplicationContext(), 10);
     }
 
     @Override
     protected void getData() {
-        mPrice.setText(dmfday);
+
 
         ssNum.addTextChangedListener(new TextWatcher() {
             @Override
@@ -170,10 +188,16 @@ public class SellFragment extends BaseMvpFragment<presenter> implements Contract
                 double num = Double.parseDouble(mNum);
                 sNump.setText(num + myu + "");
                 //sNum.setText((Double.parseDouble(mNum)*);
-                String s1 = cutDoubleNumber(Double.valueOf(Double.parseDouble(mNum) * Double.parseDouble(dmfday) + ""));
+
+                String s1 = cutDoubleNumber(Double.valueOf(Double.parseDouble(mNum) * Double.parseDouble(dmfpmoney) + ""));
+                String s2 = cutDoubleNumber(Double.valueOf(Double.parseDouble(mNum) * Double.parseDouble(toshopmoney) + ""));
                 //cutDoubleNumber(Double.parseDouble(dmfday));
-                sNum.setText(s1);
-                ;
+
+                if (username1){
+                    sNum.setText(s1);
+                }else {
+                    sNum.setText(s2);
+                }
                 //Toast.makeText(mContext, "111111111", Toast.LENGTH_SHORT).show();
                 //String mNum = ssNum.getText().toString();
                 //sNump.setText(Double.parseDouble(mEd) * Double.parseDouble(ssNum) + "");
@@ -192,9 +216,14 @@ public class SellFragment extends BaseMvpFragment<presenter> implements Contract
         mPresenter.postData(UserApi.getIsLogin, headmap, map, IsLoginBean.class);
     }
 
+    public IsLoginBean getIsLoginBean() {
+
+        return isLoginBean;
+    }
+
     @Override
     public void getData(Object object) {
-        if (!isAdded()){
+        if (!isAdded()) {
             return;
         }
         if (object instanceof DuSellBean) {
@@ -230,11 +259,13 @@ public class SellFragment extends BaseMvpFragment<presenter> implements Contract
             edOne.setText(done);
             eEdsell.setText(dfour);
             sButn.setText("卖出(DMF)");
+            //mPrice.setText(isLoginBean.dmfpmoney);
         } else {
             tvType.setText("HYT");
             edOne.setText(hone);
             eEdsell.setText(hfour);
             sButn.setText("卖出(HYTB)");
+            //mPrice.setText(isLoginBean.toshopmoney);
         }
         return rootView;
     }

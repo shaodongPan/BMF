@@ -77,6 +77,11 @@ public class BigBugHFragment extends BaseMvpFragment<presenter> implements Contr
     private EditText mPass;
     private CheckBox mExe;
 
+    private String dmfpmoney;
+    private String tdmfpmoney;
+    private String jy2;
+    private String toshopmoney;
+
     public static Fragment newInstance() {
         BigBugHFragment fragment = new BigBugHFragment();
         return fragment;
@@ -101,6 +106,12 @@ public class BigBugHFragment extends BaseMvpFragment<presenter> implements Contr
         mUid = sharedPreferences.getString(UserApi.Uid, "");
         mShell = sharedPreferences.getString(UserApi.Shell, "");
         nums = sharedPreferences.getString(UserApi.tdmf_num, "");
+
+        dmfpmoney = sharedPreferences.getString(UserApi.dmfpmoney, "");
+        tdmfpmoney = sharedPreferences.getString(UserApi.tdmfpmoney, "");
+        jy2 = sharedPreferences.getString(UserApi.jy2, "");
+        toshopmoney = sharedPreferences.getString(UserApi.toshopmoney, "");
+
         tvBug = view.findViewById(R.id.tv_bug);
         eTeprice = view.findViewById(R.id.e_teprice);
         mRecy = view.findViewById(R.id.recyo);
@@ -114,13 +125,20 @@ public class BigBugHFragment extends BaseMvpFragment<presenter> implements Contr
         String[] splitNums = nums.substring(1, nums.length() - 1).replace("\"", "").split(",");
         numList = Arrays.asList(splitNums);
         list = Arrays.asList(getResources().getStringArray(R.array.bank));
-        if (username1 == true) {
-
-
-        } else if (username1 == false) {
-            String Hed = sharedPreferences.getString(UserApi.HYTED, "");
+        if (username1) {
             tvBug.setText("DMF买入");
-            eTeprice.setText(hytday);
+            eTeprice.setText(tdmfpmoney);
+        } else {
+            String Hed = sharedPreferences.getString(UserApi.HYTED, "");
+            tvBug.setText("HYT买入");
+            eTeprice.setText(jy2);
+        }
+
+
+        if (username1) {
+
+        } else {
+
         }
         mPass = view.findViewById(R.id.tv_edphone);
         mExe = view.findViewById(R.id.login_exe);
@@ -154,7 +172,7 @@ public class BigBugHFragment extends BaseMvpFragment<presenter> implements Contr
 
     @Override
     protected void getData() {
-        eTeprice.setText(dmfday);
+
         eNum.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -165,8 +183,14 @@ public class BigBugHFragment extends BaseMvpFragment<presenter> implements Contr
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mNum = eNum.getText().toString();
                 String mPhone = tvEdphone.getText().toString().trim();
-                String s1 = cutDoubleNumber(Double.valueOf((Double.parseDouble(mNum) * Double.parseDouble(dmfday) + "")));
-                bankNin.setText(s1);
+                String s1 = cutDoubleNumber(Double.valueOf((Double.parseDouble(mNum) * Double.parseDouble(tdmfpmoney) + "")));
+                String s2 = cutDoubleNumber(Double.valueOf((Double.parseDouble(mNum) * Double.parseDouble(jy2) + "")));
+
+                if (username1){
+                    bankNin.setText(s1);
+                }else {
+                    bankNin.setText(s2);
+                }
             }
 
             @Override

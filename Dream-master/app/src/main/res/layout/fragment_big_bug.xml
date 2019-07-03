@@ -43,7 +43,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dimen5"
-                        android:text="卖出大厅-等待卖出记录" />
+                        android:text="买入大厅-等待买入记录" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -115,7 +115,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dimen5"
-                        android:text="卖出大厅-最近成功记录" />
+                        android:text="买入大厅-最近成功买入记录" />
                 </LinearLayout>
 
                 <LinearLayout

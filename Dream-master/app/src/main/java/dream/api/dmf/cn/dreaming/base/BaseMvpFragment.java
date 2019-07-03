@@ -94,7 +94,7 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment 
         mSp = getContext().getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
         mUid = mSp.getString(UserApi.Uid, "");
         mShell = mSp.getString(UserApi.Shell, "");
-         apiService.verifyLogin(mUid, mShell)
+        apiService.verifyLogin(mUid, mShell)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(resultConsumer, errorConsumer);
@@ -133,12 +133,12 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment 
             Gson gson = new Gson();
             IsLoginBean bean = gson.fromJson(dataString, IsLoginBean.class);
             getUserBean(bean);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void getUserBean(IsLoginBean bean){
+    public void getUserBean(IsLoginBean bean) {
         //子类实现获取userBean
         mSp.edit().putString(UserApi.dmf_day_price, bean.dmf_day_price.yestoday).commit();
         mSp.edit().putString(UserApi.dmf_day_Today, bean.dmf_day_price.today).commit();
@@ -148,6 +148,12 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment 
         mSp.edit().putString(UserApi.HTODAY, bean.hyt_day_price.today).commit();
         mSp.edit().putString(UserApi.HUPDATE, bean.hyt_day_price.updatemoney).commit();
         mSp.edit().putString(UserApi.ac_status, bean.ac_status).commit();
+        mSp.edit().putString(UserApi.dmfpmoney, bean.dmfpmoney).commit();
+        mSp.edit().putString(UserApi.tdmfpmoney, bean.tdmfpmoney).commit();
+        mSp.edit().putString(UserApi.jy2, bean.jy2).commit();
+        mSp.edit().putString(UserApi.toshopmoney, bean.toshopmoney).commit();
+
+
         //dmf
         mSp.edit().putString(UserApi.STock_mdf, bean.stock_dmf).commit();
         mSp.edit().putString(UserApi.balanceDMF, bean.balance_dmf).commit();
@@ -167,6 +173,7 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends Fragment 
         mSp.edit().putString(UserApi.BUYNUM, String.valueOf(bean.jy4)).commit();
         mSp.edit().putString(UserApi.idcard, (String) bean.idcard).commit();
     }
+
     @Override
     public void onDetach() {
         super.onDetach();

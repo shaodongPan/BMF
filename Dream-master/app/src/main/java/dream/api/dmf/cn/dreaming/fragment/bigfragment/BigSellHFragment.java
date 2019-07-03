@@ -97,6 +97,12 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
     private MaterialRefreshLayout materialRefreshLayout;
     private SharedPreferences sharedPreferences;
 
+    private String dmfpmoney;
+    private String tdmfpmoney;
+    private String jy2;
+    private String toshopmoney;
+
+
     @Override
     protected presenter createPresenter() {
         return new presenter();
@@ -117,6 +123,13 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
         mShell = sharedPreferences.getString(UserApi.Shell, "");
         mEd = sharedPreferences.getString(UserApi.DMFED, "");
         nums = sharedPreferences.getString(UserApi.BUYNUM, "");
+
+        dmfpmoney = sharedPreferences.getString(UserApi.dmfpmoney, "");
+        tdmfpmoney = sharedPreferences.getString(UserApi.tdmfpmoney, "");
+        jy2 = sharedPreferences.getString(UserApi.jy2, "");
+        toshopmoney = sharedPreferences.getString(UserApi.toshopmoney, "");
+
+
         String[] splitNums = nums.substring(1, nums.length() - 1).replace("\"", "").split(",");
         numList = Arrays.asList(splitNums);
         list = Arrays.asList(getResources().getStringArray(R.array.bank));
@@ -159,6 +172,11 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
         materialRefreshLayout.setIsOverLay(false);
         materialRefreshLayout.setWaveShow(false);
 
+        if (username1) {
+            mPrice.setText(tdmfpmoney);
+        } else {
+            mPrice.setText(jy2);
+        }
     }
 
     @Override
@@ -213,7 +231,7 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
             map.put("type", type);
             mPresenter.postData(UserApi.getSelllist, headmap, map, OKBean.class);
         }
-        mPrice.setText(dmfday);
+
     }
 
 
@@ -269,10 +287,12 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
             tvType.setText("DMF");
             tvAccount.setText(done);
             sEdsell.setText(dfour);
+            sButn.setText("卖出DMF");
         } else {
             tvType.setText("HYT");
             tvAccount.setText(hone);
             sEdsell.setText(hfour);
+            sButn.setText("卖出HYT");
         }
         return rootView;
     }
@@ -296,8 +316,15 @@ public class BigSellHFragment extends BaseMvpFragment<presenter> implements Cont
                         Double num = ((Double.parseDouble(mNum) * Double.parseDouble(mEd)));
                         Double nu = (Double.parseDouble(mNum));
                         sNump.setText(num + nu + "");
-                        String s1 = cutDoubleNumber(Double.valueOf((Double.parseDouble(mNum) * Double.parseDouble(dmfday) + "")));
-                        sNum.setText(s1);
+
+                        String s1 = cutDoubleNumber(Double.valueOf((Double.parseDouble(mNum) * Double.parseDouble(tdmfpmoney) + "")));
+                        String s2 = cutDoubleNumber(Double.valueOf((Double.parseDouble(mNum) * Double.parseDouble(jy2) + "")));
+                        if (username1) {
+                            sNum.setText(s1);
+                        } else {
+                            sNum.setText(s2);
+                        }
+
                     }
                 });
                 break;

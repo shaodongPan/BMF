@@ -164,4 +164,8 @@ public class UserApi {
 
     public static final String SAVE_USER_INFO = "SAVE_USER_INFO";
 
+    public static final String dmfpmoney = "dmfpmoney";
+    public static final String tdmfpmoney = "tdmfpmoney";
+    public static final String jy2 = "jy2";
+    public static final String toshopmoney = "toshopmoney";
 }

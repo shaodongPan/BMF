@@ -99,7 +99,7 @@ public class MoneyFragment extends BaseMvpFragment<presenter> implements Contrac
         super.getUserBean(bean);
 
         dmfday = sharedPreferences.getString(UserApi.dmf_day_Today, "");
-        peice = sharedPreferences.getString(UserApi.dmf_day_price, "");
+        peice = sharedPreferences.getString(UserApi.dmf_day_price, "0.0");
         updatep = sharedPreferences.getString(UserApi.updatemoney, "");
         hToday = sharedPreferences.getString(UserApi.HTODAY, "");
         hye = sharedPreferences.getString(UserApi.HYE, "");
