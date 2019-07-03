@@ -108,6 +108,11 @@ public class UserApi {
 
     public static final String getLog = "index.php?mod=mobile&act=logs";
 
+    public static final String getHome = "index.php?mod=mobile&act=notice";
+
+    public static final String getMsgNumber = "index.php?mod=mobile&act=orderNum";
+
+    public static final String getCenter = "index.php?mod=mobile&act=contact";
     public static final String SP = "SP";
     public static final String TrueName = "TrueName";
     public static final String Groupname_cn = "Groupname_cn";

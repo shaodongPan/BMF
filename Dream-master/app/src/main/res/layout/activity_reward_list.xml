@@ -16,6 +16,7 @@
         android:padding="5dp">
 
         <TextView
+            android:textColor="@color/bg_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="日期:"
@@ -31,20 +32,22 @@
             android:visibility="invisible" />
 
         <TextView
+            android:textColor="@color/textWhite"
             android:id="@+id/r_left_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimen5"
-            android:background="#ff00"
+            android:background="@color/colorLogin"
             android:padding="10dp"
             android:text="2018-07-30" />
 
         <TextView
+            android:textColor="@color/textWhite"
             android:id="@+id/r_right_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimen20"
-            android:background="#ff00"
+            android:background="@color/colorLogin"
             android:padding="10dp"
             android:text="2018-07-24" />
 
@@ -67,16 +70,18 @@
         android:padding="5dp">
 
         <TextView
+            android:textColor="@color/colorAccent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="会员编码:" />
 
         <TextView
+            android:textColor="@color/colorAccent"
             android:id="@+id/vip_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimen20"
-            android:text="99168" />
+            android:text="" />
 
         <TextView
             android:layout_width="0dp"
@@ -504,6 +509,7 @@
             android:padding="5dp">
 
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -567,7 +573,11 @@
                     android:text="0" />
 
             </LinearLayout>
-
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"></LinearLayout>
 
         </LinearLayout>
     </LinearLayout>

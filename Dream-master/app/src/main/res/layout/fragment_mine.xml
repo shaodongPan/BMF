@@ -319,6 +319,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -367,6 +369,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/dimen15"
+                        android:clipChildren="false"
+                        android:clipToPadding="false"
                         android:orientation="horizontal">
 
                         <LinearLayout
@@ -374,14 +378,38 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:clipChildren="false"
+                            android:clipToPadding="false"
                             android:orientation="vertical">
 
-                            <ImageView
+                            <RelativeLayout
                                 android:layout_width="@dimen/dimen30"
                                 android:layout_height="@dimen/dimen30"
                                 android:layout_gravity="center"
-                                android:layout_marginTop="@dimen/dimen5"
-                                android:src="@mipmap/dfk" />
+                                android:layout_marginTop="@dimen/dimen5">
+
+                                <ImageView
+                                    android:layout_width="@dimen/dimen30"
+                                    android:layout_height="@dimen/dimen30"
+                                    android:src="@mipmap/dfk" />
+
+                                <TextView
+                                    android:id="@+id/daifu_num"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginTop="-6dp"
+                                    android:layout_marginRight="-15dp"
+                                    android:background="@drawable/bg_circle"
+                                    android:paddingLeft="7dp"
+                                    android:paddingTop="2dp"
+                                    android:paddingRight="7dp"
+                                    android:paddingBottom="2dp"
+                                    android:text="12"
+                                    android:textColor="@color/item_white"
+                                    android:textSize="11dp"
+                                    android:visibility="gone" />
+                            </RelativeLayout>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -389,7 +417,7 @@
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/dimen15"
                                 android:gravity="center"
-                                android:text="代付款"
+                                android:text="待付款"
                                 android:textSize="@dimen/dimen12"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -399,15 +427,38 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:clipChildren="false"
+                            android:clipToPadding="false"
                             android:orientation="vertical">
 
-                            <ImageView
+                            <RelativeLayout
                                 android:layout_width="@dimen/dimen30"
                                 android:layout_height="@dimen/dimen30"
-                                android:layout_alignParentTop="true"
                                 android:layout_gravity="center"
-                                android:layout_marginTop="@dimen/dimen5"
-                                android:src="@mipmap/dfh" />
+                                android:layout_marginTop="@dimen/dimen5">
+
+                                <ImageView
+                                    android:layout_width="@dimen/dimen30"
+                                    android:layout_height="@dimen/dimen30"
+                                    android:src="@mipmap/dfh" />
+
+                                <TextView
+                                    android:id="@+id/daida_num"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginTop="-6dp"
+                                    android:layout_marginRight="-15dp"
+                                    android:background="@drawable/bg_circle"
+                                    android:paddingLeft="7dp"
+                                    android:paddingTop="2dp"
+                                    android:paddingRight="7dp"
+                                    android:paddingBottom="2dp"
+                                    android:text="12"
+                                    android:textColor="@color/item_white"
+                                    android:textSize="11dp"
+                                    android:visibility="gone" />
+                            </RelativeLayout>
 
                             <TextView
                                 android:id="@+id/mjf_xi"
@@ -417,7 +468,7 @@
                                 android:layout_marginTop="@dimen/dimen15"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="代发货"
+                                android:text="待发货"
                                 android:textSize="@dimen/dimen12"
                                 android:textStyle="bold" />
                         </LinearLayout>
@@ -427,14 +478,38 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:clipChildren="false"
+                            android:clipToPadding="false"
                             android:orientation="vertical">
 
-                            <ImageView
+                            <RelativeLayout
                                 android:layout_width="@dimen/dimen30"
                                 android:layout_height="@dimen/dimen30"
                                 android:layout_gravity="center"
-                                android:layout_marginTop="@dimen/dimen5"
-                                android:src="@mipmap/dsh" />
+                                android:layout_marginTop="@dimen/dimen5">
+
+                                <ImageView
+                                    android:layout_width="@dimen/dimen30"
+                                    android:layout_height="@dimen/dimen30"
+                                    android:src="@mipmap/dsh" />
+
+                                <TextView
+                                    android:id="@+id/daishou_num"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginTop="-6dp"
+                                    android:layout_marginRight="-15dp"
+                                    android:background="@drawable/bg_circle"
+                                    android:paddingLeft="7dp"
+                                    android:paddingTop="2dp"
+                                    android:paddingRight="7dp"
+                                    android:paddingBottom="2dp"
+                                    android:text="12"
+                                    android:textColor="@color/item_white"
+                                    android:textSize="11dp"
+                                    android:visibility="gone" />
+                            </RelativeLayout>
 
                             <TextView
                                 android:id="@+id/mjd_ti"
@@ -454,14 +529,38 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:clipChildren="false"
+                            android:clipToPadding="false"
                             android:orientation="vertical">
 
-                            <ImageView
+                            <RelativeLayout
                                 android:layout_width="@dimen/dimen30"
                                 android:layout_height="@dimen/dimen30"
                                 android:layout_gravity="center"
-                                android:layout_marginTop="@dimen/dimen5"
-                                android:src="@mipmap/ywc" />
+                                android:layout_marginTop="@dimen/dimen5">
+
+                                <ImageView
+                                    android:layout_width="@dimen/dimen30"
+                                    android:layout_height="@dimen/dimen30"
+                                    android:src="@mipmap/ywc" />
+
+                                <TextView
+                                    android:id="@+id/wancheng_num"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginTop="-6dp"
+                                    android:layout_marginRight="-15dp"
+                                    android:background="@drawable/bg_circle"
+                                    android:paddingLeft="7dp"
+                                    android:paddingTop="2dp"
+                                    android:paddingRight="7dp"
+                                    android:paddingBottom="2dp"
+                                    android:text="12"
+                                    android:textColor="@color/item_white"
+                                    android:textSize="11dp"
+                                    android:visibility="gone" />
+                            </RelativeLayout>
 
                             <TextView
                                 android:id="@+id/mjf_shen"

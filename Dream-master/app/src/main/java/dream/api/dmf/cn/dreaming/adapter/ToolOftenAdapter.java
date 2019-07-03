@@ -9,29 +9,33 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import dream.api.dmf.cn.dreaming.R;
+import dream.api.dmf.cn.dreaming.bean.HomeZixun;
 import dream.api.dmf.cn.dreaming.utils.OnRvItemClickListener;
 
 /**
  * Created by jason on 2019/5/24.
  */
-public class ToolOftenAdapter extends RecyclerView.Adapter<ToolOftenAdapter.MineFgListViewHolder>{
+public class ToolOftenAdapter extends RecyclerView.Adapter<ToolOftenAdapter.MineFgListViewHolder> {
     private Context mContext;
-    private List<String> itemListText;
-    private List<Integer> iconIds;
+    private List<HomeZixun.DataBean> mDatas = new ArrayList<>();
 
-    private OnRvItemClickListener itemClickedListener;
-
-    public void setItemClickedListener(OnRvItemClickListener itemClickedListener) {
-        this.itemClickedListener = itemClickedListener;
+    public ToolOftenAdapter(Context context) {
+        this.mContext = context;
     }
 
-    public ToolOftenAdapter(Context context, List<String> itemList, List<Integer> iconList) {
-        this.mContext = context;
-        this.itemListText = itemList;
-        this.iconIds = iconList;
+
+    public void setData(List<HomeZixun.DataBean> datas) {
+        if (datas == null) {
+            datas = new ArrayList<>();
+        }
+        mDatas = new ArrayList<>(datas);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -44,30 +48,25 @@ public class ToolOftenAdapter extends RecyclerView.Adapter<ToolOftenAdapter.Mine
 
     @Override
     public void onBindViewHolder(@NonNull MineFgListViewHolder mineFgListViewHolder, final int position) {
-        mineFgListViewHolder.tool_text_often.setText(itemListText.get(position));
-        mineFgListViewHolder.tool_image_often.setImageResource(iconIds.get(position));
-        if (null != itemClickedListener){
-            mineFgListViewHolder.tool_text_often.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    itemClickedListener.OnItemClicked(position,itemListText.get(position));
-                }
-            });
-        }
+        HomeZixun.DataBean item = mDatas.get(position);
+        mineFgListViewHolder.txt.setText(item.title);
+        Glide.with(mContext).load(item.imgurl).thumbnail(0.1f).into(mineFgListViewHolder.img);
+
     }
 
     @Override
     public int getItemCount() {
-        return itemListText.size();
+        return mDatas.size();
     }
 
-    class MineFgListViewHolder extends RecyclerView.ViewHolder{
-        ImageView tool_image_often;
-        TextView tool_text_often;
+    class MineFgListViewHolder extends RecyclerView.ViewHolder {
+        TextView txt;
+        ImageView img;
+
         public MineFgListViewHolder(@NonNull View itemView) {
             super(itemView);
-            tool_image_often = itemView.findViewById(R.id.tool_image_often);
-            tool_text_often = itemView.findViewById(R.id.tool_text_often);
+            txt = itemView.findViewById(R.id.txt);
+            img=itemView.findViewById(R.id.img);
         }
     }
 }

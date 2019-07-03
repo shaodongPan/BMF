@@ -167,12 +167,7 @@ public class SellNumActivity extends BaseMvpActivity<presenter> implements Contr
                 finish();
             }
         });
-        pay_pannel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
     }
 
     @Override

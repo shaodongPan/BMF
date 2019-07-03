@@ -3,6 +3,7 @@ package dream.api.dmf.cn.dreaming.activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -76,7 +77,7 @@ public class RewardzzActivity extends BaseMvpActivity<presenter> implements Cont
             Toast.makeText(mContext, JsonUtil.getError(error), Toast.LENGTH_SHORT).show();
             return;
         }
-        if (object instanceof ZhuanBean) {
+        if (object instanceof JFZBean) {
             JFZBean jfzBean = (JFZBean) object;
             if (jfzBean.status == 200) {
                 Toast.makeText(mContext, jfzBean.message, Toast.LENGTH_SHORT).show();
@@ -97,18 +98,22 @@ public class RewardzzActivity extends BaseMvpActivity<presenter> implements Cont
                 String nums = mNum.getText().toString().trim();
                 String pass = mPass.getText().toString().trim();
                 String name = mName.getText().toString().trim();
-                if (!phone.isEmpty() && !nums.isEmpty() && !pass.isEmpty() && !name.isEmpty()) {
-                    //Toast.makeText(mContext,"该内容不能为空",Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(phone)) {
+                    Toast.makeText(mContext,"转赠账号不能为空",Toast.LENGTH_SHORT).show();
+                    return;
                 }
-               /* if (){
-                    Toast.makeText(mContext,"转增数量不能为空",Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(nums)) {
+                    Toast.makeText(mContext,"转赠数量不能为空",Toast.LENGTH_SHORT).show();
+                    return;
                 }
-                if (){
+                if (TextUtils.isEmpty(pass)) {
                     Toast.makeText(mContext,"安全密码不能为空",Toast.LENGTH_SHORT).show();
+                    return;
                 }
-                if (){
+                if (TextUtils.isEmpty(name)) {
                     Toast.makeText(mContext,"备注不能为空",Toast.LENGTH_SHORT).show();
-                }*/
+                    return;
+                }
                 HashMap<String, Object> headmap = new HashMap<>();
                 HashMap<String, Object> map = new HashMap<>();
                 map.put("phone", minePhone);
@@ -119,15 +124,6 @@ public class RewardzzActivity extends BaseMvpActivity<presenter> implements Cont
                 map.put("number", mVipNumber);
                 mPresenter.postData(UserApi.getReZZ, headmap, map, JFZBean.class);
                 break;
-                 /*   HashMap<String,Object> headmap=new HashMap<>();
-                    HashMap<String,Object> map=new HashMap<>();
-                    map.put()
-                    map.put()
-                    map.put()
-                    map.put();
-                    mPresenter.postData(UserApi.getReZZ,headmap,map,);*/
-
-
         }
     }
 }

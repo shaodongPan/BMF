@@ -18,4 +18,15 @@ public class DateUtil {
 
         return dateString;
     }
+
+    public static String getTodayMonth() {
+        Date date = new Date();//取时间
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        date = calendar.getTime(); //这个时间就是日期往后推一天的结果
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM");
+        String dateString = formatter.format(date);
+
+        return dateString;
+    }
 }

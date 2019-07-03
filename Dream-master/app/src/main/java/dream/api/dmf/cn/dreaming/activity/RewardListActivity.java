@@ -76,6 +76,7 @@ public class RewardListActivity extends BaseMvpActivity<presenter> implements Co
     TextView num1_5;
     @BindView(R.id.num1_6)
     TextView num1_6;
+
     @BindView(R.id.num2_1)
     TextView num2_1;
     @BindView(R.id.num2_2)
@@ -88,6 +89,8 @@ public class RewardListActivity extends BaseMvpActivity<presenter> implements Co
     TextView num2_5;
     @BindView(R.id.num2_6)
     TextView num2_6;
+    @BindView(R.id.num2_7)
+    TextView num2_7;
     @BindView(R.id.num3_1)
     TextView num3_1;
     @BindView(R.id.num3_2)
@@ -100,7 +103,8 @@ public class RewardListActivity extends BaseMvpActivity<presenter> implements Co
     TextView num3_5;
     @BindView(R.id.num3_6)
     TextView num3_6;
-
+    @BindView(R.id.num3_7)
+    TextView num3_7;
     @BindView(R.id.r_listnew)
     TextView rListnew;
     @BindView(R.id.r_lin_butn)
@@ -163,6 +167,7 @@ public class RewardListActivity extends BaseMvpActivity<presenter> implements Co
         mPhone.setText(number);
         mLeftTime.setText(DateUtil.getTodayDate(-1));
         mRightTime.setText(DateUtil.getTodayDate(0));
+        rListnew.setText(DateUtil.getTodayMonth());
 
     }
 
@@ -200,9 +205,9 @@ public class RewardListActivity extends BaseMvpActivity<presenter> implements Co
                     num2_1.setText(last.commend);
                     num2_2.setText(last.share);
                     num2_3.setText(last.share_commission);
-                    num2_4.setText(last.form);
-                    num2_5.setText(last.manger);
-                    num2_6.setText(last.real_reward);
+                    num2_5.setText(last.form);
+                    num2_6.setText(last.manger);
+                    num2_7.setText(last.real_reward);
                 }
 
                 RewardBean.DataBean.TotalBean total = rewardBean.data.total;
@@ -210,9 +215,9 @@ public class RewardListActivity extends BaseMvpActivity<presenter> implements Co
                     num3_1.setText(total.commend);
                     num3_2.setText(total.share);
                     num3_3.setText(total.share_commission);
-                    num3_4.setText(total.form);
-                    num3_5.setText(total.manger);
-                    num3_6.setText(total.real_reward);
+                    num3_5.setText(total.form);
+                    num3_6.setText(total.manger);
+                    num3_7.setText(total.real_reward);
                 }
                 mPhone.setText("" + rewardBean.data.number);
                 mNumber.setText("");
@@ -290,6 +295,16 @@ public class RewardListActivity extends BaseMvpActivity<presenter> implements Co
                 } else {
                     mRightTime.setText(getTime2(date));
                 }
+
+                HashMap<String, Object> headmap = new HashMap<>();
+                HashMap<String, Object> map = new HashMap<>();
+                String lefttime = mLeftTime.getText().toString();
+                String righttime = mRightTime.getText().toString();
+                map.put("phone", username);
+                map.put("start", mLeftTime.getText().toString());
+                map.put("end", mRightTime.getText().toString());
+                map.put("number", number);
+                mPresenter.postData(UserApi.getREList, headmap, map, RewardBean.class);
             }
         })
                 .setTimeSelectChangeListener(new OnTimeSelectChangeListener() {
@@ -323,14 +338,12 @@ public class RewardListActivity extends BaseMvpActivity<presenter> implements Co
     }
 
     private String getTime(Date date) {//可根据需要自行截取数据显示
-        Log.d("getTime()", "choice date millis: " + date.getTime());
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy年MM");
         return format.format(date);
     }
 
     private String getTime2(Date date) {//可根据需要自行截取数据显示
-        Log.d("getTime()", "choice date millis: " + date.getTime());
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return format.format(date);
     }
 

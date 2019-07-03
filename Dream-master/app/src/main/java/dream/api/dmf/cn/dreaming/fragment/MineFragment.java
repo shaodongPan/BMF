@@ -41,13 +41,13 @@ import dream.api.dmf.cn.dreaming.api.UserApi;
 import dream.api.dmf.cn.dreaming.base.BaseMvpFragment;
 import dream.api.dmf.cn.dreaming.base.mvp.Contract;
 import dream.api.dmf.cn.dreaming.base.mvp.presenter.presenter;
+import dream.api.dmf.cn.dreaming.bean.MsgNum;
 import dream.api.dmf.cn.dreaming.bean.SignBean;
 
 
 public class MineFragment extends BaseMvpFragment<presenter> implements Contract.Iview {
 
 
-    Unbinder unbinder;
     @BindView(R.id.mine_head_img)
     SimpleDraweeView mineHeadImg;
     @BindView(R.id.r_head_num)
@@ -80,18 +80,26 @@ public class MineFragment extends BaseMvpFragment<presenter> implements Contract
     LinearLayout rReward;
     @BindView(R.id.m_pay)
     LinearLayout mPay;
+    @BindView(R.id.daifu_num)
+    TextView daifu_num;
     @BindView(R.id.mjf_xi)
     TextView mjfXi;
     @BindView(R.id.m_waito)
     LinearLayout mWaito;
+    @BindView(R.id.daida_num)
+    TextView daida_num;
     @BindView(R.id.mjd_ti)
     TextView mjdTi;
     @BindView(R.id.m_Waitt)
     LinearLayout mWaitt;
+    @BindView(R.id.daishou_num)
+    TextView daishou_num;
     @BindView(R.id.mjf_shen)
     TextView mjfShen;
     @BindView(R.id.m_finish)
     LinearLayout mFinish;
+    @BindView(R.id.wancheng_num)
+    TextView wancheng_num;
     @BindView(R.id.m_shop)
     LinearLayout mShop;
     @BindView(R.id.m_address)
@@ -100,7 +108,6 @@ public class MineFragment extends BaseMvpFragment<presenter> implements Contract
     LinearLayout mFu;
     @BindView(R.id.m_set)
     LinearLayout mSet;
-    Unbinder unbinder1;
     private TextView mMoney;
     private SharedPreferences sharedPreferences;
     private String mMone;
@@ -124,11 +131,9 @@ public class MineFragment extends BaseMvpFragment<presenter> implements Contract
 
     @Override
     protected void initView(View view) {
-
+        sharedPreferences = mContext.getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
         mMoney = view.findViewById(R.id.m_edu);
-
         rHeadNum = view.findViewById(R.id.r_head_num);
-
         rReward = view.findViewById(R.id.r_reward);
         rReward.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -154,20 +159,28 @@ public class MineFragment extends BaseMvpFragment<presenter> implements Contract
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden && rHeadNum != null) {
-            sharedPreferences = mContext.getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
             username = sharedPreferences.getString(UserApi.UserName, "");
             mone = sharedPreferences.getString(UserApi.credit3, "");
             mtwo = sharedPreferences.getString(UserApi.credit4, "");
             mUid = sharedPreferences.getString(UserApi.Uid, "");
             mShell = sharedPreferences.getString(UserApi.Shell, "");
             rHeadNum.setText(username);
+            getData();
         }
     }
 
     @Override
     protected void getData() {
-
-
+        username = sharedPreferences.getString(UserApi.UserName, "");
+        mUid = sharedPreferences.getString(UserApi.Uid, "");
+        mShell = sharedPreferences.getString(UserApi.Shell, "");
+        //获取 消息数量
+        HashMap<String, Object> headmap = new HashMap<>();
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("shell", mShell);
+        map.put("uid", mUid);
+        map.put("phone", username);
+        mPresenter.postData(UserApi.getMsgNumber, headmap, map, MsgNum.class);
     }
 
     @Override
@@ -179,22 +192,30 @@ public class MineFragment extends BaseMvpFragment<presenter> implements Contract
             } else {
                 Toast.makeText(mContext, signBean.getMsg(), Toast.LENGTH_SHORT).show();
             }
+        } else if (object instanceof MsgNum) {
+            MsgNum bean = (MsgNum) object;
+            if (bean.data != null) {
+                int num = 0;
+                for (MsgNum.Item item : bean.data) {
+                    num = item.nums;
+                    if ("0".equals(item.status)) {
+                        daifu_num.setText("" + num);
+                        daifu_num.setVisibility(num == 0 ? View.GONE : View.VISIBLE);
+                    } else if ("1".equals(item.status)) {
+                        daida_num.setText("" + num);
+                        daida_num.setVisibility(num == 0 ? View.GONE : View.VISIBLE);
+                    } else if ("2".equals(item.status)) {
+                        daishou_num.setText("" + num);
+                        daishou_num.setVisibility(num == 0 ? View.GONE : View.VISIBLE);
+                    } else if ("3".equals(item.status)) {
+                        wancheng_num.setText("" + num);
+                        wancheng_num.setVisibility(num == 0 ? View.GONE : View.VISIBLE);
+                    }
+                }
+            }
         }
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder1 = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder1.unbind();
-    }
 
     @OnClick({R.id.mhead_image, R.id.m_jin, R.id.m_fen, R.id.man_lin, R.id.m_tone, R.id.m_ttwo, R.id.m_tshare, R.id.r_reward, R.id.m_pay, R.id.mjf_xi, R.id.m_waito, R.id.mjd_ti, R.id.m_Waitt, R.id.mjf_shen, R.id.m_finish, R.id.m_shop, R.id.m_address, R.id.m_fu, R.id.m_set})
     public void onViewClicked(View view) {
@@ -266,71 +287,5 @@ public class MineFragment extends BaseMvpFragment<presenter> implements Contract
                 break;
         }
     }
-
-
- /*   @OnClick({R.id.head_s_image, R.id.m_fen, R.id.m_edu, R.id.m_tone, R.id.m_ttwo, R.id.m_tshare, R.id.m_pay, R.id.m_waito, R.id.m_Waitt, R.id.m_finish, R.id.mjf_list, R.id.mjf_xi, R.id.mjd_ti, R.id.mjf_shen, R.id.m_shop, R.id.m_address, R.id.m_fu, R.id.m_set})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            //扫码
-            case R.id.head_s_image:
-
-                break;
-            //惠民积分
-            case R.id.m_fen:
-                break;
-
-            case R.id.m_edu:
-                break;
-
-            case R.id.m_tone:
-
-                break;
-
-            case R.id.m_ttwo:
-
-                break;
-
-            case R.id.m_tshare:
-
-                break;
-            //关于平台
-           *//* case R.id.m_tfoure:
-                startActivity(new Intent(getActivity(), AboutActivity.class));
-                break;*//*
-
-            case R.id.m_pay:
-
-                break;
-
-            case R.id.m_waito:
-
-                break;
-
-            case R.id.m_Waitt:
-
-                break;
-
-            case R.id.m_finish:
-
-                break;
-            case R.id.mjf_list:
-                break;
-
-            case R.id.mjf_shen:
-                break;
-
-            case R.id.m_shop:
-
-                break;
-
-            case R.id.m_address:
-
-                break;
-
-            case R.id.m_fu:
-
-                break;
-
-    }*/
 }
 

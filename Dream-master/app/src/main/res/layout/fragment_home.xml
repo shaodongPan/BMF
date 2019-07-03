@@ -6,40 +6,103 @@
     android:orientation="vertical"
     tools:context=".fragment.HomeFragment">
 
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:orientation="vertical">
-      <com.recker.flybanner.FlyBanner
-          android:id="@+id/banner"
-          android:layout_width="match_parent"
-          android:layout_height="200dp"></com.recker.flybanner.FlyBanner>
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="@dimen/dimen40"
-          android:orientation="horizontal">
-          <View
-              android:layout_width="@dimen/dimen5"
-              android:layout_height="@dimen/dimen30"
-              android:layout_gravity="center"
-              android:background="@drawable/login_butn"
-              android:layout_marginLeft="@dimen/dimen10"/>
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="资讯"
-              android:textSize="18sp"
-              android:textColor="#050118"
-              android:layout_marginTop="@dimen/dimen8"
-              android:layout_marginLeft="@dimen/dimen20"/>
-      </LinearLayout>
-      <android.support.v7.widget.RecyclerView
-          android:id="@+id/recForeign"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-      </android.support.v7.widget.RecyclerView>
-  </LinearLayout>
+        <com.recker.flybanner.FlyBanner
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"></com.recker.flybanner.FlyBanner>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <View
+                android:layout_width="@dimen/dimen5"
+                android:layout_height="@dimen/dimen25"
+                android:layout_gravity="center"
+                android:background="@drawable/login_butn" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen20"
+                android:text="公告"
+                android:textColor="#050118"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="3dp"
+            android:background="#f5f5f5"></View>
+
+        <LinearLayout
+            android:id="@+id/gg_pannel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/gg_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="title"
+                android:textColor="#333333"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/gg_img"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:scaleType="centerCrop" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <View
+                android:layout_width="@dimen/dimen5"
+                android:layout_height="@dimen/dimen25"
+                android:layout_gravity="center"
+                android:background="@drawable/login_butn" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen20"
+                android:text="资讯"
+                android:textColor="#050118"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="3dp"
+            android:background="#f5f5f5"></View>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recForeign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
 
 
 </LinearLayout>

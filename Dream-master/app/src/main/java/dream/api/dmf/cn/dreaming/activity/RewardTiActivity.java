@@ -100,6 +100,7 @@ public class RewardTiActivity extends BaseMvpActivity<presenter> implements Cont
         if (object instanceof Throwable) {
             String error = ((Throwable) object).getMessage();
             Toast.makeText(mContext, JsonUtil.getError(error), Toast.LENGTH_SHORT).show();
+            finish();
             return;
         }
         if (object instanceof ZhuanBean) {
@@ -121,7 +122,6 @@ public class RewardTiActivity extends BaseMvpActivity<presenter> implements Cont
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.login_exe:
-
                 break;
             case R.id.m_butn:
                 String nums = mNums.getText().toString().trim();

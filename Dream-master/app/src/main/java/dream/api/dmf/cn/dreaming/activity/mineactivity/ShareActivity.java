@@ -2,80 +2,133 @@ package dream.api.dmf.cn.dreaming.activity.mineactivity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.webkit.SslErrorHandler;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dream.api.dmf.cn.dreaming.R;
 import dream.api.dmf.cn.dreaming.api.UserApi;
+import dream.api.dmf.cn.dreaming.base.BaseMvpActivity;
+import dream.api.dmf.cn.dreaming.base.mvp.Contract;
+import dream.api.dmf.cn.dreaming.base.mvp.presenter.presenter;
+import dream.api.dmf.cn.dreaming.bean.HtmlBean;
+import dream.api.dmf.cn.dreaming.bean.IsLoginBean;
+import dream.api.dmf.cn.dreaming.utils.HtmlUtil;
 import dream.api.dmf.cn.dreaming.utils.MD5Utils;
 
-public class ShareActivity extends AppCompatActivity {
+public class ShareActivity extends BaseMvpActivity<presenter> implements Contract.Iview {
 
     @BindView(R.id.tv_title)
     TextView mTitle;
     @BindView(R.id.iv_back)
     ImageView mBack;
-    private WebView mWeb;
+    private WebView webView;
     private SharedPreferences sharedPreferences;
     private String username;
     private String mUid;
     private String mShell;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_share);
-        ButterKnife.bind(this);
+    public void getThisData() {
+        getDate();
+    }
+
+    @Override
+    public void getInitData() {
         sharedPreferences = getSharedPreferences(UserApi.SP, Context.MODE_PRIVATE);
         mUid = sharedPreferences.getString(UserApi.Uid, "");
         mShell = sharedPreferences.getString(UserApi.Shell, "");
         username = sharedPreferences.getString(UserApi.UserName, "");
         mTitle.setText("客服中心");
         mTitle.setTextSize(18);
-        mWeb = findViewById(R.id.mweb);
-        getDate();
+        webView = findViewById(R.id.mweb);
+
+        webView.setVerticalScrollBarEnabled(false);
+        webView.getSettings().setJavaScriptEnabled(false);
+        webView.getSettings().setBlockNetworkImage(false);
+        webView.getSettings().setDefaultTextEncodingName("UTF-8");
+        webView.setWebChromeClient(new WebChromeClient() {
+        });
+        webView.getSettings().setSupportZoom(true);//支持缩放
+        webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+        webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webView.getSettings().setBuiltInZoomControls(true);
+        webView.getSettings().setDisplayZoomControls(false);//不显示缩放按钮
+        if (Build.VERSION.SDK_INT > 21) {
+            webView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
+
+        webView.setHorizontalScrollBarEnabled(false);
+        webView.setVerticalScrollBarEnabled(false);
+
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                handler.proceed();
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+            }
+        });
+        webView.getSettings().setDomStorageEnabled(false);
+
+    }
+
+    @Override
+    public int getView() {
+        return R.layout.activity_share;
+    }
+
+    @Override
+    protected presenter createP() {
+        return new presenter();
     }
 
 
-    public void getDate(){
-        WebSettings webSettings = mWeb.getSettings();
-        //如果访问的页面中要与Javascript交互，则webview必须设置支持Javascript
-        webSettings.setJavaScriptEnabled(true);
-        // 若加载的 html 里有JS 在执行动画等操作，会造成资源浪费（CPU、电量）
-        // 在 onStop 和 onResume 里分别把 setJavaScriptEnabled() 给设置成 false 和 true 即可
-
-        //设置自适应屏幕，两者合用
-        mWeb.setWebViewClient(new WebViewClient());
-        webSettings.setUseWideViewPort(true); //将图片调整到适合webview的大小
-        webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
-        webSettings.setSupportMultipleWindows(false);
-        //缩放操作
-        //        webSettings.setSupportZoom(true); //支持缩放，默认为true。是下面那个的前提。
-        //        webSettings.setBuiltInZoomControls(true); //设置内置的缩放控件。若为false，则该WebView不可缩放
-        //        webSettings.setDisplayZoomControls(false); //隐藏原生的缩放控件
-
-//其他细节操作
-        webSettings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK); //关闭webview中缓存
-        webSettings.setAllowFileAccess(true); //设置可以访问文件
-        webSettings.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
-        webSettings.setLoadsImagesAutomatically(true); //支持自动加载图片
-        webSettings.setDefaultTextEncodingName("utf-8");//
-        //SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日  HH:mm:ss");
-        // Date curDate = new Date(System.currentTimeMillis());
-        // mTime = formatter.format(curDate);
-         long timeStamp = System.currentTimeMillis();
-        String tex = "a85GhBeA73J3";
-        String token = MD5Utils.MD5(username + tex + timeStamp);
-        mWeb.loadUrl("http://api.xg360.cc/index.php?mod=mobile&act=contact");
+    public void getDate() {
+        HashMap<String, Object> headmap = new HashMap<>();
+        HashMap<String, Object> map = new HashMap<>();
+        mPresenter.postData(UserApi.getCenter, headmap, map, HtmlBean.class);
     }
+
+
+    @Override
+    public void getData(Object object) {
+        if (object instanceof HtmlBean) {
+            HtmlBean bean = (HtmlBean) object;
+            if (TextUtils.isEmpty(bean.content)) {
+                return;
+            }
+            String temp = HtmlUtil
+                    .modifySrcFromImg(bean.content, 300, 200);
+            StringBuffer buffer = new StringBuffer(
+                    "<html><body>").append(temp)
+                    .append("</body></html>");
+            webView.loadData(buffer.toString(), "text/html;utf-8", null);
+
+
+        }
+    }
+
     @OnClick(R.id.iv_back)
     public void onViewClicked() {
         finish();

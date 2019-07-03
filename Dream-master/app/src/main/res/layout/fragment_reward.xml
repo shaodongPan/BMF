@@ -207,7 +207,8 @@
                                 android:layout_height="@dimen/dimen30"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/dimen5"
-                                android:src="@mipmap/left_image" />
+                                android:src="@mipmap/left_image"
+                                android:visibility="invisible" />
                         </LinearLayout>
 
                         <View
@@ -369,14 +370,16 @@
                                 android:gravity="right|center"
                                 android:text="查看明细"
                                 android:textSize="14sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                android:visibility="invisible" />
 
                             <ImageView
                                 android:id="@+id/r_hui_left"
                                 android:layout_width="@dimen/dimen30"
                                 android:layout_height="@dimen/dimen30"
                                 android:layout_marginTop="@dimen/dimen5"
-                                android:src="@mipmap/left_image" />
+                                android:src="@mipmap/left_image"
+                                android:visibility="invisible" />
                         </LinearLayout>
 
                         <View
@@ -460,9 +463,7 @@
                     android:layout_marginRight="@dimen/dimen10"
                     android:layout_marginBottom="@dimen/dimen15"
                     app:cardCornerRadius="@dimen/dimen5"
-
                     >
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -492,7 +493,8 @@
                                 android:gravity="right|center"
                                 android:text="查看明细"
                                 android:textSize="14sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                android:visibility="invisible" />
 
                             <ImageView
                                 android:id="@+id/r_cai_left"
@@ -500,7 +502,8 @@
                                 android:layout_height="@dimen/dimen30"
                                 android:layout_gravity="center"
                                 android:layout_marginTop="@dimen/dimen5"
-                                android:src="@mipmap/left_image" />
+                                android:src="@mipmap/left_image"
+                                android:visibility="invisible" />
                         </LinearLayout>
 
                         <View
@@ -509,124 +512,138 @@
                             android:layout_marginTop="@dimen/dimen10"
                             android:background="#E8E8E8" />
 
-                        <RelativeLayout
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="@dimen/dimen15">
+                            android:orientation="horizontal"
+                            android:padding="10dp">
 
-                            <ImageView
-                                android:id="@+id/r_showlist"
-                                android:layout_width="@dimen/dimen30"
-                                android:layout_height="@dimen/dimen30"
-                                android:layout_alignParentTop="true"
-                                android:layout_marginLeft="@dimen/dimen20"
-                                android:layout_marginTop="0dp"
-                                android:src="@mipmap/list_imgs" />
-
-                            <TextView
-                                android:id="@+id/mjf_list"
-                                android:layout_width="wrap_content"
+                            <RelativeLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@+id/r_showlist"
-                                android:layout_marginLeft="@dimen/dimen10"
-                                android:layout_marginTop="@dimen/dimen10"
-                                android:paddingBottom="@dimen/dimen10"
-                                android:text="奖励列表"
-                                android:textSize="12sp"
-                                android:textStyle="bold" />
+                                android:layout_weight="1">
 
-                            <ImageView
-                                android:id="@+id/r_xiang"
-                                android:layout_width="@dimen/dimen30"
-                                android:layout_height="@dimen/dimen30"
-                                android:layout_alignParentTop="true"
-                                android:layout_marginLeft="@dimen/dimen40"
-                                android:layout_marginTop="0dp"
-                                android:layout_toRightOf="@+id/r_showlist"
-                                android:src="@mipmap/jifen_imgs" />
+                                <ImageView
+                                    android:id="@+id/r_showlist"
+                                    android:layout_width="@dimen/dimen30"
+                                    android:layout_height="@dimen/dimen30"
+                                    android:layout_centerHorizontal="true"
+                                    android:src="@mipmap/list_imgs" />
 
-                            <TextView
-                                android:id="@+id/mjf_xi"
-                                android:layout_width="wrap_content"
+                                <TextView
+                                    android:id="@+id/mjf_list"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/r_showlist"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:text="奖励列表"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@+id/r_xiang"
-                                android:layout_marginLeft="@dimen/dimen15"
-                                android:layout_marginTop="@dimen/dimen10"
-                                android:layout_toRightOf="@+id/r_showlist"
-                                android:paddingBottom="@dimen/dimen10"
-                                android:text="奖励积分明细"
-                                android:textSize="12sp"
-                                android:textStyle="bold" />
+                                android:layout_weight="1">
 
-                            <ImageView
-                                android:id="@+id/r_tixian"
-                                android:layout_width="@dimen/dimen30"
-                                android:layout_height="@dimen/dimen30"
-                                android:layout_alignParentTop="true"
-                                android:layout_marginLeft="@dimen/dimen45"
-                                android:layout_marginTop="0dp"
-                                android:layout_toRightOf="@+id/r_xiang"
-                                android:src="@mipmap/jifen_ti_img" />
+                                <ImageView
+                                    android:id="@+id/r_xiang"
+                                    android:layout_width="@dimen/dimen30"
+                                    android:layout_height="@dimen/dimen30"
+                                    android:layout_centerHorizontal="true"
+                                    android:src="@mipmap/jifen_imgs" />
 
-                            <TextView
-                                android:id="@+id/mjd_ti"
-                                android:layout_width="wrap_content"
+                                <TextView
+                                    android:id="@+id/mjf_xi"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/r_xiang"
+                                    android:layout_marginTop="10dp"
+                                    android:gravity="center"
+                                    android:text="奖励积分明细"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@+id/r_tixian"
-                                android:layout_marginLeft="@dimen/dimen30"
-                                android:layout_marginTop="@dimen/dimen10"
-                                android:layout_toRightOf="@+id/r_xiang"
-                                android:paddingBottom="@dimen/dimen10"
-                                android:text="积分转换DMF"
-                                android:textSize="12sp"
-                                android:textStyle="bold" />
+                                android:layout_weight="1">
 
-                            <ImageView
-                                android:id="@+id/r_shen"
-                                android:layout_width="@dimen/dimen30"
-                                android:layout_height="@dimen/dimen30"
-                                android:layout_alignParentTop="true"
-                                android:layout_marginLeft="@dimen/dimen45"
-                                android:layout_marginTop="0dp"
-                                android:layout_toRightOf="@+id/r_tixian"
-                                android:src="@mipmap/shen_qing_img" />
+                                <ImageView
+                                    android:id="@+id/r_tixian"
+                                    android:layout_width="@dimen/dimen30"
+                                    android:layout_height="@dimen/dimen30"
+                                    android:layout_centerHorizontal="true"
+                                    android:src="@mipmap/jifen_ti_img" />
 
-                            <ImageView
-                                android:id="@+id/r_jifen"
-                                android:layout_width="@dimen/dimen30"
-                                android:layout_height="@dimen/dimen30"
-                                android:layout_alignParentTop="true"
-                                android:layout_marginLeft="@dimen/dimen30"
-                                android:layout_marginTop="0dp"
-                                android:layout_toRightOf="@+id/r_shen"
-                                android:src="@mipmap/jifen_zhuan_zeng_img" />
+                                <TextView
+                                    android:id="@+id/mjd_ti"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/r_tixian"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:gravity="center"
+                                    android:text="积分转换DMF"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+                            </RelativeLayout>
 
-                            <TextView
-                                android:id="@+id/mjf_zz"
-                                android:layout_width="wrap_content"
+                            <RelativeLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@+id/r_jifen"
-                                android:layout_marginLeft="@dimen/dimen20"
-                                android:layout_marginTop="@dimen/dimen10"
-                                android:layout_toRightOf="@+id/r_shen"
-                                android:paddingBottom="@dimen/dimen10"
-                                android:text="积分转增"
-                                android:textSize="12sp"
-                                android:textStyle="bold" />
+                                android:layout_weight="1">
 
-                            <TextView
-                                android:id="@+id/mjf_shen"
-                                android:layout_width="wrap_content"
+                                <ImageView
+                                    android:id="@+id/r_shen"
+                                    android:layout_width="@dimen/dimen30"
+                                    android:layout_height="@dimen/dimen30"
+                                    android:layout_centerHorizontal="true"
+                                    android:src="@mipmap/shen_qing_img" />
+
+                                <TextView
+                                    android:id="@+id/mjf_shen"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/r_shen"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:gravity="center"
+                                    android:text="申请服务"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@+id/r_shen"
-                                android:layout_marginLeft="@dimen/dimen35"
-                                android:layout_marginTop="10dp"
-                                android:layout_toRightOf="@+id/r_tixian"
-                                android:paddingBottom="@dimen/dimen10"
-                                android:text="申请服务"
-                                android:textSize="12sp"
-                                android:textStyle="bold" />
-                        </RelativeLayout>
+                                android:layout_weight="1">
+
+                                <ImageView
+                                    android:id="@+id/r_jifen"
+                                    android:layout_width="@dimen/dimen30"
+                                    android:layout_height="@dimen/dimen30"
+                                    android:layout_centerHorizontal="true"
+                                    android:src="@mipmap/jifen_zhuan_zeng_img" />
+
+                                <TextView
+                                    android:id="@+id/mjf_zz"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/r_jifen"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:gravity="center"
+                                    android:text="积分转增"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+                            </RelativeLayout>
+                        </LinearLayout>
+
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
             </LinearLayout>
